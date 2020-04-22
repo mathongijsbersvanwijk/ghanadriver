@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Models\DvlaApplication;
 use App\Models\Payment;
 use Carbon\Carbon;
 
@@ -19,16 +20,30 @@ class PaymentService
             $date = Carbon::now();
         }
 
-        //todo: finetune for time
+        //TODO: finetune for time
         return Payment::where('created_at', '>', $date)->get();
     }
 
-    public function saveNew($untypedArr, $dva) {
+    public function saveNew($pay, $dvaId) {
+        $dva = new DvlaApplication();
+        $dva->id = $dvaId;
+        $pay->dvlaApplication()->associate($dva);
+        $pay->save();
+        return $pay;
+    }
+        
+    public function update($pay) {
+        $pay->exists = true;
+        $pay->save();
+        return $pay;
+    }
+    
+    public function saveNewRaw($untypedArr, $dva) {
         $pay = new Payment();
         return $this->savePayment($pay, $untypedArr, $dva);
     }
 
-    public function update($untypedArr, $dva) {
+    public function updateRaw($untypedArr, $dva) {
         $pay = new Payment();
         $pay->exists = true;
         return $this->savePayment($pay, $untypedArr, $dva);

@@ -7,13 +7,13 @@ use Bmatovu\MtnMomo\Products\Collection;
 class MomoService {
 	public function requestToPay($col, $transactionId, $partyId, $amount, $payerMessage, $payeeNote) {
 	    try {
-	        //todo: save this payment in GD with status PENDING or REQUEST
+	        //TODO: save this payment in GD with status PENDING or REQUEST
 	        
 	        $momoTransactionId = $col->requestToPay($transactionId, $partyId, $amount, $payerMessage, $payeeNote);
 	        return $momoTransactionId;
 	    } catch(CollectionRequestException $e) {
 	        $this->printErrors($e);
-	        //todo: return proper message with payment data 
+	        //TODO: return proper message with payment data 
 	        return null;
 	    }
 	}
