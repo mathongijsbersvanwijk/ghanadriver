@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-2-colums')
 
 @section('content')
 @if ($ut == null)
@@ -88,7 +88,7 @@
 		<a id="redofaultsbutton" class="btn btn-primary btn-primary-result" href="/z/restart" role="button">Redo faults</a>
 		<a id="redotrainingbutton" class="btn btn-primary btn-primary-result" href="/z/render/0/{!! App\Support\Helpers\WebConstants::REDO_TEST_SELF_PACED !!}" role="button">Redo as training</a>
 		<a id="redoexambutton" class="btn btn-primary btn-primary-result" href="/z/render/0/{!! App\Support\Helpers\WebConstants::REDO_TEST_TIMED_QUESTION !!}" role="button">Redo as examination</a>
-		<a id="newtestbutton" class="btn btn-primary btn-primary-result" href="/z" role="button">New test</a>
+		<a id="newtestbutton" class="btn btn-primary btn-primary-result" href="/" role="button">New test</a>
 	</div>
 </div>
 @endsection

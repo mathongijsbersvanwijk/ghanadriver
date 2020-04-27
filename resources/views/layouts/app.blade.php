@@ -45,14 +45,16 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="/z/">Home</a>
-                                <!-- a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a -->
+                                <a class="nav-link" href="{{ route('render', ['id' => 0, 'op' => 3]) }}">Your test</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/z/render/0/3">Your test</a>
+                                <a class="nav-link" href="{{ route('ridehailing') }}">Ride hailing</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/ridehailing">Ride hailing</a>
+                                <a class="nav-link" href="{{ route('dvla') }}">DVLA</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
@@ -81,7 +83,7 @@
         <main class="py-4">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
                                 @if (session('status'))
@@ -93,11 +95,6 @@
 					            @yield('content')
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-						@include('z.nav')
-                        &nbsp;
-			            @yield('nav-rh')
                     </div>
                 </div>
             </div>

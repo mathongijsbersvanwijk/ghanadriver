@@ -130,11 +130,12 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'telephone' => [
+            'numeric' => 'The mobile number must be 10 digits (starting with 0)',
+            'digits' => 'The mobile number must be 10 digits (starting with 0)',
         ],
     ],
-
+    
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes

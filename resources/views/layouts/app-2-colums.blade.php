@@ -45,25 +45,28 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="/z/">Home</a>
-                                <!-- a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a -->
+                                <a class="nav-link" href="{{ route('render', ['id' => 0, 'op' => 3]) }}">Your test</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/z/render/0/3">Your test</a>
+                                <a class="nav-link" href="{{ route('ridehailing') }}">Ride hailing</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('dvla') }}">DVLA</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -78,7 +81,7 @@
         <main class="py-4">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-md-12">
+                    <div class="col-md-9">
                         <div class="card">
                             <div class="card-body">
                                 @if (session('status'))
@@ -90,6 +93,11 @@
 					            @yield('content')
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-3">
+						@include('z.nav')
+                        &nbsp;
+			            @yield('nav-rh')
                     </div>
                 </div>
             </div>
