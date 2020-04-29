@@ -15,11 +15,18 @@ class MomoController extends Controller {
     }
     
     public function momoDvlaForm() {
-        
         return view('momo.dvlaform');
     }
     
     public function momoCheckout(Request $request, DvlaApplicationService $das) {
+        $request->validate([
+            'name'           => 'required',
+            'license_class'  => 'required',
+            'dvla_center'    => 'required',
+            'service_type'   => 'required',
+            'payment_option' => 'required',
+        ]);
+            
         //note: Eloquent create will also save to db, Eloquent firstOrCreate will query db first; both we do not want
         $dva = $das->create($request->all());
         $request->session()->put('dva', $dva);

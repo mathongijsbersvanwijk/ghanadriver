@@ -7,7 +7,6 @@ class DvlaApplicationService
 {
     public function create($untypedArr) {
         $dva = new DvlaApplication();
-        $dva->id = isset($untypedArr['id']) ? $untypedArr['id'] : null;
         $dva->name = $untypedArr['name'];
         $dva->license_class = $untypedArr['license_class'];
         $dva->dvla_center = $untypedArr['dvla_center'];

@@ -11,19 +11,34 @@
 		<div class="col-sm-12">
 		<form action='/momo/requesttopay' method='post'>
 			@csrf
-			<input type="hidden" id="dvaId" name="dvaId" value="1">
 			<div class="form-group row">
-				<label for="name" class="col-sm-2 col-form-label">This one should go</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
-				</div>
+				<div class="col-sm-2">Service application</div>
+				<div class="col-sm-10">{{ $dva->name }}</div>
 			</div>
 			<div class="form-group row">
-				<label for="amount" class="col-sm-2 col-form-label">Amount to
-					pay</label>
-				<div class="col-sm-10">
-					<input type="text" readonly class="form-control-plaintext" id="amount" name="amount" value="{!! isset($amount) ? $amount : "" !!}">
-				</div>
+				<div class="col-sm-2">License class</div>
+				<div class="col-sm-10">{{ $dva->license_class }}</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-2">DVLA center</div>
+				<div class="col-sm-10">{{ $dva->dvla_center }}</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-2">Service type</div>
+				<div class="col-sm-10">{{ $dva->service_type }}</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-2">Payment option</div>
+				<div class="col-sm-10">{{ $dva->payment_option == 'MTN_MOMO' ? 'MTN MoMo' : 'Cash' }}</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-2">Comments</div>
+				<div class="col-sm-10">{{ $dva->comments }}</div>
+			</div>
+
+			<div class="form-group row">
+				<div class="col-sm-2"><h3>Amount</h3></div>
+				<div class="col-sm-10"><h3>{{ $amount }}</h3></div>
 			</div>
 			<button type="submit" class="btn btn-primary">Do Payment</button>
 		</form>
