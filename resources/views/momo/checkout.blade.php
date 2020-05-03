@@ -12,7 +12,7 @@
 		<form action='/momo/requesttopay' method='post'>
 			@csrf
 			<div class="form-group row">
-				<div class="col-sm-2">Service application</div>
+				<div class="col-sm-2">Apply for</div>
 				<div class="col-sm-10">{{ $dva->name }}</div>
 			</div>
 			<div class="form-group row">
@@ -35,12 +35,12 @@
 				<div class="col-sm-2">Comments</div>
 				<div class="col-sm-10">{{ $dva->comments }}</div>
 			</div>
-
+			<hr/>
 			<div class="form-group row">
 				<div class="col-sm-2"><h3>Amount</h3></div>
-				<div class="col-sm-10"><h3>{{ $amount }}</h3></div>
+				<div class="col-sm-10"><h3>{{ $amount }} GHC</h3></div>
 			</div>
-			<button type="submit" class="btn btn-primary">Do Payment</button>
+			<button type="submit" class="btn btn-primary">Do payment</button>
 		</form>
 		</div>
 	</div>

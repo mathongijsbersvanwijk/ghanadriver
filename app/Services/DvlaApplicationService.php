@@ -16,7 +16,8 @@ class DvlaApplicationService
         return $dva;
     }
         
-    public function saveNew($dva) {
+    public function saveNew($dva, $usr) {
+        $dva->user()->associate($usr);
         $dva->save();
         return $dva;
     }

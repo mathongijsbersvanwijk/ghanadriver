@@ -18,12 +18,16 @@ class MomoTest extends TestCase
             $result = $collection->getTransactionStatus($momoTransactionId);
             print_r($result);
 
+            echo $result['financialTransactionId'];
+            echo $result['payer']['partyId'];
+            
             // expired, see /api-documentation/testing/
             $momoTransactionId = $collection->requestToPay('bfab46d9-0c63-4eaf-8eea-c5fc47a8e8ef', '46733123452', 150);
             $this->assertTrue(Uuid::isValid($momoTransactionId));
 
             $result = $collection->getTransactionStatus($momoTransactionId);
             print_r($result);
+            
         } catch (CollectionRequestException $e) {
             do {
                 printf("\n\r%s:%d %s (%d) [%s]\n\r", $e->getFile(), $e->getLine(), $e->getMessage(), $e->getCode(),

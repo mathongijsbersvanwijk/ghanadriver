@@ -22,7 +22,7 @@ class CreateDvlaApplicationsTable extends Migration
             $table->string('dvla_center');
             $table->string('service_type');
             $table->enum('payment_option', ['CASH', 'MTN_MOMO']);
-            $table->string('comments');
+            $table->string('comments')->nullable();
             
             $table->timestamps();
         });

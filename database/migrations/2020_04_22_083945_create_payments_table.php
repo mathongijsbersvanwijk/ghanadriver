@@ -17,8 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->foreignId('dvla_application_id')->constrained();
             
-            $table->string('transaction_id');
-            $table->string('momo_transaction_id');
+            $table->string('momo_transaction_id')->nullable();
             $table->string('financial_transaction_id')->nullable();
             
             $table->enum('status', ['PENDING', 'FAILED', 'SUCCESSFUL']);

@@ -25,7 +25,6 @@ class PaymentService
 
     public function create($untypedArr) {
         $pay = new Payment();
-        $pay->transaction_id = $untypedArr['transaction_id'];
         $pay->momo_transaction_id = $untypedArr['momo_transaction_id'];
         $pay->financial_transaction_id = $untypedArr['financial_transaction_id'];
         $pay->status = $untypedArr['status'];
@@ -40,7 +39,6 @@ class PaymentService
     public function saveNew($pay, $dva) {
         $pay->dvlaApplication()->associate($dva);
         $pay->save();
-        $pay->transaction_id = $pay->id;
         return $pay;
     }
         

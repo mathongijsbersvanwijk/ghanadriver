@@ -18,7 +18,6 @@ use Faker\Generator as Faker;
 $factory->define(Payment::class, function (Faker $faker) {
     return [
         'dvla_application_id' => 1,
-        'transaction_id' => $faker->randomNumber,
         'momo_transaction_id' => $faker->uuid,
         'status' => 'SUCCESSFUL',
         'amount' => $faker->randomFloat(2, 0, 1000),

@@ -32,7 +32,7 @@ class MomoController extends Controller {
         $request->session()->put('dva', $dva);
         
         //TODO calculate amount
-        $amount = "100";
+        $amount = "10";
         $request->session()->put('amount', $amount);
         
         return view('momo.checkout', compact('dva', 'amount'));
@@ -40,7 +40,7 @@ class MomoController extends Controller {
     
     public function momoRequestToPay(Request $request, DvlaApplicationService $das, PaymentService $pms, MomoService $mos) {
         $dva = $request->session()->get('dva');
-        $dva = $das->saveNew($dva);
+        $dva = $das->saveNew($dva, Auth::user());
         
         $pay = new Payment();
         $pay->amount = $request->session()->get('amount');
@@ -50,20 +50,23 @@ class MomoController extends Controller {
         $pay = $pms->saveNew($pay, $dva);
         
         $col = new Collection();
-        $momoTransactionId = $mos->requestToPay($col, $pay->transaction_id, Auth::user()->telephone, $pay->amount,
+        $momoTransactionId = $mos->requestToPay($col, $pay->id, Auth::user()->telephone, $pay->amount,
             $pay->payer_message, $pay->payee_note);
 
         $result = $mos->getTransactionStatus($col, $momoTransactionId);
         
-        //TODO: parse result and get finTransactionId status reason
-        
         $pay->momo_transaction_id = $momoTransactionId;
-        $pay->financial_transaction_id = $finTransactionId;
-        $pay->status = $status;
-        $pay->reason = $reason;
+        $pay->financial_transaction_id = isset($result['financialTransactionId']) ? $result['financialTransactionId'] : null;
+        $pay->status = $result['status'];
+        if (isset($result['reason'])) {
+            $reasonArr = $result['reason'];
+            $code = isset($reasonArr['code']) ? $reasonArr['code'] : '';
+            $message = isset($reasonArr['message']) ? $reasonArr['message'] : '';
+            $pay->reason = $code." ".$message;
+        }
         $pay = $pms->update($pay);
         
-        return view('momo.rtpresponse', compact('transactionId', 'momoTransactionId', 'result'));
+        return view('momo.rtpresponse', compact('pay'));
     }
     
     public function momoCallback() {

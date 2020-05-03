@@ -43,16 +43,16 @@
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('render', ['id' => 0, 'op' => 3]) }}">Your test</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('ridehailing') }}">Ride hailing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('dvla') }}">DVLA</a>
+                        </li>
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('render', ['id' => 0, 'op' => 3]) }}">Your test</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('ridehailing') }}">Ride hailing</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('dvla') }}">DVLA</a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>

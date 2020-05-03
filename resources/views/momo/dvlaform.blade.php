@@ -4,14 +4,15 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12">
-			<h5>Form to fill in here it is</h5>
+			<h5>Apply for new driving license</h5>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
 		<form action='/momo/checkout' method='post'>
 			@csrf
-			<div class="form-group row">
+			<input type="hidden" id="name" name="name" value="New Driving License" >
+			<!-- div class="form-group row">
 				<label for="name" class="col-sm-2 col-form-label">Service application</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control @error('name') is-invalid @enderror" 
@@ -22,7 +23,7 @@
                         </span>
                     @enderror
 				</div>
-			</div>
+			</div -->
 			<div class="form-group row">
 				<label for="license_class" class="col-sm-2 col-form-label">License class</label>
 				<div class="col-sm-10">
