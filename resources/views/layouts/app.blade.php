@@ -49,9 +49,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('ridehailing') }}">Ride hailing</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- li class="nav-item">
                             <a class="nav-link" href="{{ route('dvla') }}">DVLA</a>
-                        </li>
+                        </li -->
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
