@@ -17,7 +17,7 @@ Auth::routes();
 
 Route::group(['middleware'=>['auth']], function(){
     Route::get('/momo/dvlaform', 'MomoController@momoDvlaForm')->name('momoDvlaForm');
-    Route::post('/momo/checkout', 'MomoController@momoCheckout')->name('momoCheckout');
+    Route::get('/momo/checkout', 'MomoController@momoCheckout')->name('momoCheckout');
     Route::post('/momo/requesttopay', 'MomoController@momoRequestToPay')->name('momoRequestToPay');
     Route::put('/momocallback', 'MomoController@momoCallback')->name('momoCallback');
 });

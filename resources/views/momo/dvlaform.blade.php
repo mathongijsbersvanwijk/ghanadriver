@@ -9,8 +9,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-		<form action='/momo/checkout' method='post'>
-			@csrf
+		<form action='/momo/checkout' method='get'>
 			<input type="hidden" id="name" name="name" value="New Driving License" >
 			<!-- div class="form-group row">
 				<label for="name" class="col-sm-2 col-form-label">Service application</label>
