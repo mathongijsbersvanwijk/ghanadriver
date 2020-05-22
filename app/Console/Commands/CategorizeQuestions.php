@@ -36,49 +36,49 @@ class CategorizeQuestions extends Command {
     
     private function getCategoryName($value) {
     	if ($value == 'SA') {
-    		return "General";
+    		return "general";
     	}
     	if ($value == 'SB') {
-    		return "Defensive driving";
+    		return "defensive-driving";
     	}
     	if ($value == 'SC') {
-    		return "Emergency";
+    		return "emergency";
     	}
     	if ($value == 'SD') {
-    		return "Lines and lanes";
+    		return "lines-and-lanes";
     	}
     	if ($value == 'SE') {
-    		return "Overtaking";
+    		return "overtaking";
     	}
     	if ($value == 'SF') {
-    		return "Road junctions";
+    		return "road-junctions";
     	}
     	if ($value == 'SG') {
-    		return "Roundabouts";
+    		return "roundabouts";
     	}
     	if ($value == 'SH') {
-    		return "Reversing";
+    		return "reversing";
     	}
     	if ($value == 'SI') {
-    		return "Lights";
+    		return "lights";
     	}
     	if ($value == 'SJ') {
-    		return "Waiting and parking";
+    		return "waiting-and-parking";
     	}
     	if ($value == 'SW') {
-    		return "Warning signs";
+    		return "warning-signs";
     	}
     	if ($value == 'SP') {
-    		return "Prohibitory signs";
+    		return "prohibitory-signs";
     	}
     	if ($value == 'SM') {
-    		return "Mandatory signs";
+    		return "mandatory-signs";
     	}
     	if ($value == 'SX') {
-    		return "Informatory signs";
+    		return "informatory-signs";
     	}
     	if ($value == 'C1') {
-    		return "Vertical signalling";
+    		return "vertical-signalling";
     	}
     	echo 'ERROR value not found: '.$value;
 
