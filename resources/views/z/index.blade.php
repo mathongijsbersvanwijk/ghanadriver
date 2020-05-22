@@ -18,11 +18,6 @@
             </script>
         </div>
         <div class="col-md-9">
-        	<h5>UPDATE</h5>
-        	<h4>
-         	<img src="/img/dvla.png" class="img-fluid"/><a class="text-danger" href="https://www.gbcghanaonline.com/news/covid-19-dvla-suspends-outreach-services/2020/" target="_blank">Corona: DVLA suspends outreach services</a>
-        	</h4>
-        
         	<h1>How is your knowledge of traffic rules and road signs?</h1>
         	<p>To get your drivers license you need your DVLA theory examination first! The tests offered here help you in training for it. There is also an online summary of the Ghana Highway Code, on which the test questions are based. We have more than 350 questions available now!</p>
         	<p>A test contains 10 multiple choice questions, all DVLA compliant. You need to answer 9 questions correctly to succeed. Do you like to try a training or an examination?</p>
