@@ -82,6 +82,11 @@ class ZebraController extends Controller
     }
 
     public function render(Request $request, $id, $op, $page = WebConstants::QUESTION_PAGE) {
+        if ($op == WebConstants::EXACT_QUESTION) {
+            $utq = new UserTestQuestion($id);
+            return view('z.questionexact', compact('utq'));
+        }
+        
         $ut = $request->session()->get('ut');
         if ($ut != null) {
             if ($op == null) {
@@ -102,8 +107,8 @@ class ZebraController extends Controller
                 $ut->setMode(WebConstants::TIMED_QUESTION_MODE);
                 $ut->setFaultsOnly(false);
                 $utq = $ut->getNextQuestion($id);
-            } else if ($op == WebConstants::EXACT_QUESTION) {
-                $utq = new UserTestQuestion($id);
+            } else {
+                return view('z.index');
             }
         } else {
             return view('z.index');
