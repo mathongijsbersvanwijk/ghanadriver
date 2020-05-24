@@ -10,8 +10,8 @@ class PredefinedTstTest extends TestCase {
 	protected $tcfs;
 	protected $tqs;
 	
-	public function setUp() {
-		parent::setUp();
+	protected function setUp(): void {
+	    parent::setUp();
 		$this->tcfs = new TestConfigurationService();
 		$this->tqs = new TestQuestionService();
 	}

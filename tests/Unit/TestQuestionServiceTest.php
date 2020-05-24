@@ -7,8 +7,8 @@ use Tests\TestCase;
 class TestQuestionServiceTest extends TestCase {
 	protected $tqs;
 	
-	public function setUp() {
-		parent::setUp();
+	protected function setUp(): void {
+	    parent::setUp();
 		$this->tqs = new TestQuestionService();
 	}
 	

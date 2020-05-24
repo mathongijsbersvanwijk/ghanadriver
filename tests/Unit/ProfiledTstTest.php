@@ -12,8 +12,8 @@ class ProfiledTstTest extends TestCase {
 	protected $pcs;
 	protected $qs;
 	
-	public function setUp() {
-		parent::setUp();
+	protected function setUp(): void {
+	    parent::setUp();
 		$this->tcfs = new TestConfigurationService();
 		$this->pcs = new ProfileCategoryService();
 		$this->qs = new QuestionService();

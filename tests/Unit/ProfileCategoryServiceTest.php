@@ -8,8 +8,8 @@ use Tests\TestCase;
 class ProfileCategoryServiceTest extends TestCase {
 	protected $pcs;
 	
-	public function setUp() {
-		parent::setUp();
+	protected function setUp(): void {
+	    parent::setUp();
 		$this->cs = new CategoryService();
 		$this->pcs = new ProfileCategoryService();
 	}

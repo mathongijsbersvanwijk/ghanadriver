@@ -8,7 +8,7 @@ use Tests\TestCase;
 class QuestionServiceTest extends TestCase {
 	protected $qs;
 	
-	public function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->qs = new QuestionService();
 	}
@@ -31,7 +31,7 @@ class QuestionServiceTest extends TestCase {
 	
 	public function testFindBySingleCategory() {
 		$ques = $this->qs->findBySingleCategory(1);
-		$this->assertEquals(35, sizeof($ques));
+		$this->assertEquals(41, sizeof($ques));
 		$ques = $this->qs->findBySingleCategory(12);
 		$this->assertEquals(28, sizeof($ques));
 	}

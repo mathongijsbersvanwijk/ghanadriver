@@ -7,8 +7,8 @@ use Tests\TestCase;
 class TestConfigurationServiceTest extends TestCase {
 	protected $tcfs;
 	
- 	public function setUp() {
-		parent::setUp();
+	protected function setUp(): void {
+	    parent::setUp();
 		$this->tcfs = new TestConfigurationService;	
  	}
 	

@@ -8,9 +8,9 @@ use Tests\TestCase;
 class CategoryServiceTest extends TestCase {
 	protected $cs;
 	
- 	public function setUp() {
-		parent::setUp();
-		$this->cs = new CategoryService;	
+	protected function setUp(): void {
+	    parent::setUp();
+	    $this->cs = new CategoryService;	
  	}
 	
 	public function  testFindByName() {
@@ -29,11 +29,10 @@ class CategoryServiceTest extends TestCase {
 		$this->assertEquals(2, sizeof($cats));
 	}
 	
-	/**
-	 * @expectedException 			Illuminate\Database\Eloquent\ModelNotFoundException
-	 * @expectedExceptionMessage 	No query results for model [App\Models\Category] 9999
-	 */
 	public function testFindNotFound() {
-		$cat = $this->cs->find(9999);
+	    $this->expectException(ModelNotFoundException::class);
+	    $this->expectExceptionMessage('No query results for model [App\Models\Category] 9999');
+	    
+	    $cat = $this->cs->find(9999);
 	}
 }
