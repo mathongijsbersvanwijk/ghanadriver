@@ -31,7 +31,7 @@ class QuestionToolkit {
 			$dq = new DisplayQuestion($queId);
 		}
 		
-		$que = $qs->find($loa[0]->que_id);
+		$que = $qs->findByQueId($loa[0]->que_id);
 		$dq->setQue($que);
 		
 		$dqask = $dq->getDisplayQuestionAsked(); 

@@ -14,7 +14,11 @@ class QuestionService {
 	}
 	
 	public function find($id) {
-		return Question::findOrFail($id);
+	    return Question::findOrFail($id);
+	}
+	
+	public function findByQueId($queId) {
+	    return Question::where('que_id', $queId)->first();
 	}
 	
 	public function findBySingleCategory($catId) {
@@ -35,7 +39,7 @@ class QuestionService {
 		for ($i = 0; $i < sizeof($ca); $i++) {
 			$lqas = $lqas
 			->join('categorizations as c'.$i, function ($join) use ($ca, $i) {
-				$join->on('c'.$i.'.categorizable_id', '=', 'quagga_question.que_id')
+				$join->on('c'.$i.'.categorizable_id', '=', 'quagga_question.id')
 				->where('c'.$i.'.categorizable_type', '=', 'App\Models\Question')
 				->where('c'.$i.'.category_id', '=', $ca[$i]);
 			});
@@ -92,6 +96,10 @@ class QuestionService {
 		
 	// NOT USED
 	public function saveQuestion($untypedArr, $que) {
+	    DB::transaction(function() {
+	        // generate que_id
+	    });
+	    
 		$que->id = isset($untypedArr['id']) ? $untypedArr['id'] : null;
 		$que->title = $untypedArr['title'];
 		$que->body = $untypedArr['body'];

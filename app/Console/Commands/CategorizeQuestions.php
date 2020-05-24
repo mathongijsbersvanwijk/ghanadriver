@@ -24,7 +24,7 @@ class CategorizeQuestions extends Command {
     		$loa = $this->qs->findQuestionMetaData($que->que_id);
     		echo 'Categorizing '.$loa[0]->doc_id.' as '.$loa[0]->value.PHP_EOL;
     		
-    		$que = $this->qs->find($loa[0]->doc_id);
+    		$que = $this->qs->findByQueId($loa[0]->doc_id);
     		$catName = $this->getCategoryName($loa[0]->value);
     		$cat = $this->cs->findByName($catName);
     		$catids = array();
