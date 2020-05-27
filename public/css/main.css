@@ -140,3 +140,9 @@ body {
     color: #3B5998;
     margin-bottom: 4px;
 }
+.entry:not(:first-of-type) {
+    margin-top: 10px;
+}
+.glyphicon {
+    font-size: 12px;
+}

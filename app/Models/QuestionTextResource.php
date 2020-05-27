@@ -1,14 +1,13 @@
-<?php 
+<?php
 namespace App\Models;
 
 use App\Support\Helpers\HasCompositePrimaryKey;
 use Illuminate\Database\Eloquent\Model;
 
-// NOT USED
-class QuestionResource extends Model {
+class QuestionTextResource extends Model {
     use HasCompositePrimaryKey;
     
-    protected $table = 'quagga_medium';
+    protected $table = 'quagga_tekst';
     protected $primaryKey = array('med_id', 'med_type');
-    protected $fillable = ['med_id', 'med_type', 'med_name'];
+    protected $fillable = ['med_id', 'med_type', 'tek_contents'];
 }

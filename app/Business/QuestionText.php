@@ -6,10 +6,6 @@ class QuestionText {
 	protected $medType;
 	protected $tekContents;
 	
-    //protected $table = 'quagga_tekst';
-    //protected $primaryKey = array('med_id', 'med_type');
-    //protected $fillable = ['med_id', 'med_type', 'tek_contents'];
-
 	/**
 	 * @return mixed
 	 */

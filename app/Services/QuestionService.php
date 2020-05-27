@@ -1,11 +1,17 @@
 <?php
 namespace App\Services;
 
-use App\Models\Question;
-use App\Models\Category;
 use App\Models\Categorization;
+use App\Models\Category;
+use App\Models\Question;
+use App\Models\QuestionAlternative;
+use App\Models\QuestionAsked;
+use App\Models\QuestionImageResource;
+use App\Models\QuestionTextResource;
+use App\Models\User;
 use App\Support\Helpers\Utils;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class QuestionService {
@@ -94,23 +100,51 @@ class QuestionService {
 		return $loa;
 	}
 		
-	// NOT USED
-	public function saveQuestion($untypedArr, $que) {
-	    DB::transaction(function() {
-	        // generate que_id
+	// NOT USED YET
+	public function saveQuestion($untypedArr, $user = null) {
+	    $que = new Question();
+	    DB::transaction(function () use ($untypedArr, $que, $user) {
+	        $maxQueId = DB::table('quagga_question')->max('que_id'); // should be > 9999
+	        $que->que_id = $maxQueId + 1;
+	        $que->owner = ($user == null ? Auth::user() : $user);
+	        $que->save();
+	        
+	        $qtr = new QuestionTextResource();
+	        $maxMedtxtId = DB::table('quagga_tekst')->max('med_id');
+	        $qtr->med_id = $maxMedtxtId + 1;
+	        $qtr->med_type = 'T';
+	        $qtr->tek_contents = $untypedArr['tek_contents'];
+	        $qtr->save();
+	        
+	        $qir = new QuestionImageResource();
+	        $maxMedgrfId = DB::table('quagga_graphic')->max('med_id');
+	        $qir->med_id = $maxMedgrfId + 1;
+	        $qir->med_type = 'B';
+	        $qir->grf_filename = $untypedArr['grf_filename'];
+	        $qir->save();
+	        
+	        $qask = new QuestionAsked();
+	        $qask->que_id = $que->que_id;
+	        $qask->pop_id = 1; // 2
+	        $qask->med_id = $qtr->med_id; // en $qir->med_id;
+	        $qask->med_type = 'T'; // en een voor B
+	        $qask->save();
+	        
+	        $qalt = new QuestionAlternative();
+	        $qalt->que_id = $que->que_id;
+	        $qalt->alt_id = 1; // 2, 3 ,4
+	        $qalt->med_id = $qtr->med_id; // en $qir->med_id;
+	        $qalt->med_type = 'T'; // en voor B
+	        $qalt->alt_correct = 0; // 1
+	        $qalt->save();
+	        
+	        $catids = isset($untypedArr['category']) ? $untypedArr['category'] : null;
+	        if ($catids != null) {
+	            $this->saveCategorizations($que, $catids);
+	        }
 	    });
-	    
-		$que->id = isset($untypedArr['id']) ? $untypedArr['id'] : null;
-		$que->title = $untypedArr['title'];
-		$que->body = $untypedArr['body'];
-		$que->save();
-		
-		$catids = isset($untypedArr['category']) ? $untypedArr['category'] : null;
-		if ($catids != null) {
-			$this->saveCategorizations($que, $catids);
-		}
-
-		return $que;
+	
+	    return $que;
 	}
 	
 	public function saveCategorizations($que, $catids) {
