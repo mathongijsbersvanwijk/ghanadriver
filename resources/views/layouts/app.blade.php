@@ -20,6 +20,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+	@yield('dzscript')
 </head>
 <body>
     <div id="app">
@@ -104,5 +105,6 @@
         </footer>
     </div>
 </body>
+@yield('script')
 </html>
 
