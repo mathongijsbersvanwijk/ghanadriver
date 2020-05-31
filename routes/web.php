@@ -13,6 +13,9 @@ Route::get('z/render/{id}/{op}', 'ZebraController@render')->name('render');
 Route::get('/z/book/{title}', 'ZebraController@book')->name('book');
 Route::get('/z/booknav/{title}', 'ZebraController@book')->name('booknav');
 
+Route::resource('questions','QuestionUgcController');
+Route::resource('tests','TestUgcController');
+
 Route::get('/dynform', 'ContentController@dynform')->name('dynform');
 Route::post('/dynsubmit', 'ContentController@dynsubmit')->name('dynsubmit');
 

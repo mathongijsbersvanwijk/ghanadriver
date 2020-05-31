@@ -6,11 +6,15 @@ use Illuminate\Support\Facades\Log;
 
 class ContentController extends Controller
 {
+    public function create() {
+        return view('content.questionugc');
+    }
+    
     public function dynform(Request $request) {
         
         return view('home.dynform');
     }
-
+    
     public function dynsubmit(Request $request) {
         
         Log::info($request->input('firstname'));
