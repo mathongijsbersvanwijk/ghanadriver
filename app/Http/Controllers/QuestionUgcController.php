@@ -18,22 +18,18 @@ class QuestionUgcController extends Controller
     }
 
     public function store(Request $request) {
-        //dd($request);        
+        $fm = $request->input('fm');
+        $fmdec = json_decode($fm, true);
+        Log::info($fmdec);
         
         $photo = $request->file('photo');
         Log::info($photo->getClientOriginalname());
-        
-        $asked = $request->input('asked');
-        Log::info($asked);
-        
-      
-        $alternativea = $request->input('alternative');
-        //Log::info($alt);
-        
        
-        for ($i = 0; $i < sizeof($alternativea); $i++) {
-            Log::info($alternativea[i]);
-        }
+        for ($i = 0; $i < sizeof($fmdec); $i++) {
+            $elem = $fmdec[$i];
+            Log::info($elem['name']);
+            Log::info($elem['value']);
+        } 
             
         
         return redirect()->route('ridehailing');

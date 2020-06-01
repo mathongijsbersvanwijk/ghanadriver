@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-        <form role="form" action="{{ route('questions.store') }}" enctype="multipart/form-data" method="post" autocomplete="off">
+        <form id="fm" role="form" action="{{ route('questions.store') }}" enctype="multipart/form-data" method="post" autocomplete="off">
             <div class="form-group row">
                 <div class="dropzone" id="photo" name="photo"></div>
             </div>
@@ -19,7 +19,7 @@
             <div class="form-group row">
                 <div class="col-sm-12">
                     <input class="form-control @error('asked') is-invalid @enderror" type="text" 
-                        id="asked" name="asked" value="{{ old('asked', '') }}" placeholder="for example: Is it allowed to park here?">
+                        name="asked" value="{{ old('asked', '') }}" placeholder="for example: Is it allowed to park here?">
                     @error('asked')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group row controls"> 
                 <div class="entry input-group col-sm-12">
-                    <input class="form-control" id="alternative[]" name="alternative[]" type="text" placeholder="for example: Yes" />
+                    <input class="form-control" name="alternative" type="text" placeholder="for example: Yes" />
                     <span class="input-group-btn">
                         <button class="btn btn-success btn-add" type="button">
                             <span class="fa fa-plus"></span>
@@ -65,27 +65,21 @@ Dropzone.options.photo = {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     },    
     init: function() {
-        dzClosure = this; // Makes sure that 'this' is understood inside the functions below.
+        dzClosure = this; // makes sure that 'this' is understood inside the functions below.
 
         // for Dropzone to process the queue (instead of default form behavior):
         document.getElementById("submit").addEventListener("click", function(e) {
-            // Make sure that the form isn't actually being sent.
+            // make sure that the form isn't actually being sent.
             e.preventDefault();
             e.stopPropagation();
             dzClosure.processQueue();
         });
 
-        //send all the form data along with the files:
+        // send all the form data along with the files:
         this.on("sending", function(data, xhr, formData) {
-            alert(jQuery("#asked").val());
-            alert(jQuery("#alternative"));
-            var values1 = $("input[name='alternative[]']").map(function(){return $(this).val();}).get();
-            var values2 = jQuery("#alternative").map(function(){return $(this).val();}).get();
-            alert(values1);
-            alert(values2);
-            
-            formData.append("asked", jQuery("#asked").val());
-            formData.append("alternative", values1);
+            var form = JSON.stringify($("#fm").serializeArray());
+            formData.append("fm", form);
+            //formData.append("asked", jQuery("#asked").val());
         });
 
         this.on('complete', function(){
