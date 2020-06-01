@@ -5,7 +5,7 @@
 	<div class="row">
         <div class="control-group" id="fields">
 
-<form action="/dynsubmit" enctype="multipart/form-data" method="POST">
+<form action="{{ route('questions.store') }}" enctype="multipart/form-data" method="POST">
     <input type="text" id ="firstname" name ="firstname" />
     <input type="text" id ="lastname" name ="lastname" />
     <div class="dropzone" id="photo" name="photo"></div>
@@ -21,12 +21,11 @@
 <script src="{{ asset('js/dropzone.min.js') }}"></script>
 <script>
 Dropzone.options.photo= {
-	    url: '/dynsubmit',
+		url: '{{ route('questions.store') }}',
 	    paramName: 'photo',
 	    autoProcessQueue: false,
 	    uploadMultiple: false,
-	    parallelUploads: 5,
-	    maxFiles: 5,
+	    maxFiles: 1,
 	    maxFilesize: 1,
 	    acceptedFiles: 'image/*',
 	    addRemoveLinks: true,

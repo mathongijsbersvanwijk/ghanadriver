@@ -25,13 +25,18 @@ class QuestionUgcController extends Controller
         
         $asked = $request->input('asked');
         Log::info($asked);
+        
+      
         $alternativea = $request->input('alternative');
+        //Log::info($alt);
+        
+       
         for ($i = 0; $i < sizeof($alternativea); $i++) {
             Log::info($alternativea[i]);
         }
             
         
-        return redirect()->route('content.questions.index');
+        return redirect()->route('ridehailing');
     }
 
     public function show(Question $question) {

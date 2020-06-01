@@ -2,50 +2,48 @@
 
 @section('content')
 <div class="container">
-	<div class="row">
-		<div class="col-sm-12">
-			<h5>Create your own question</h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12">
-        <form role="form" action="/questions/store" enctype="multipart/form-data" method="post" autocomplete="off">
-	            <div class="dropzone" id="photo" name="photo"></div>
-			<div class="form-group row">
-			</div>
-			<div class="form-group row">
-        		<div class="col-sm-12">Pose the question you want to ask about this photo</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-12">
-					<input class="form-control @error('asked') is-invalid @enderror" type="text" 
-						id="asked" name="asked" value="{{ old('asked', '') }}" placeholder="for example: Is it allowed to park here?">
+    <div class="row">
+        <div class="col-sm-12">
+            <h5>Create your own question</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+        <form role="form" action="{{ route('questions.store') }}" enctype="multipart/form-data" method="post" autocomplete="off">
+            <div class="form-group row">
+                <div class="dropzone" id="photo" name="photo"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12">Pose the question you want to ask about this photo</div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <input class="form-control @error('asked') is-invalid @enderror" type="text" 
+                        id="asked" name="asked" value="{{ old('asked', '') }}" placeholder="for example: Is it allowed to park here?">
                     @error('asked')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-				</div>
-			</div>
-			<div class="form-group row">
-        		<div class="col-sm-12">Give the possible multiple choice answers (press <span class="fa fa-plus gs"></span> to add more options)</div>
-			</div>
-            <div class="controls"> 
-                <div class="form-group row">
-    				<div class="entry input-group col-sm-12">
-                        <input class="form-control" name="alternative[]" type="text" placeholder="for example: Yes" />
-                    	<span class="input-group-btn">
-                            <button class="btn btn-success btn-add" type="button">
-                                <span class="fa fa-plus"></span>
-                            </button>
-                        </span>
-    				</div>
-    			</div>
-		    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12">Give the possible multiple choice answers (press <span class="fa fa-plus gs"></span> to add more options)</div>
+            </div>
+            <div class="form-group row controls"> 
+                <div class="entry input-group col-sm-12">
+                    <input class="form-control" id="alternative[]" name="alternative[]" type="text" placeholder="for example: Yes" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-success btn-add" type="button">
+                            <span class="fa fa-plus"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
             <button type="submit" id="submit" class="btn btn-primary">Go</button>
         </form>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 @endsection
 
@@ -54,8 +52,8 @@
 <script>
 Dropzone.prototype.defaultOptions.dictDefaultMessage = "Choose photo";
 Dropzone.prototype.defaultOptions.dictRemoveFile = "Remove photo";
-Dropzone.options.photo= {
-	url: '/questions/store',
+Dropzone.options.photo = {
+    url: '{{ route('questions.store') }}',
     paramName: 'photo',
     autoProcessQueue: false,
     uploadMultiple: false,
@@ -78,12 +76,19 @@ Dropzone.options.photo= {
         });
 
         //send all the form data along with the files:
-        dzClosure.on("sending", function(data, xhr, formData) {
-        	formData.append("asked", jQuery("#asked").val());
+        this.on("sending", function(data, xhr, formData) {
+            alert(jQuery("#asked").val());
+            alert(jQuery("#alternative"));
+            var values1 = $("input[name='alternative[]']").map(function(){return $(this).val();}).get();
+            var values2 = jQuery("#alternative").map(function(){return $(this).val();}).get();
+            alert(values1);
+            alert(values2);
+            
+            formData.append("asked", jQuery("#asked").val());
+            formData.append("alternative", values1);
         });
 
-        dzClosure.on('complete',function(){
-            window.location.href = '/dvla';
+        this.on('complete', function(){
         })
     }
 }
@@ -116,3 +121,4 @@ $(function() {
 });
 </script>
 @endsection
+
