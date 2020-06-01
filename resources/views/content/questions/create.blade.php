@@ -9,10 +9,9 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-        <form role="form" action='/dynsubmit' method='post' autocomplete="off">
-      		@csrf
-			<div class="form-group row">
+        <form role="form" action="/questions/store" enctype="multipart/form-data" method="post" autocomplete="off">
 	            <div class="dropzone" id="photo" name="photo"></div>
+			<div class="form-group row">
 			</div>
 			<div class="form-group row">
         		<div class="col-sm-12">Pose the question you want to ask about this photo</div>
@@ -34,7 +33,7 @@
             <div class="controls"> 
                 <div class="form-group row">
     				<div class="entry input-group col-sm-12">
-                        <input class="form-control" name="fields[]" type="text" placeholder="for example: Yes" />
+                        <input class="form-control" name="alternative[]" type="text" placeholder="for example: Yes" />
                     	<span class="input-group-btn">
                             <button class="btn btn-success btn-add" type="button">
                                 <span class="fa fa-plus"></span>
@@ -42,7 +41,6 @@
                         </span>
     				</div>
     			</div>
-
 		    </div>
             <button type="submit" id="submit" class="btn btn-primary">Go</button>
         </form>
@@ -57,7 +55,7 @@
 Dropzone.prototype.defaultOptions.dictDefaultMessage = "Choose photo";
 Dropzone.prototype.defaultOptions.dictRemoveFile = "Remove photo";
 Dropzone.options.photo= {
-	url: '/dynsubmit',
+	url: '/questions/store',
     paramName: 'photo',
     autoProcessQueue: false,
     uploadMultiple: false,
@@ -81,11 +79,11 @@ Dropzone.options.photo= {
 
         //send all the form data along with the files:
         dzClosure.on("sending", function(data, xhr, formData) {
-            formData.append("asked", jQuery("#asked").val());
+        	formData.append("asked", jQuery("#asked").val());
         });
 
         dzClosure.on('complete',function(){
-            window.location.href = '/';
+            window.location.href = '/dvla';
         })
     }
 }

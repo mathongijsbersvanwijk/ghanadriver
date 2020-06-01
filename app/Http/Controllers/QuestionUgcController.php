@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class QuestionUgcController extends Controller
 {
@@ -17,6 +18,19 @@ class QuestionUgcController extends Controller
     }
 
     public function store(Request $request) {
+        //dd($request);        
+        
+        $photo = $request->file('photo');
+        Log::info($photo->getClientOriginalname());
+        
+        $asked = $request->input('asked');
+        Log::info($asked);
+        $alternativea = $request->input('alternative');
+        for ($i = 0; $i < sizeof($alternativea); $i++) {
+            Log::info($alternativea[i]);
+        }
+            
+        
         return redirect()->route('content.questions.index');
     }
 

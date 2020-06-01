@@ -16,15 +16,14 @@ class ContentController extends Controller
     }
     
     public function dynsubmit(Request $request) {
-        
+       
         Log::info($request->input('firstname'));
         
         $uf = $request->file('photo');
         Log::info($uf->getClientOriginalname());
         
-        dd( $request);
-        echo $request->input('fields')[0];
-        echo $request->input('fields')[1];
+        //echo $request->input('fields')[0];
+        //echo $request->input('fields')[1];
         
         //$op = $request->input('op');
         
