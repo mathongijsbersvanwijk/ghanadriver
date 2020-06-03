@@ -71,7 +71,7 @@ class QuestionToolkit {
 		return $dq;
 	}
 	
-	private static function createText ($medid, $medType, $tek) {
+	public static function createText ($medid, $medType, $tek) {
 		$qt = new QuestionText();
 		$qt->setMedid($medid); 
 		$qt->setMedType($medType); 
@@ -80,7 +80,7 @@ class QuestionToolkit {
 		return $qt;
 	}
 	
-	private static function createImage ($medid, $medType, $grfFn) {
+	public static function createImage ($medid, $medType, $grfFn) {
 		$qi = new QuestionImage(); 
 		$qi->setMedid($medid); 
 		$qi->setMedType($medType); 

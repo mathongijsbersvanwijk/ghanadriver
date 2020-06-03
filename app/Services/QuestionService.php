@@ -100,10 +100,9 @@ class QuestionService {
 		return $loa;
 	}
 		
-	// NOT USED YET
-	public function saveQuestion($untypedArr, $user = null) {
+	public function saveQuestion($qi, $qt, $ldqalt, $user = null) {
 	    $que = new Question();
-	    DB::transaction(function () use ($untypedArr, $que, $user) {
+	    DB::transaction(function () use ($que, $qi, $qt, $ldqalt, $user) {
 	        $maxQueId = DB::table('quagga_question')->max('que_id'); // should be > 9999
 	        $que->que_id = $maxQueId + 1;
 	        $que->owner = ($user == null ? Auth::user() : $user);
@@ -112,33 +111,49 @@ class QuestionService {
 	        $qtr = new QuestionTextResource();
 	        $maxMedtxtId = DB::table('quagga_tekst')->max('med_id');
 	        $qtr->med_id = $maxMedtxtId + 1;
-	        $qtr->med_type = 'T';
-	        $qtr->tek_contents = $untypedArr['tek_contents'];
+	        $qtr->med_type = $qt->getMedType();
+	        $qtr->tek_contents = $qt->getTekContents();
 	        $qtr->save();
+	        
+	        $qask = new QuestionAsked();
+	        $qask->que_id = $que->que_id;
+	        $qask->pop_id = 1;
+	        $qask->med_id = $qtr->med_id;
+	        $qask->med_type = $qtr->med_type;
+	        $qask->save();
 	        
 	        $qir = new QuestionImageResource();
 	        $maxMedgrfId = DB::table('quagga_graphic')->max('med_id');
 	        $qir->med_id = $maxMedgrfId + 1;
-	        $qir->med_type = 'B';
-	        $qir->grf_filename = $untypedArr['grf_filename'];
+	        $qir->med_type = $qi->getMedType();
+	        $qir->grf_filename = $qi->getGrfFileName();
 	        $qir->save();
 	        
 	        $qask = new QuestionAsked();
 	        $qask->que_id = $que->que_id;
-	        $qask->pop_id = 1; // 2
-	        $qask->med_id = $qtr->med_id; // en $qir->med_id;
-	        $qask->med_type = 'T'; // en een voor B
+	        $qask->pop_id = 2;
+	        $qask->med_id = $qir->med_id;
+	        $qask->med_type = $qir->med_type;
 	        $qask->save();
 	        
-	        $qalt = new QuestionAlternative();
-	        $qalt->que_id = $que->que_id;
-	        $qalt->alt_id = 1; // 2, 3 ,4
-	        $qalt->med_id = $qtr->med_id; // en $qir->med_id;
-	        $qalt->med_type = 'T'; // en voor B
-	        $qalt->alt_correct = 0; // 1
-	        $qalt->save();
+	        foreach ($ldqalt as $dqalt) {
+	            $qtr = new QuestionTextResource();
+	            $maxMedtxtId = DB::table('quagga_tekst')->max('med_id');
+	            $qtr->med_id = $maxMedtxtId + 1;
+	            $qtr->med_type = $dqalt->getQuestionText()->getMedType();
+	            $qtr->tek_contents = $dqalt->getQuestionText()->getTekContents();
+	            $qtr->save();
+	            
+	            $qalt = new QuestionAlternative();
+	            $qalt->que_id = $que->que_id;
+	            $qalt->alt_id = $dqalt->getAltId();
+	            $qalt->med_id = $qtr->med_id; 
+	            $qalt->med_type = $qtr->med_type;
+	            $qalt->alt_correct = $dqalt->isCorrect() ? 1 : 0;
+	            $qalt->save();
+	        }
 	        
-	        $catids = isset($untypedArr['category']) ? $untypedArr['category'] : null;
+	        $catids = [1];
 	        if ($catids != null) {
 	            $this->saveCategorizations($que, $catids);
 	        }
@@ -169,7 +184,7 @@ class QuestionService {
 		}
 	}
 	
-	// Just a test
+	// just a test
 	public function countMetaValues() {
 		$loa = $this->findQuestionArtifacts('3225');
 		return sizeof($loa);

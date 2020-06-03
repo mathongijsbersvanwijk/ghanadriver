@@ -36,7 +36,9 @@ class QuestionServiceTest extends TestCase {
 		$this->assertEquals(28, sizeof($ques));
 	}
 	
-	public function testBasicTest() {
+	public function testSaveQuestion() {
+	    
+	    
         $this->assertTrue(true);
     }
 }

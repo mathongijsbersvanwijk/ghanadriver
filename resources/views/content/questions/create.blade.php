@@ -28,10 +28,15 @@
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-sm-12">Give the possible multiple choice answers (press <span class="fa fa-plus gs"></span> to add more options)</div>
+                <div class="col-sm-12">Give the possible multiple choice answers and indicate the correct one with the orange radio-button (press <span class="fa fa-plus gs"></span> to add more options)</div>
             </div>
             <div class="form-group row controls"> 
                 <div class="entry input-group col-sm-12">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <input type="radio" name="iscorrect" aria-label="Radio button for following text input">
+                        </div>
+                    </div>
                     <input class="form-control" name="alternative" type="text" placeholder="for example: Yes" />
                     <span class="input-group-btn">
                         <button class="btn btn-success btn-add" type="button">
@@ -40,7 +45,7 @@
                     </span>
                 </div>
             </div>
-            <button type="submit" id="submit" class="btn btn-primary">Go</button>
+            <button type="submit" id="submit" class="btn btn-primary">Save</button>
         </form>
         </div>
     </div>

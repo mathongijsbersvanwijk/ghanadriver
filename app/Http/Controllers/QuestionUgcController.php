@@ -1,8 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Business\DisplayQuestionAlternative;
 use App\Models\Question;
+use App\Models\User;
+use App\Services\QuestionService;
+use App\Support\Helpers\QuestionToolkit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 
 class QuestionUgcController extends Controller
@@ -17,20 +22,33 @@ class QuestionUgcController extends Controller
         return view('content.questions.create');
     }
 
-    public function store(Request $request) {
+    public function store(Request $request, QuestionService $qs) {
         $fm = $request->input('fm');
-        $fmdec = json_decode($fm, true);
-        Log::info($fmdec);
-        
-        $photo = $request->file('photo');
-        Log::info($photo->getClientOriginalname());
-       
-        for ($i = 0; $i < sizeof($fmdec); $i++) {
-            $elem = $fmdec[$i];
-            Log::info($elem['name']);
-            Log::info($elem['value']);
-        } 
+        $fmd = json_decode($fm, true);
+        Log::info($fmd);
 
+        $photo = $request->file('photo');
+        $qi = QuestionToolkit::createImage(0, 'B', $photo->getClientOriginalname());
+        $qt = QuestionToolkit::createText(0, 'T', $fmd[0]['value']); // $fmd[0]['name'] == 'asked'
+        
+        $ldqalt = new Collection();
+        $i = 1;
+        while ($i < sizeof($fmd)) {
+            $dqalt = null;
+            if ($fmd[$i]['name'] == 'iscorrect') {
+                $dqalt = new DisplayQuestionAlternative($i, 1);
+                $i++;
+            } else {
+                $dqalt = new DisplayQuestionAlternative($i, 0);
+            }
+        
+            $dqalt->setQuestionText(QuestionToolkit::createText(0, 'T', $fmd[$i]['value']));
+            $ldqalt->push($dqalt);
+            $i++;
+        }
+         
+        $qs->saveQuestion($qi, $qt, $ldqalt, new User(['id' => 1]));
+        
         // return is void, because redirect is done on complete event in create.blade.php
     }
 
