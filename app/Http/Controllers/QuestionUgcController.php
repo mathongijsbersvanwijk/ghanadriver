@@ -30,9 +30,8 @@ class QuestionUgcController extends Controller
             Log::info($elem['name']);
             Log::info($elem['value']);
         } 
-            
-        
-        return redirect()->route('ridehailing');
+
+        // return is void, because redirect is done on complete event in create.blade.php
     }
 
     public function show(Question $question) {

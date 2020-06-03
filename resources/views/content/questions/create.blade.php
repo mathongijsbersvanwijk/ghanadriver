@@ -65,7 +65,7 @@ Dropzone.options.photo = {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     },    
     init: function() {
-        dzClosure = this; // makes sure that 'this' is understood inside the functions below.
+        dzClosure = this; // make sure that 'this' is understood inside the functions below.
 
         // for Dropzone to process the queue (instead of default form behavior):
         document.getElementById("submit").addEventListener("click", function(e) {
@@ -83,6 +83,7 @@ Dropzone.options.photo = {
         });
 
         this.on('complete', function(){
+        	window.location.href = '/home';
         })
     }
 }
