@@ -8,7 +8,6 @@ use App\Models\QuestionAlternative;
 use App\Models\QuestionAsked;
 use App\Models\QuestionImageResource;
 use App\Models\QuestionTextResource;
-use App\Models\User;
 use App\Support\Helpers\Utils;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -100,12 +99,12 @@ class QuestionService {
 		return $loa;
 	}
 		
-	public function saveQuestion($qi, $qt, $ldqalt, $user = null) {
+	public function saveQuestion($qt, $qi, $ldqalt, $user = null) {
 	    $que = new Question();
 	    DB::transaction(function () use ($que, $qi, $qt, $ldqalt, $user) {
-	        $maxQueId = DB::table('quagga_question')->max('que_id'); // should be > 9999
+	        $maxQueId = DB::table('quagga_question')->max('que_id'); // should be > 10000
 	        $que->que_id = $maxQueId + 1;
-	        $que->owner = ($user == null ? Auth::user() : $user);
+	        $que->owner()->associate($user == null ? Auth::user() : $user);
 	        $que->save();
 	        
 	        $qtr = new QuestionTextResource();

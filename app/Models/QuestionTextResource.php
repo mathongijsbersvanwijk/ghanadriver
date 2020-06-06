@@ -10,4 +10,5 @@ class QuestionTextResource extends Model {
     protected $table = 'quagga_tekst';
     protected $primaryKey = array('med_id', 'med_type');
     protected $fillable = ['med_id', 'med_type', 'tek_contents'];
+    public $timestamps = false;
 }

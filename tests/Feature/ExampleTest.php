@@ -15,6 +15,7 @@ class ExampleTest extends TestCase
     public function testBasicTest()
     {
         $user = new User(['id' => 1, 'name' => 'Mathon']);
+        echo $user;
         echo $user->name;
         
         $response = $this->get('/');

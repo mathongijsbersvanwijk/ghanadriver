@@ -8,7 +8,7 @@ use App\Business\QuestionText;
 use App\Services\QuestionService;
 
 class QuestionToolkit {
-	// NOT USED
+	// only used in unittests
 	public static function getDisplayQuestionById($queId, QuestionService $qs) {
 		$loa = $qs->findQuestionArtifacts($queId);
 		if ($loa != null && sizeof($loa) > 0) {

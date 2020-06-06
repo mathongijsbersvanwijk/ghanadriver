@@ -47,7 +47,7 @@ class QuestionUgcController extends Controller
             $i++;
         }
          
-        $qs->saveQuestion($qi, $qt, $ldqalt, new User(['id' => 1]));
+        $qs->saveQuestion($qt, $qi, $ldqalt, new User(['id' => 1]));
         
         // return is void, because redirect is done on complete event in create.blade.php
     }

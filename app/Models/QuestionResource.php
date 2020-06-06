@@ -11,4 +11,5 @@ class QuestionResource extends Model {
     protected $table = 'quagga_medium';
     protected $primaryKey = array('med_id', 'med_type');
     protected $fillable = ['med_id', 'med_type', 'med_name'];
+    public $timestamps = false;
 }
