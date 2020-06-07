@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Business\DisplayQuestionAlternative;
 use App\Models\Question;
 use App\Models\User;
+use App\Services\ImageService;
 use App\Services\QuestionService;
 use App\Support\Helpers\QuestionToolkit;
 use Illuminate\Http\Request;
@@ -22,10 +23,14 @@ class QuestionUgcController extends Controller
         return view('content.questions.create');
     }
 
-    public function store(Request $request, QuestionService $qs) {
+    public function store(Request $request, QuestionService $qs, ImageService $is) {
+        $this->validate($request, [
+            'fm'    => 'required',
+            'photo' => 'image|required|mimes:jpeg,png,jpg,gif,svg',
+        ]);
+        
         $fm = $request->input('fm');
         $fmd = json_decode($fm, true);
-        Log::info($fmd);
 
         $photo = $request->file('photo');
         $qi = QuestionToolkit::createImage(0, 'B', $photo->getClientOriginalname());
@@ -47,11 +52,20 @@ class QuestionUgcController extends Controller
             $i++;
         }
          
-        $qs->saveQuestion($qt, $qi, $ldqalt, new User(['id' => 1]));
+        $que = $qs->saveQuestion($qt, $qi, $ldqalt, new User(['id' => 1]));
+        $request->session()->put('que', $que);
+        
+        $is->save($photo);
         
         // return is void, because redirect is done on complete event in create.blade.php
     }
 
+    public function check(Request $request) {
+        $que = $request->session()->get('que');
+        
+        return redirect('/z/render/'.$que->que_id.'/5');
+    }
+    
     public function show(Question $question) {
         //
     }

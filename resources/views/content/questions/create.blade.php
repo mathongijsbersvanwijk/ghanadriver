@@ -88,7 +88,7 @@ Dropzone.options.photo = {
         });
 
         this.on('complete', function(){
-        	window.location.href = '/home';
+        	window.location.href = '/questions/check';
         })
     }
 }

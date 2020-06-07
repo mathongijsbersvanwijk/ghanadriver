@@ -38,7 +38,7 @@ function doAnswerQuestion(alt) {
 	@endif
 	@php ($qi = $dq->getDisplayQuestionAsked()->getQuestionImage())
 	@if ($qi != null)
-		<div class="image-container"><img class="img-fluid" src="/img/{!! $qi->getGrfFileName() !!}" /></div>
+		<div class="image-container"><img class="img-fluid" src="/storage/img/{!! $qi->getGrfFileName() !!}" /></div>
 		<div class="zebra-image-bottom"></div>
 	@endif
 

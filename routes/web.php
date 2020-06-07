@@ -13,6 +13,7 @@ Route::get('z/render/{id}/{op}', 'ZebraController@render')->name('render');
 Route::get('/z/book/{title}', 'ZebraController@book')->name('book');
 Route::get('/z/booknav/{title}', 'ZebraController@book')->name('booknav');
 
+Route::get('questions/check','QuestionUgcController@check')->name('check');
 Route::resource('questions','QuestionUgcController');
 Route::resource('tests','TestUgcController');
 
