@@ -150,7 +150,7 @@ body {
 .dz-progress {
 	display: none;
 }
-.dz-button {
+.dropzone .dz-message .dz-button {
 	background-color: rgb(16, 40, 18);
 	border-bottom-color: rgb(16, 40, 18);
 	border-bottom-left-radius: 4px;

@@ -56,7 +56,6 @@ class QuestionUgcController extends Controller
         $request->session()->put('que', $que);
         
         $is->save($photo);
-        
         // return is void, because redirect is done on complete event in create.blade.php
     }
 

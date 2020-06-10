@@ -63,7 +63,6 @@ Dropzone.options.photo = {
     autoProcessQueue: false,
     uploadMultiple: false,
     maxFiles: 1,
-    maxFilesize: 1,
     acceptedFiles: 'image/*',
     addRemoveLinks: true,
     headers: {
@@ -80,6 +79,20 @@ Dropzone.options.photo = {
             dzClosure.processQueue();
         });
 
+        this.on('thumbnail', function(file) {
+  			if (file.accepted !== false) {
+     	        if (file.size > 100000) {
+    	        	file.toobig(100); 
+    		    } else {		        
+                    if (file.width < 640 || file.height < 480) {
+	                    file.rejectDimensions();
+                    } else {
+    	                file.acceptDimensions();
+                    }
+    		    }
+        	}
+        });
+        
         // send all the form data along with the files:
         this.on("sending", function(data, xhr, formData) {
             var form = JSON.stringify($("#fm").serializeArray());
@@ -87,9 +100,18 @@ Dropzone.options.photo = {
             //formData.append("asked", jQuery("#asked").val());
         });
 
-        this.on('complete', function(){
+        this.on('success', function() {
         	window.location.href = '/questions/check';
-        })
+        });
+    },
+    accept: function(file, done) {
+        file.acceptDimensions = done;
+        file.rejectDimensions = function() {
+          done('The image must be at least 640px x 480px')
+        };
+        file.toobig = function(max) {
+        	done("File is too big " + file.size / 1000 + "KB, max filesize is " + max + " KB")
+        };
     }
 }
 </script>
