@@ -62,6 +62,10 @@ class QuestionUgcController extends Controller
     public function check(Request $request) {
         $que = $request->session()->get('que');
         
+        if ($que == null) {
+            return view('errors.app')->withErrors(["something-wrong"=>"Something went wrong!"]);
+        }
+        
         return redirect('/z/render/'.$que->que_id.'/5');
     }
     

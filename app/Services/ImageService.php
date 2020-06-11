@@ -7,7 +7,8 @@ use Intervention\Image\Facades\Image;
 class ImageService
 {
     public function save($photo) {
-        $img = Image::make($photo)->resize(384, 256)->save();
+        $img = Image::make($photo)->save();
+        //$img = Image::make($photo)->resize(384, 256)->save();
         Storage::disk('public')->put('img/'.$photo->getClientOriginalname(), $img);
         
         return $img;

@@ -140,6 +140,12 @@ body {
     color: #3B5998;
     margin-bottom: 4px;
 }
+.asked-feedback #asked-error {
+	font-weight: 700;
+}
+.alternative-feedback #alternative-error {
+	font-weight: 700;
+}
 .entry:not(:first-of-type) {
     margin-top: 10px;
 }

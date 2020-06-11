@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-        <form id="fm" role="form" action="{{ route('questions.store') }}" enctype="multipart/form-data" method="post" autocomplete="off">
+        <form id="fm" name="fm" role="form" action="{{ route('questions.store') }}" enctype="multipart/form-data" method="post" autocomplete="off">
             <div class="form-group row">
                 <div class="dropzone" id="photo" name="photo"></div>
             </div>
@@ -19,12 +19,8 @@
             <div class="form-group row">
                 <div class="col-sm-12">
                     <input class="form-control @error('asked') is-invalid @enderror" type="text" 
-                        name="asked" value="{{ old('asked', '') }}" placeholder="for example: Is it allowed to park here?">
-                    @error('asked')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                        id="asked" name="asked" value="{{ old('asked', '') }}" placeholder="for example: Is it allowed to park here?">
+                    <span class="invalid-feedback asked-feedback" role="alert"></span>
                 </div>
             </div>
             <div class="form-group row">
@@ -34,7 +30,7 @@
                 <div class="entry input-group col-sm-12">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                          <input type="radio" name="iscorrect" aria-label="Radio button for following text input">
+                            <input type="radio" name="iscorrect" aria-label="Radio button for following text input">
                         </div>
                     </div>
                     <input class="form-control" name="alternative" type="text" placeholder="for example: Yes" />
@@ -43,6 +39,7 @@
                             <span class="fa fa-plus"></span>
                         </button>
                     </span>
+	                <span class="invalid-feedback alternative-feedback" role="alert"></span>
                 </div>
             </div>
             <button type="submit" id="submit" class="btn btn-primary">Save</button>
@@ -64,6 +61,7 @@ Dropzone.options.photo = {
     uploadMultiple: false,
     maxFiles: 1,
     acceptedFiles: 'image/*',
+    resizeWidth: 384,
     addRemoveLinks: true,
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -76,7 +74,10 @@ Dropzone.options.photo = {
             // make sure that the form isn't actually being sent.
             e.preventDefault();
             e.stopPropagation();
-            dzClosure.processQueue();
+            $('#fm').validate();
+            if ($('#fm').valid()) {
+                dzClosure.processQueue();
+            };
         });
 
         this.on('thumbnail', function(file) {
@@ -120,8 +121,7 @@ Dropzone.options.photo = {
 @section('script')
 <script>
 $(function() {
-    $(document).on('click', '.btn-add', function(e)
-    {
+    $(document).on('click', '.btn-add', function(e) {
         e.preventDefault();
 
         var controlForm = $('.controls'),
@@ -140,6 +140,16 @@ $(function() {
 		e.preventDefault();
 		return false;
 	});
+
+    $("#fm").validate({
+        rules: {
+	        asked: "required"
+        },
+        messages: {
+        	asked: "Please enter text&nbsp;"
+        },
+        errorLabelContainer: $("#fm span.asked-feedback"),
+    });
 });
 </script>
 @endsection
