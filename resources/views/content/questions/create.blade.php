@@ -20,7 +20,7 @@
                 <div class="col-sm-12">
                     <input class="form-control @error('asked') is-invalid @enderror" type="text" 
                         id="asked" name="asked" value="{{ old('asked', '') }}" placeholder="for example: Is it allowed to park here?">
-                    <span class="invalid-feedback asked-feedback" role="alert"></span>
+                    <!-- span class="invalid-feedback asked-feedback" role="alert"></span -->
                 </div>
             </div>
             <div class="form-group row">
@@ -30,7 +30,7 @@
                 <div class="entry input-group col-sm-12">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <input type="radio" name="iscorrect" aria-label="Radio button for following text input">
+                            <input type="radio" name="iscorrect" aria-label="Radio button for following text input" checked="checked">
                         </div>
                     </div>
                     <input class="form-control" name="alternative" type="text" placeholder="for example: Yes" />
@@ -39,7 +39,7 @@
                             <span class="fa fa-plus"></span>
                         </button>
                     </span>
-	                <span class="invalid-feedback alternative-feedback" role="alert"></span>
+	                <!-- span class="invalid-feedback alternative-feedback" role="alert"></span -->
                 </div>
             </div>
             <button type="submit" id="submit" class="btn btn-primary">Save</button>
@@ -74,8 +74,7 @@ Dropzone.options.photo = {
             // make sure that the form isn't actually being sent.
             e.preventDefault();
             e.stopPropagation();
-            $('#fm').validate();
-            if ($('#fm').valid()) {
+            if (formIsValid()) {
                 dzClosure.processQueue();
             };
         });
@@ -115,6 +114,10 @@ Dropzone.options.photo = {
         };
     }
 }
+function formIsValid() {
+	alert("not valid for now");
+	return false;
+}
 </script>
 @endsection
 
@@ -123,16 +126,23 @@ Dropzone.options.photo = {
 $(function() {
     $(document).on('click', '.btn-add', function(e) {
         e.preventDefault();
-
+      
         var controlForm = $('.controls'),
 	        currentEntry = $(this).parents('.entry:first'),
     	    newEntry = $(currentEntry.clone()).appendTo(controlForm);
 
+        alert(controlForm.children().length);
+        
         newEntry.find('input').val('');
+        //newEntry.find('button').removeClass('btn-add').addClass('btn-default');
+        
         controlForm.find('.entry:not(:last) .btn-add')
             .removeClass('btn-add').addClass('btn-remove')
             .removeClass('btn-success').addClass('btn-danger')
             .html('<span class="fa fa-minus"></span>');
+
+        $('input:radio[name=iscorrect]').each(function () { $(this).prop('checked', false); });
+        
     }).on('click', '.btn-remove', function(e)
     {
 		$(this).parents('.entry:first').remove();
@@ -141,15 +151,19 @@ $(function() {
 		return false;
 	});
 
-    $("#fm").validate({
-        rules: {
-	        asked: "required"
-        },
-        messages: {
-        	asked: "Please enter text&nbsp;"
-        },
-        errorLabelContainer: $("#fm span.asked-feedback"),
-    });
+    $('#fm input[type="text"]').focus(function(){
+        if($(this).val() == "Please enter text"){
+            $(this).val("");
+        }
+    });    
+
+    $('#fm input[type="text"]').blur(function(){
+        if(!$(this).val()){
+            $(this).val("Please enter text").addClass("input-feedback");
+        } else{
+            $(this).removeClass("input-feedback");
+        }
+    });    
 });
 </script>
 @endsection

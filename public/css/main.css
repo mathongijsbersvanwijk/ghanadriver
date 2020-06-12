@@ -146,6 +146,11 @@ body {
 .alternative-feedback #alternative-error {
 	font-weight: 700;
 }
+.input-feedback {
+    color: #ff0000;
+	font-weight: 700;
+	outline: 2px solid red;
+}    
 .entry:not(:first-of-type) {
     margin-top: 10px;
 }

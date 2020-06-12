@@ -141,16 +141,6 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/intervention/imagecache/src/Intervention/Image">
-		<attributes>
-			<attribute name="composer" value="vendor"/>
-		</attributes>
-	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/jeremeamia/superclosure/src">
-		<attributes>
-			<attribute name="composer" value="vendor"/>
-		</attributes>
-	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/laravel/framework/src/Illuminate/Foundation">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
@@ -496,11 +486,6 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/symfony/polyfill-php56">
-		<attributes>
-			<attribute name="composer" value="vendor"/>
-		</attributes>
-	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/symfony/polyfill-php72">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
@@ -522,11 +507,6 @@
 		</attributes>
 	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/symfony/polyfill-php80/Resources/stubs">
-		<attributes>
-			<attribute name="composer" value="vendor"/>
-		</attributes>
-	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/symfony/polyfill-util">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
