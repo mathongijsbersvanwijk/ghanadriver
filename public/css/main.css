@@ -165,6 +165,15 @@ body {
 .dz-progress {
 	display: none;
 }
+.dropzone .dz-preview .dz-error-message {
+	top: 144px;
+	left: -30px;
+	width: 180px;
+}
+.dropzone .dz-preview .dz-error-message::after {
+	top: -6px;
+	left: 80px;
+}
 .dropzone .dz-message .dz-button {
 	background-color: rgb(16, 40, 18);
 	border-bottom-color: rgb(16, 40, 18);

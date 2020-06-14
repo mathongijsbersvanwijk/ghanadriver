@@ -87,7 +87,7 @@ Dropzone.options.photo = {
         dzClosure = this; // make sure that 'this' is understood inside the functions below.
 
         // for Dropzone to process the queue (instead of default form behavior):
-        document.getElementById("submit").addEventListener("click", function(e) {
+        document.getElementById('submit').addEventListener('click', function(e) {
             // make sure that the form isn't actually being sent.
             e.preventDefault();
             e.stopPropagation();
@@ -108,14 +108,14 @@ Dropzone.options.photo = {
                     }
     		    }
         	}
-  		    $("div.form-feedback").hide();
+  		    formFeedback("");
         });
         
         // send all the form data along with the files:
-        this.on("sending", function(data, xhr, formData) {
-            var form = JSON.stringify($("#fm").serializeArray());
-            formData.append("fm", form);
-            //formData.append("asked", jQuery("#asked").val());
+        this.on('sending', function(data, xhr, formData) {
+            var form = JSON.stringify($('#fm').serializeArray());
+            formData.append('fm', form);
+            //formData.append('asked', jQuery('#asked').val());
         });
 
         this.on('success', function() {
@@ -125,7 +125,7 @@ Dropzone.options.photo = {
     accept: function(file, done) {
         file.acceptDimensions = done;
         file.rejectDimensions = function() {
-        	done('The image must be at least 640px x 480px')
+        	done("The image must be at least 640px x 480px")
         };
         file.toobig = function(max) {
         	done("File is too big " + file.size / 1000 + "KB, max filesize is " + max + " KB")
@@ -135,56 +135,58 @@ Dropzone.options.photo = {
 $(function() {
     $(document).on('click', '.btn-add', function(e) {
         e.preventDefault();
-      
+
+    	var countAlt = $('.controls').children().length;
+    	if (countAlt > 3) {
+    		formFeedback("Number of possible answers should not be more than 4");
+    		return false;
+    	}		
+        
         var controlForm = $('.controls'),
 	        currentEntry = $(this).parents('.entry:first'),
-    	    newEntry = $(currentEntry.clone()).appendTo(controlForm);
+    	    newEntry = $(currentEntry.clone(true)).appendTo(controlForm);
 
         newEntry.find('input').val('');
-        //newEntry.find('button').removeClass('btn-add').addClass('btn-default');
-        
         controlForm.find('.entry:not(:last) .btn-add')
             .removeClass('btn-add').addClass('btn-remove')
             .removeClass('btn-success').addClass('btn-danger')
             .html('<span class="fa fa-minus"></span>');
 
         $('input:radio[name=iscorrect]').each(function () { $(this).prop('checked', false); });
-        $("div.form-feedback").hide();
+        formFeedback("");
         
     }).on('click', '.btn-remove', function(e)
     {
 		$(this).parents('.entry:first').remove();
 
 		e.preventDefault();
-	    $("div.form-feedback").hide();
+	    formFeedback("");
 		return false;
 	});
 
     $('#fm input[type="text"]').focus(function() {
         if($(this).val() == "Please enter text") {
-            $(this).val("");
+            $(this).val('');
         }
-	    $("div.form-feedback").hide();
+	    formFeedback("");
     });    
 
     $('#fm input[type="text"]').blur(function() {
         if(!$(this).val()) {
-            $(this).val("Please enter text").addClass("input-feedback");
+            $(this).val("Please enter text").addClass('input-feedback');
         } else{
-            $(this).removeClass("input-feedback");
+            $(this).removeClass('input-feedback');
         }
     });    
 });
 function formIsValid() {
-    if ($("#photo").find(".dz-preview").length == 0) {
-	    $("div.form-feedback p").html("Please choose photo");
-	    $("div.form-feedback").show();
+    if ($('#photo').find('.dz-preview').length == 0) {
+    	formFeedback("Please choose photo");
 		return false;
     }
     	
-    if (!$("#asked").val()) {
-	    $("div.form-feedback p").html("Please enter text for the question you want to ask");
-	    $("div.form-feedback").show();
+    if (!$('#asked').val()) {
+    	formFeedback("Please enter text for the question you want to ask");
 		return false;
     }
 
@@ -196,8 +198,7 @@ function formIsValid() {
 		}	 
     });
 	if (alternativeEmpty) {
-	    $("div.form-feedback p").html("Please enter text for possible answer");
-	    $("div.form-feedback").show();
+		formFeedback("Please enter text for possible answer");
 		return false;
 	}		
 
@@ -208,25 +209,30 @@ function formIsValid() {
 		}	 
     });
 	if (!radioButtonChecked) {
-	    $("div.form-feedback p").html("1 possible answer should be checked as correct");
-	    $("div.form-feedback").show();
+		formFeedback("1 possible answer should be checked as correct");
 		return false;
 	}		
 
 	var countAlt = $('.controls').children().length;
 	if (countAlt < 2) {
-	    $("div.form-feedback p").html("Number of possible answers should be at least 2");
-	    $("div.form-feedback").show();
+		formFeedback("Number of possible answers should be at least 2");
 		return false;
 	}		
 	if (countAlt > 4) {
-	    $("div.form-feedback p").html("Number of possible answers should not be more than 4");
-	    $("div.form-feedback").show();
+		formFeedback("Number of possible answers should not be more than 4");
 		return false;
 	}		
 	
-	$("div.form-feedback").hide();
+	formFeedback("");
 	return true;
+}
+function formFeedback(message) {
+    if (message != "") {
+        $('div.form-feedback p').html(message);
+        $('div.form-feedback').show();
+    } else {
+    	$('div.form-feedback').hide();
+    }
 }
 </script>
 @endsection
