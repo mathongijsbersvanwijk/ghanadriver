@@ -14,7 +14,7 @@
                 <div class="dropzone" id="photo" name="photo"></div>
             </div>
             <div class="form-group row">
-                <div class="col-sm-12">Pose the question you want to ask about this photo</div>
+                <div class="col-sm-12">Write the question you want to ask about this photo</div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-12">
@@ -111,6 +111,12 @@ Dropzone.options.photo = {
   		    formFeedback("");
         });
         
+        this.on('addedfile', function(file) {
+	        if (this.files.length > 1) {
+				this.removeFile(this.files[0]);
+	        }
+        });
+
         // send all the form data along with the files:
         this.on('sending', function(data, xhr, formData) {
             var form = JSON.stringify($('#fm').serializeArray());
