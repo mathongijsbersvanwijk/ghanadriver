@@ -18,8 +18,8 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-12">
-                    <input class="form-control @error('asked') is-invalid @enderror" type="text" 
-                        id="asked" name="asked" value="{{ old('asked', '') }}" placeholder="for example: Is it allowed to park here?">
+                    <input class="form-control" type="text" 
+                    	id="asked" name="asked" value="" placeholder="for example: Is it allowed to park here?">
                     <!-- span class="invalid-feedback asked-feedback" role="alert"></span -->
                 </div>
             </div>
@@ -33,7 +33,23 @@
                             <input type="radio" name="iscorrect" aria-label="Radio button for following text input" checked="checked">
                         </div>
                     </div>
-                    <input class="form-control" name="alternative" type="text" placeholder="for example: Yes" />
+                    <input class="form-control" type="text" 
+                    	name="alternative" value="" placeholder="for example: Yes" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger btn-remove" type="button">
+                            <span class="fa fa-minus"></span>
+                        </button>
+                    </span>
+	                <!-- span class="invalid-feedback alternative-feedback" role="alert"></span -->
+                </div>
+                <div class="entry input-group col-sm-12">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="radio" name="iscorrect" aria-label="Radio button for following text input">
+                        </div>
+                    </div>
+                    <input class="form-control" type="text" 
+                    	name="alternative" value="" placeholder="for example: No" />
                     <span class="input-group-btn">
                         <button class="btn btn-success btn-add" type="button">
                             <span class="fa fa-plus"></span>
@@ -42,6 +58,7 @@
 	                <!-- span class="invalid-feedback alternative-feedback" role="alert"></span -->
                 </div>
             </div>
+            <div class="form-feedback"><p></p></div>
             <button type="submit" id="submit" class="btn btn-primary">Save</button>
         </form>
         </div>
@@ -49,7 +66,7 @@
 </div>
 @endsection
 
-@section('dzscript')
+@section('script')
 <script src="{{ asset('js/dropzone.min.js') }}"></script>
 <script>
 Dropzone.prototype.defaultOptions.dictDefaultMessage = "Choose photo";
@@ -84,13 +101,14 @@ Dropzone.options.photo = {
      	        if (file.size > 100000) {
     	        	file.toobig(100); 
     		    } else {		        
-                    if (file.width < 640 || file.height < 480) {
+                    if (file.width < 640 || file.height < 480 || file.size == 0) {
 	                    file.rejectDimensions();
                     } else {
     	                file.acceptDimensions();
                     }
     		    }
         	}
+  		    $("div.form-feedback").hide();
         });
         
         // send all the form data along with the files:
@@ -107,22 +125,13 @@ Dropzone.options.photo = {
     accept: function(file, done) {
         file.acceptDimensions = done;
         file.rejectDimensions = function() {
-          done('The image must be at least 640px x 480px')
+        	done('The image must be at least 640px x 480px')
         };
         file.toobig = function(max) {
         	done("File is too big " + file.size / 1000 + "KB, max filesize is " + max + " KB")
         };
     }
 }
-function formIsValid() {
-	alert("not valid for now");
-	return false;
-}
-</script>
-@endsection
-
-@section('script')
-<script>
 $(function() {
     $(document).on('click', '.btn-add', function(e) {
         e.preventDefault();
@@ -131,8 +140,6 @@ $(function() {
 	        currentEntry = $(this).parents('.entry:first'),
     	    newEntry = $(currentEntry.clone()).appendTo(controlForm);
 
-        alert(controlForm.children().length);
-        
         newEntry.find('input').val('');
         //newEntry.find('button').removeClass('btn-add').addClass('btn-default');
         
@@ -142,29 +149,85 @@ $(function() {
             .html('<span class="fa fa-minus"></span>');
 
         $('input:radio[name=iscorrect]').each(function () { $(this).prop('checked', false); });
+        $("div.form-feedback").hide();
         
     }).on('click', '.btn-remove', function(e)
     {
 		$(this).parents('.entry:first').remove();
 
 		e.preventDefault();
+	    $("div.form-feedback").hide();
 		return false;
 	});
 
-    $('#fm input[type="text"]').focus(function(){
-        if($(this).val() == "Please enter text"){
+    $('#fm input[type="text"]').focus(function() {
+        if($(this).val() == "Please enter text") {
             $(this).val("");
         }
+	    $("div.form-feedback").hide();
     });    
 
-    $('#fm input[type="text"]').blur(function(){
-        if(!$(this).val()){
+    $('#fm input[type="text"]').blur(function() {
+        if(!$(this).val()) {
             $(this).val("Please enter text").addClass("input-feedback");
         } else{
             $(this).removeClass("input-feedback");
         }
     });    
 });
+function formIsValid() {
+    if ($("#photo").find(".dz-preview").length == 0) {
+	    $("div.form-feedback p").html("Please choose photo");
+	    $("div.form-feedback").show();
+		return false;
+    }
+    	
+    if (!$("#asked").val()) {
+	    $("div.form-feedback p").html("Please enter text for the question you want to ask");
+	    $("div.form-feedback").show();
+		return false;
+    }
+
+	var alternativeEmpty = false;
+	$('input:text[name=alternative]').each(function () {
+	    if (!$(this).val()) {
+		    alternativeEmpty = true;
+			return false;
+		}	 
+    });
+	if (alternativeEmpty) {
+	    $("div.form-feedback p").html("Please enter text for possible answer");
+	    $("div.form-feedback").show();
+		return false;
+	}		
+
+	var radioButtonChecked = false;
+	$('input:radio[name=iscorrect]').each(function () {
+		if ($(this).prop('checked')) {
+			radioButtonChecked = true; 
+		}	 
+    });
+	if (!radioButtonChecked) {
+	    $("div.form-feedback p").html("1 possible answer should be checked as correct");
+	    $("div.form-feedback").show();
+		return false;
+	}		
+
+	var countAlt = $('.controls').children().length;
+	if (countAlt < 2) {
+	    $("div.form-feedback p").html("Number of possible answers should be at least 2");
+	    $("div.form-feedback").show();
+		return false;
+	}		
+	if (countAlt > 4) {
+	    $("div.form-feedback p").html("Number of possible answers should not be more than 4");
+	    $("div.form-feedback").show();
+		return false;
+	}		
+	
+	$("div.form-feedback").hide();
+	return true;
+}
 </script>
 @endsection
 

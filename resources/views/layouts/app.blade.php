@@ -105,7 +105,6 @@
         </footer>
     </div>
 </body>
-@yield('dzscript')
 @yield('script')
 </html>
 
