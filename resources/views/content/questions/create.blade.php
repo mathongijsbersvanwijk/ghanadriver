@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+@isset($dq) 
+	@php 
+		$asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents();
+		$photoFileName = $dq->getDisplayQuestionAsked()->getQuestionImage()->getGrfFileName();
+	@endphp
+@endisset
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
@@ -9,7 +15,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-        <form id="fm" name="fm" role="form" action="{{ route('questions.store') }}" enctype="multipart/form-data" method="post" autocomplete="off">
+        <form id="fm" name="fm" role="form" action="" enctype="multipart/form-data" method="post" autocomplete="off">
             <div class="form-group row">
                 <div class="dropzone" id="photo" name="photo"></div>
             </div>
@@ -19,7 +25,7 @@
             <div class="form-group row">
                 <div class="col-sm-12">
                     <input class="form-control" type="text" 
-                    	id="asked" name="asked" value="" placeholder="for example: Is it allowed to park here?">
+                    	id="asked" name="asked" value="{{ $asked ?? '' }}" placeholder="for example: Is it allowed to park here?">
                     <!-- span class="invalid-feedback asked-feedback" role="alert"></span -->
                 </div>
             </div>
@@ -85,7 +91,7 @@ Dropzone.options.photo = {
     },    
     init: function() {
         dzClosure = this; // make sure that 'this' is understood inside the functions below.
-
+        
         // for Dropzone to process the queue (instead of default form behavior):
         document.getElementById('submit').addEventListener('click', function(e) {
             // make sure that the form isn't actually being sent.
@@ -97,26 +103,26 @@ Dropzone.options.photo = {
         });
 
         this.on('thumbnail', function(file) {
-  			if (file.accepted !== false) {
-     	        if (file.size > 100000) {
-    	        	file.toobig(100); 
-    		    } else {		        
+            if (file.accepted !== false) {
+                if (file.size > 100000) {
+                    file.toobig(100); 
+                } else {                
                     if (file.width < 640 || file.height < 480 || file.size == 0) {
-	                    file.rejectDimensions();
+                        file.rejectDimensions();
                     } else {
-    	                file.acceptDimensions();
+                        file.acceptDimensions();
                     }
-    		    }
-        	}
-  		    formFeedback("");
-        });
-        
-        this.on('addedfile', function(file) {
-	        if (this.files.length > 1) {
-				this.removeFile(this.files[0]);
-	        }
+                }
+            }
+            formFeedback("");
         });
 
+        this.on('addedfile', function(file) {
+            if (this.files.length > 1) {
+                this.removeFile(this.files[0]);
+            }
+        });
+ 
         // send all the form data along with the files:
         this.on('sending', function(data, xhr, formData) {
             var form = JSON.stringify($('#fm').serializeArray());
@@ -242,4 +248,3 @@ function formFeedback(message) {
 }
 </script>
 @endsection
-

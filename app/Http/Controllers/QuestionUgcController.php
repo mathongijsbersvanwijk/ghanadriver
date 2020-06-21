@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Business\DisplayQuestion;
 use App\Business\DisplayQuestionAlternative;
 use App\Models\Question;
 use App\Models\User;
@@ -57,6 +58,7 @@ class QuestionUgcController extends Controller
         
         $is->save($photo);
         // return is void, because redirect is done on complete event in create.blade.php
+        // return response()->json(['success'=>$imageName]);
     }
 
     public function check(Request $request) {
@@ -68,19 +70,54 @@ class QuestionUgcController extends Controller
         
         return redirect('/z/render/'.$que->que_id.'/5');
     }
+     
+    public function fetch(Request $request, ImageService $is) {
+        $photoFileName = $request->input('photoFileName');
+        Log::info($photoFileName);
+        
+        echo $is->get($photoFileName);
+        return;
+    }
     
     public function show(Question $question) {
         //
     }
 
-    public function edit(Question $question) {
-        //
+    public function edit(Question $question, QuestionService $qs) {
+        $dq = new DisplayQuestion($question->que_id);
+        $dq = QuestionToolkit::getDisplayQuestion($dq, $qs);
+        
+        return view('content.questions.editphoto', compact('dq'));
     }
 
-    public function update(Request $request, Question $question) {
-        //
+    public function update(Request $request, Question $question, QuestionService $qs) {
+        $dq = new DisplayQuestion($question->que_id);
+        $dq = QuestionToolkit::getDisplayQuestion($dq, $qs);
+        
+        
+        return response()->json(['success' => 'ok then']);
     }
 
+    public function updatephoto(Request $request, QuestionService $qs, ImageService $is) {
+        $this->validate($request, [
+            'fm'    => 'required',
+            'photo' => 'image|required|mimes:jpeg,png,jpg,gif,svg',
+        ]);
+        
+        $photo = $request->file('photo');
+        Log::info($photo->getClientOriginalname());
+        $qi = QuestionToolkit::createImage(0, 'B', $photo->getClientOriginalname());
+        
+        $id = $request->input('id');
+        // todo
+        //$que = $qs->updateQuestionPhoto($id, $qi, new User(['id' => 1]));
+        //$request->session()->put('que', $que);
+        
+        $is->save($photo);
+       
+        return response()->json(['success' => 'ok then']);
+    }
+    
     public function destroy(Question $question) {
         //
     }

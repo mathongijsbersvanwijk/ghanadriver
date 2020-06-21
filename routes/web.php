@@ -14,6 +14,8 @@ Route::get('/z/book/{title}', 'ZebraController@book')->name('book');
 Route::get('/z/booknav/{title}', 'ZebraController@book')->name('booknav');
 
 Route::get('questions/check','QuestionUgcController@check')->name('check');
+Route::post('questions/fetch','QuestionUgcController@fetch')->name('fetch');
+Route::post('questions/updatephoto','QuestionUgcController@updatephoto')->name('questions.updatephoto');
 Route::resource('questions','QuestionUgcController');
 Route::resource('tests','TestUgcController');
 
