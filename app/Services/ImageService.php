@@ -6,6 +6,7 @@ use Intervention\Image\Facades\Image;
 
 class ImageService
 {
+    // NOT USED
     public function get($photoFileName) {
         $path = 'storage/img/'.$photoFileName;
         $img = Image::make($path);

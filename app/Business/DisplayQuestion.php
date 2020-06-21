@@ -2,6 +2,7 @@
 namespace App\Business;
 
 use App\Models\Question;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Collection;
 
 class DisplayQuestion {

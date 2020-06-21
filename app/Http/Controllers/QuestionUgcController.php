@@ -71,6 +71,7 @@ class QuestionUgcController extends Controller
         return redirect('/z/render/'.$que->que_id.'/5');
     }
      
+    // NOT USED
     public function fetch(Request $request, ImageService $is) {
         $photoFileName = $request->input('photoFileName');
         Log::info($photoFileName);
@@ -84,13 +85,23 @@ class QuestionUgcController extends Controller
     }
 
     public function edit(Question $question, QuestionService $qs) {
+        // implicit retrieval of question is done by Laravel
         $dq = new DisplayQuestion($question->que_id);
+        $dq = QuestionToolkit::getDisplayQuestion($dq, $qs);
+        
+        return view('content.questions.edit', compact('dq'));
+    }
+    
+    public function editphoto($id, QuestionService $qs) {
+        $que = $qs->find($id);
+        $dq = new DisplayQuestion($que->que_id);
         $dq = QuestionToolkit::getDisplayQuestion($dq, $qs);
         
         return view('content.questions.editphoto', compact('dq'));
     }
-
+    
     public function update(Request $request, Question $question, QuestionService $qs) {
+        // implicit retrieval of question is done by Laravel
         $dq = new DisplayQuestion($question->que_id);
         $dq = QuestionToolkit::getDisplayQuestion($dq, $qs);
         

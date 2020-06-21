@@ -44,7 +44,7 @@ class QuestionService {
 		for ($i = 0; $i < sizeof($ca); $i++) {
 			$lqas = $lqas
 			->join('categorizations as c'.$i, function ($join) use ($ca, $i) {
-				$join->on('c'.$i.'.categorizable_id', '=', 'quagga_question.id')
+				$join->on('c'.$i.'.categorizable_id', '=', 'quagga_question.que_id')
 				->where('c'.$i.'.categorizable_type', '=', 'App\Models\Question')
 				->where('c'.$i.'.category_id', '=', $ca[$i]);
 			});

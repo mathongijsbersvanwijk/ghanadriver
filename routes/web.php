@@ -9,12 +9,13 @@ Route::get('/dvla', 'HomeController@dvla')->name('dvla');
 Route::post('/z/start', 'ZebraController@starttest')->name('start');
 Route::post('/z/question', 'ZebraController@answerQuestionAndProceed')->name('question');
 Route::get('/z/restart', 'ZebraController@redoFaults')->name('restart');
-Route::get('z/render/{id}/{op}', 'ZebraController@render')->name('render');
+Route::get('/z/render/{id}/{op}', 'ZebraController@render')->name('render');
 Route::get('/z/book/{title}', 'ZebraController@book')->name('book');
 Route::get('/z/booknav/{title}', 'ZebraController@book')->name('booknav');
 
 Route::get('questions/check','QuestionUgcController@check')->name('check');
 Route::post('questions/fetch','QuestionUgcController@fetch')->name('fetch');
+Route::get('questions/{id}/editphoto','QuestionUgcController@editphoto')->name('questions.editphoto');
 Route::post('questions/updatephoto','QuestionUgcController@updatephoto')->name('questions.updatephoto');
 Route::resource('questions','QuestionUgcController');
 Route::resource('tests','TestUgcController');
