@@ -26,6 +26,11 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
+	<buildpathentry kind="src" path="vendor/barryvdh/laravel-debugbar/src">
+		<attributes>
+			<attribute name="composer" value="vendor"/>
+		</attributes>
+	</buildpathentry>
 	<buildpathentry excluding="Support/" kind="src" path="vendor/bmatovu/laravel-mtn-momo/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
@@ -76,7 +81,7 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/egulias/email-validator/EmailValidator">
+	<buildpathentry kind="src" path="vendor/egulias/email-validator/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
@@ -177,6 +182,11 @@
 		</attributes>
 	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/league/flysystem/src">
+		<attributes>
+			<attribute name="composer" value="vendor"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry kind="src" path="vendor/maximebf/debugbar/src/DebugBar">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
@@ -407,6 +417,11 @@
 		</attributes>
 	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/symfony/css-selector">
+		<attributes>
+			<attribute name="composer" value="vendor"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry kind="src" path="vendor/symfony/debug">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
