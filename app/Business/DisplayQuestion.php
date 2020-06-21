@@ -60,6 +60,7 @@ class DisplayQuestion {
 	}
 		
 	public function getCategorizations() {
+	    dd($this->que->categorizations());
 		return $this->que->categorizations()->get();
 	}
 
