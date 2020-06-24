@@ -65,7 +65,7 @@
                 </div>
             </div>
             <div class="form-feedback"><p></p></div>
-            <button type="submit" id="submit" class="btn btn-primary">Save</button>
+            <button type="submit" id="submit" class="btn btn-primary">Save and check</button>
         </form>
         </div>
     </div>

@@ -10,14 +10,15 @@ use App\Services\QuestionService;
 use App\Support\Helpers\QuestionToolkit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class QuestionUgcController extends Controller
 {
-    public function index() {
-        $questions = [];
-
-        return view('content.questions.index', compact('questions'));
+    public function index(QuestionService $qs) {
+        $ldq = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
+        
+        return view('content.questions.index', compact('ldq'));
     }
 
     public function create() {
@@ -53,10 +54,10 @@ class QuestionUgcController extends Controller
             $i++;
         }
          
-        $que = $qs->saveQuestion($qt, $qi, $ldqalt, new User(['id' => 1]));
+        $que = $qs->saveQuestion($qt, $qi, $ldqalt, Auth::user());
         $request->session()->put('que', $que);
         
-        $is->save($photo);
+        $is->save($photo, $que->que_id);
         // return is void, because redirect is done on complete event in create.blade.php
         // return response()->json(['success'=>$imageName]);
     }
@@ -81,32 +82,29 @@ class QuestionUgcController extends Controller
     }
     
     public function show(Question $question) {
-        //
+        return redirect('/z/render/'.$question->que_id.'/5');
     }
 
-    public function edit(Question $question, QuestionService $qs) {
+    public function edit(Question $question) {
         // implicit retrieval of question is done by Laravel
-        $dq = new DisplayQuestion($question->que_id);
-        $dq = QuestionToolkit::getDisplayQuestion($dq, $qs);
-        
-        return view('content.questions.edit', compact('dq'));
     }
     
-    public function editphoto($id, QuestionService $qs) {
-        $que = $qs->find($id);
-        $dq = new DisplayQuestion($que->que_id);
+    public function editphoto($queid, QuestionService $qs) {
+        $dq = new DisplayQuestion($queid);
         $dq = QuestionToolkit::getDisplayQuestion($dq, $qs);
         
         return view('content.questions.editphoto', compact('dq'));
     }
     
-    public function update(Request $request, Question $question, QuestionService $qs) {
-        // implicit retrieval of question is done by Laravel
-        $dq = new DisplayQuestion($question->que_id);
+    public function edittext($queid, QuestionService $qs) {
+        $dq = new DisplayQuestion($queid);
         $dq = QuestionToolkit::getDisplayQuestion($dq, $qs);
         
-        
-        return response()->json(['success' => 'ok then']);
+        return view('content.questions.edittext', compact('dq'));
+    }
+    
+    public function update(Request $request, Question $question) {
+        // implicit retrieval of question is done by Laravel
     }
 
     public function updatephoto(Request $request, QuestionService $qs, ImageService $is) {
@@ -129,6 +127,21 @@ class QuestionUgcController extends Controller
         return response()->json(['success' => 'ok then']);
     }
     
+    public function updatetext(Request $request, QuestionService $qs) {
+        $this->validate($request, [
+            'queid'         => 'required', // hidden input
+            'asked'         => 'required',
+            'iscorrect'     => 'required',
+            'alternative'   => 'required',
+        ]);
+        
+        $queId = $request->input('queid');
+        $dq = new DisplayQuestion($queId);
+        $dq = QuestionToolkit::getDisplayQuestion($dq, $qs);
+        
+        // todo a lot
+    }
+        
     public function destroy(Question $question) {
         //
     }

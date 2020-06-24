@@ -29,9 +29,15 @@ class QuestionServiceTest extends TestCase {
  		$this->assertEquals('You are held up in the middle of a level crossing and cannot restart the engine. The warning bell starts to ring. You should', $dqask->getQuestionText()->getTekContents());
 	}
 	
+	public function testGetDisplayQuestions() {
+	    $ldq = QuestionToolkit::getDisplayQuestionsByUser(2, $this->qs);
+	    $this->assertEquals(3, sizeof($ldq));
+	    
+	}
+	
 	public function testFindBySingleCategory() {
 		$ques = $this->qs->findBySingleCategory(1);
-		$this->assertEquals(41, sizeof($ques));
+		$this->assertEquals(44, sizeof($ques));
 		$ques = $this->qs->findBySingleCategory(12);
 		$this->assertEquals(28, sizeof($ques));
 	}

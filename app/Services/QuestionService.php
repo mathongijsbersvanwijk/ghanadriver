@@ -89,6 +89,19 @@ class QuestionService {
  		return $loa;		
 	}
 
+	public function findQuestionAskedArtifacts($userId) {
+	    $loa = DB::select(DB::raw(
+	        "SELECT pp.que_id, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
+	        "FROM quagga_question q " .
+	        "LEFT JOIN quagga_pose_part pp ON q.que_id = pp.que_id " .
+	        "LEFT JOIN quagga_tekst tk ON pp.med_id = tk.med_id " .
+	        "LEFT JOIN quagga_graphic grf ON pp.med_id = grf.med_id " .
+	        "WHERE q.user_id = ". $userId
+	        ));
+	    
+	    return $loa;
+	}
+	
 	public function findQuestionMetaData($queId) {
 		$loa = DB::select(DB::raw(
 			"SELECT dm.doc_id, mv.value " .
@@ -125,7 +138,7 @@ class QuestionService {
 	        $maxMedgrfId = DB::table('quagga_graphic')->max('med_id');
 	        $qir->med_id = $maxMedgrfId + 1;
 	        $qir->med_type = $qi->getMedType();
-	        $qir->grf_filename = $qi->getGrfFileName();
+	        $qir->grf_filename = $que->que_id."_".$qi->getGrfFileName();
 	        $qir->save();
 	        
 	        $qask = new QuestionAsked();

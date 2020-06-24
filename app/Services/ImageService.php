@@ -15,9 +15,11 @@ class ImageService
         return json_encode($file);
     }
 
-    public function save($photo) {
+    public function save($photo, $queId) {
         $img = Image::make($photo)->save();
-        Storage::disk('public')->put('img/'.$photo->getClientOriginalname(), $img);
+        Storage::disk('public')->put('img/'.$queId."_".$photo->getClientOriginalname(), $img);
+        $imgThumb = $img->fit(100)->save();
+        Storage::disk('public')->put('thumb/'.$queId."_".$photo->getClientOriginalname(), $imgThumb);
         
         return $img;
     }

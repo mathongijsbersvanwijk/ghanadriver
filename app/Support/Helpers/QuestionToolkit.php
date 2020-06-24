@@ -6,18 +6,47 @@ use App\Business\DisplayQuestionAlternative;
 use App\Business\QuestionImage;
 use App\Business\QuestionText;
 use App\Services\QuestionService;
+use Illuminate\Support\Collection;
 
 class QuestionToolkit {
 	// only used in unittests
-	public static function getDisplayQuestionById($queId, QuestionService $qs) {
-		$loa = $qs->findQuestionArtifacts($queId);
-		if ($loa != null && sizeof($loa) > 0) {
-			return QuestionToolkit::createDisplayQuestion($loa, null, $qs);
-		}
-		return null;
-	}
-
-	public static function getDisplayQuestion($dq, QuestionService $qs) {
+    public static function getDisplayQuestionById($queId, QuestionService $qs) {
+        $loa = $qs->findQuestionArtifacts($queId);
+        if ($loa != null && sizeof($loa) > 0) {
+            return QuestionToolkit::createDisplayQuestion($loa, null, $qs);
+        }
+        return null;
+    }
+    
+    public static function getDisplayQuestionsByUser($userId, QuestionService $qs) {
+        $loa = $qs->findQuestionAskedArtifacts($userId);
+        $ldq = new Collection();
+        if ($loa != null && sizeof($loa) > 0) {
+            $i = 0; 
+            while ($i < sizeof($loa)) {
+                $dq = new DisplayQuestion($loa[$i]->que_id);
+                $ldq->push($dq);
+                
+                $medId = $loa[$i]->med_id;
+                $medType = $loa[$i]->med_type;
+                $tek = $loa[$i]->tek_contents;
+                $grfFn = $loa[$i]->grf_filename;
+                QuestionToolkit::fillQuestionAsked($dq, $medId, $medType, $tek, $grfFn);
+                $i++;
+                
+                $medId = $loa[$i]->med_id;
+                $medType = $loa[$i]->med_type;
+                $tek = $loa[$i]->tek_contents;
+                $grfFn = $loa[$i]->grf_filename;
+                QuestionToolkit::fillQuestionAsked($dq, $medId, $medType, $tek, $grfFn);
+                $i++;
+            }
+        }
+        
+        return $ldq;
+    }
+    
+    public static function getDisplayQuestion($dq, QuestionService $qs) {
 		$loa = $qs->findQuestionArtifacts($dq->getQueId());
 		if ($loa != null && sizeof($loa) > 0) {
 			return QuestionToolkit::createDisplayQuestion($loa, $dq, $qs);
@@ -71,18 +100,30 @@ class QuestionToolkit {
 		return $dq;
 	}
 	
-	public static function createText ($medid, $medType, $tek) {
+	private static function fillQuestionAsked($dq, $medId, $medType, $tek, $grfFn) {
+	    $dqask = $dq->getDisplayQuestionAsked();
+	    if ($medType == 'T') {
+	        $dqask->setQuestionText(QuestionToolkit::createText($medId, $medType, $tek));
+	    }
+	    if ($medType == 'B') {
+	        $dqask->setQuestionImage(QuestionToolkit::createImage($medId, $medType, $grfFn));
+	    }
+
+	    return $dq;
+	}
+	    
+	public static function createText($medId, $medType, $tek) {
 		$qt = new QuestionText();
-		$qt->setMedid($medid); 
+		$qt->setMedid($medId); 
 		$qt->setMedType($medType); 
 		$qt->setTekContents($tek); 
 		
 		return $qt;
 	}
 	
-	public static function createImage ($medid, $medType, $grfFn) {
+	public static function createImage($medId, $medType, $grfFn) {
 		$qi = new QuestionImage(); 
-		$qi->setMedid($medid); 
+		$qi->setMedid($medId); 
 		$qi->setMedType($medType); 
 		$qi->setGrfFileName ($grfFn); 
 		

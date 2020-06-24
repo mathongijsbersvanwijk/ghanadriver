@@ -13,13 +13,6 @@ Route::get('/z/render/{id}/{op}', 'ZebraController@render')->name('render');
 Route::get('/z/book/{title}', 'ZebraController@book')->name('book');
 Route::get('/z/booknav/{title}', 'ZebraController@book')->name('booknav');
 
-Route::get('questions/check','QuestionUgcController@check')->name('check');
-Route::post('questions/fetch','QuestionUgcController@fetch')->name('fetch');
-Route::get('questions/{id}/editphoto','QuestionUgcController@editphoto')->name('questions.editphoto');
-Route::post('questions/updatephoto','QuestionUgcController@updatephoto')->name('questions.updatephoto');
-Route::resource('questions','QuestionUgcController');
-Route::resource('tests','TestUgcController');
-
 Route::get('/dynform', 'ContentController@dynform')->name('dynform');
 Route::post('/dynsubmit', 'ContentController@dynsubmit')->name('dynsubmit');
 
@@ -30,5 +23,14 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/momo/checkout', 'MomoController@momoCheckout')->name('momoCheckout');
     Route::post('/momo/requesttopay', 'MomoController@momoRequestToPay')->name('momoRequestToPay');
     Route::put('/momocallback', 'MomoController@momoCallback')->name('momoCallback');
+
+    Route::get('questions/check','QuestionUgcController@check')->name('check');
+    //Route::post('questions/fetch','QuestionUgcController@fetch')->name('fetch');
+    Route::get('questions/{queid}/editphoto','QuestionUgcController@editphoto')->name('questions.editphoto');
+    Route::get('questions/{queid}/edittext','QuestionUgcController@edittext')->name('questions.edittext');
+    Route::post('questions/updatephoto','QuestionUgcController@updatephoto')->name('questions.updatephoto');
+    Route::post('questions/updatetext','QuestionUgcController@updatetext')->name('questions.updatetext');
+    Route::resource('questions','QuestionUgcController');
+    Route::resource('tests','TestUgcController');
 });
     
