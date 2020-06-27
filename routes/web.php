@@ -31,6 +31,10 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('questions/updatephoto','QuestionUgcController@updatephoto')->name('questions.updatephoto');
     Route::post('questions/updatetext','QuestionUgcController@updatetext')->name('questions.updatetext');
     Route::resource('questions','QuestionUgcController');
+    
+    Route::post('tests/{tstid}/chosenquestions','TestUgcController@chosenquestions')->name('tests.chosenquestions');
     Route::resource('tests','TestUgcController');
 });
+
+
     

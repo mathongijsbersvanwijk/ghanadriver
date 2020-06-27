@@ -13,12 +13,12 @@ class QuestionServiceTest extends TestCase {
 		$this->qs = new QuestionService();
 	}
 	
-	public function  testFindByName() {
+	public function testFindByName() {
 		$loa = $this->qs->findQuestionArtifacts(3225);
 		$this->assertEquals(6, sizeof($loa));
 	}
 	
-	public function  testFindByMore() {
+	public function testFindByMore() {
 		$loa = $this->qs->findQuestionMetaData(3225);
 		$this->assertEquals(1, sizeof($loa));
 	}
@@ -32,7 +32,6 @@ class QuestionServiceTest extends TestCase {
 	public function testGetDisplayQuestions() {
 	    $ldq = QuestionToolkit::getDisplayQuestionsByUser(2, $this->qs);
 	    $this->assertEquals(3, sizeof($ldq));
-	    
 	}
 	
 	public function testFindBySingleCategory() {
@@ -43,8 +42,6 @@ class QuestionServiceTest extends TestCase {
 	}
 	
 	public function testSaveQuestion() {
-	    
-	    
         $this->assertTrue(true);
     }
 }

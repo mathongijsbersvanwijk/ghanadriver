@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h5>Update question text or possible answers</h5>
+            <h5>Update your question text or possible answers</h5>
         </div>
     </div>
     <div class="row">
