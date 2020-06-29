@@ -33,6 +33,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::resource('questions','QuestionUgcController');
     
     Route::post('tests/{tstid}/chosenquestions','TestUgcController@chosenquestions')->name('tests.chosenquestions');
+    Route::get('tests/{tstid}/sortquestions','TestUgcController@sortquestions')->name('tests.sortquestions');
     Route::resource('tests','TestUgcController');
 });
 

@@ -105,7 +105,7 @@
 	    	</div>
         </footer>
     </div>
+	@yield('script')
 </body>
-@yield('script')
 </html>
 

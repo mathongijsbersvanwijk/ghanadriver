@@ -7,6 +7,7 @@ use App\Services\QuestionService;
 use App\Services\TestConfigurationService;
 use App\Support\Helpers\QuestionToolkit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class TestUgcController extends Controller
@@ -14,21 +15,36 @@ class TestUgcController extends Controller
     public function index(TestConfigurationService $tcfs) {
     }
     
-    public function create(QuestionService $qs) {
+    public function create(Request $request, QuestionService $qs) {
         $ldq = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
+        $request->session()->put('ldq', $ldq);
         
         return view('content.tests.choosequestions', compact('ldq'));
     }
     
-    public function chosenquestions($tstid, QuestionService $qs) {
+    public function chosenquestions(Request $request, $tstid, QuestionService $qs) {
         // $tstid is null the first time
-        $ldq = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
+        $queIdArr = $request->get('queids');
+        $ldq = $request->session()->get('ldq');
+        $ldqchosen = new Collection();
+        foreach ($ldq as $dq) {
+            if (in_array($dq->getQueId(), $queIdArr)) {
+                $ldqchosen->push($dq);            
+            }
+        }
+        $request->session()->put('ldqchosen', $ldqchosen);
         
-        return view('content.tests.sortquestions', compact('ldq'));
+        return redirect()->route('tests.sortquestions', ['tstid' => $tstid]);
+    }
+    
+    public function sortquestions(Request $request, $tstid) {
+        $ldqchosen = $request->session()->get('ldqchosen');
+        
+        return view('content.tests.sortquestions', compact('ldqchosen'));
     }
     
     public function store(Request $request) {
-
+        
         
         return redirect()->route('content.tests.index'); // generated
     }
