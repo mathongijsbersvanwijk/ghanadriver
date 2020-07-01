@@ -175,7 +175,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,7 +184,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (15,'2014_04_22_083616_create_roles_table',1),(16,'2014_10_12_000000_create_users_table',1),(17,'2014_10_12_100000_create_password_resets_table',1),(18,'2018_03_20_000001_create_mtn_momo_tokens_table',1),(19,'2019_08_19_000000_create_failed_jobs_table',1),(20,'2020_04_22_083929_create_dvla_applications_table',1),(21,'2020_04_22_083945_create_payments_table',1),(22,'2020_05_24_130450_modify_questions_table',2);
+INSERT INTO `migrations` VALUES (15,'2014_04_22_083616_create_roles_table',1),(16,'2014_10_12_000000_create_users_table',1),(17,'2014_10_12_100000_create_password_resets_table',1),(18,'2018_03_20_000001_create_mtn_momo_tokens_table',1),(19,'2019_08_19_000000_create_failed_jobs_table',1),(20,'2020_04_22_083929_create_dvla_applications_table',1),(21,'2020_04_22_083945_create_payments_table',1),(22,'2020_05_24_130450_modify_questions_table',2),(23,'2020_07_01_075735_modify_tests_table',3),(24,'2020_07_01_090315_create_test_questions_table',4);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -567,7 +567,7 @@ CREATE TABLE `quagga_examination` (
   UNIQUE KEY `examination_pk` (`prs_id`,`tst_id`,`exa_date_taken`),
   KEY `relation_1260_fk` (`prs_id`),
   KEY `relation_405_fk` (`tst_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=141645 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=141646 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -576,7 +576,7 @@ CREATE TABLE `quagga_examination` (
 
 LOCK TABLES `quagga_examination` WRITE;
 /*!40000 ALTER TABLE `quagga_examination` DISABLE KEYS */;
-INSERT INTO `quagga_examination` VALUES (141639,'SzD52VFb6Udn3nu41WfFEHEzAjI5uUnY7e52sToY',103,'2020-05-22 08:42:21',9310,1,1,NULL),(141640,'SzD52VFb6Udn3nu41WfFEHEzAjI5uUnY7e52sToY',103,'2020-05-22 08:42:39',9310,0,1,NULL),(141641,'SzD52VFb6Udn3nu41WfFEHEzAjI5uUnY7e52sToY',103,'2020-05-22 08:42:56',9310,0,1,NULL),(141642,'SzD52VFb6Udn3nu41WfFEHEzAjI5uUnY7e52sToY',103,'2020-05-22 08:45:23',9310,0,1,NULL),(141643,'SzD52VFb6Udn3nu41WfFEHEzAjI5uUnY7e52sToY',103,'2020-05-22 08:45:39',9310,0,1,NULL),(141644,'SzD52VFb6Udn3nu41WfFEHEzAjI5uUnY7e52sToY',103,'2020-05-22 08:46:39',9310,1,1,NULL);
+INSERT INTO `quagga_examination` VALUES (141639,'SzD52VFb6Udn3nu41WfFEHEzAjI5uUnY7e52sToY',103,'2020-05-22 08:42:21',9310,1,1,NULL),(141640,'SzD52VFb6Udn3nu41WfFEHEzAjI5uUnY7e52sToY',103,'2020-05-22 08:42:39',9310,0,1,NULL),(141641,'SzD52VFb6Udn3nu41WfFEHEzAjI5uUnY7e52sToY',103,'2020-05-22 08:42:56',9310,0,1,NULL),(141642,'SzD52VFb6Udn3nu41WfFEHEzAjI5uUnY7e52sToY',103,'2020-05-22 08:45:23',9310,0,1,NULL),(141643,'SzD52VFb6Udn3nu41WfFEHEzAjI5uUnY7e52sToY',103,'2020-05-22 08:45:39',9310,0,1,NULL),(141644,'SzD52VFb6Udn3nu41WfFEHEzAjI5uUnY7e52sToY',103,'2020-05-22 08:46:39',9310,1,1,NULL),(141645,'gJjWbvkQ34EPKCfUYkloxKJbpwtEmeBPXkmLF6OI',103,'2020-07-01 09:26:51',9310,2,2,NULL);
 /*!40000 ALTER TABLE `quagga_examination` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1308,7 +1308,7 @@ DROP TABLE IF EXISTS `quagga_test`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `quagga_test` (
-  `companyId` bigint(20) NOT NULL DEFAULT '0',
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `tst_id` int(11) NOT NULL DEFAULT '0',
   `pro_id` int(11) DEFAULT NULL,
   `tst_type` char(1) NOT NULL DEFAULT '',
@@ -1316,9 +1316,14 @@ CREATE TABLE `quagga_test` (
   `tst_count_tqu` int(11) DEFAULT NULL,
   `tst_count_min_success` int(11) DEFAULT NULL,
   `marker` datetime DEFAULT NULL,
-  PRIMARY KEY (`tst_id`,`companyId`),
-  UNIQUE KEY `test_pk` (`tst_id`,`companyId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 PACK_KEYS=1;
+  `user_id` bigint(20) unsigned NOT NULL DEFAULT '2',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `test_pk` (`tst_id`),
+  KEY `quagga_test_user_id_foreign` (`user_id`),
+  CONSTRAINT `quagga_test_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1 PACK_KEYS=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1327,7 +1332,7 @@ CREATE TABLE `quagga_test` (
 
 LOCK TABLES `quagga_test` WRITE;
 /*!40000 ALTER TABLE `quagga_test` DISABLE KEYS */;
-INSERT INTO `quagga_test` VALUES (10131,101,0,'T',NULL,10,9,NULL),(10131,102,0,'T',NULL,10,9,NULL),(10131,103,9310,'T','Ghana profile',10,9,NULL),(170059,203,9410,'T','Cameroon profile',10,9,NULL);
+INSERT INTO `quagga_test` VALUES (1,101,0,'T',NULL,10,9,NULL,2,NULL,NULL),(2,102,0,'T',NULL,10,9,NULL,2,NULL,NULL),(3,103,9310,'T','Ghana profile',10,9,NULL,2,NULL,NULL),(4,203,9410,'T','Cameroon profile',10,9,NULL,2,NULL,NULL);
 /*!40000 ALTER TABLE `quagga_test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1363,30 +1368,6 @@ INSERT INTO `quagga_test_document` VALUES (101,1,1,3117,NULL,NULL),(101,2,2,3421
 UNLOCK TABLES;
 
 --
--- Table structure for table `quagga_test_grouping`
---
-
-DROP TABLE IF EXISTS `quagga_test_grouping`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `quagga_test_grouping` (
-  `tgr_id` int(11) NOT NULL DEFAULT '0',
-  `tgr_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`tgr_id`),
-  UNIQUE KEY `EVALUATION_PK` (`tgr_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 PACK_KEYS=1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `quagga_test_grouping`
---
-
-LOCK TABLES `quagga_test_grouping` WRITE;
-/*!40000 ALTER TABLE `quagga_test_grouping` DISABLE KEYS */;
-/*!40000 ALTER TABLE `quagga_test_grouping` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `quagga_test_question`
 --
 
@@ -1394,16 +1375,17 @@ DROP TABLE IF EXISTS `quagga_test_question`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `quagga_test_question` (
-  `tst_id` int(11) NOT NULL DEFAULT '0',
-  `tqu_id` int(11) NOT NULL DEFAULT '0',
-  `que_id` int(11) NOT NULL DEFAULT '0',
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `test_id` bigint(20) unsigned NOT NULL,
+  `question_id` bigint(20) unsigned NOT NULL,
+  `seq_id` int(11) DEFAULT NULL,
   `tqu_count_alt` int(11) DEFAULT NULL,
-  `marker` datetime DEFAULT NULL,
-  PRIMARY KEY (`tst_id`,`tqu_id`),
-  UNIQUE KEY `test_question_pk` (`tst_id`,`tqu_id`),
-  KEY `ref_106_fk` (`que_id`),
-  KEY `ref_109_fk` (`tst_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 PACK_KEYS=1;
+  PRIMARY KEY (`id`),
+  KEY `quagga_test_question_test_id_foreign` (`test_id`),
+  KEY `quagga_test_question_question_id_foreign` (`question_id`),
+  CONSTRAINT `quagga_test_question_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `quagga_question` (`id`),
+  CONSTRAINT `quagga_test_question_test_id_foreign` FOREIGN KEY (`test_id`) REFERENCES `quagga_test` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1608,4 +1590,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-24 16:17:46
+-- Dump completed on 2020-07-01 11:27:15

@@ -12,7 +12,7 @@ class TestQuestionService {
 		return TestQuestion::findOrFail($id);
 	}
 
-	public function findByTest($tst_id) {
+	public function findByTstId($tst_id) {
 		return TestQuestion::where('tst_id', $tst_id)->get();
 	}
 

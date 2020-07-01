@@ -15,9 +15,9 @@ class ModifyQuestionsTable extends Migration
 //             $table->foreignId('user_id')->constrained(); // User 1 should always be the admin
 //         });
 
-         Schema::table('quagga_question', function ($table) {
-             $table->timestamps();
-         });
+//         Schema::table('quagga_question', function ($table) {
+//             $table->timestamps();
+//         });
        
     }
 
