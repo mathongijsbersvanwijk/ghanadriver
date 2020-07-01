@@ -44,6 +44,14 @@ class TestUgcController extends Controller
     }
     
     public function store(Request $request) {
+        $queIdArr = $request->get('queids');
+
+        // save testconfig 
+        
+        // create one-to-many relationship
+        
+        // use saveMany
+        
         
         
         return redirect()->route('content.tests.index'); // generated

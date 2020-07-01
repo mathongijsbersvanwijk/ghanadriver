@@ -13,10 +13,12 @@
     <div id="draggablePanelList" class="">
     @csrf
     @foreach($ldqchosen as $dq)
+    @php ($queId = $dq->getQueId())
     @php ($asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents())
     @php ($photoFileName = $dq->getDisplayQuestionAsked()->getQuestionImage()->getGrfFileName())
     <div class="panel panel-info">
         <div class="panel-heading">
+			<input name="queids[]" type="hidden" value="{!! $queId !!}" />
             <div class="col-sm-12">
                	<img class="img-fluid" src="/storage/thumb/{!! $photoFileName !!}" />&nbsp;&nbsp;&nbsp;{!! $asked !!}
             </div>

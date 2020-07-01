@@ -10,14 +10,14 @@
 	<form action="{{ route('tests.chosenquestions', ['tstid' => 0]) }}" method="post">
 	@csrf
     @foreach($ldq as $dq)
-    @php ($queid = $dq->getQueId())
+    @php ($queId = $dq->getQueId())
     @php ($asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents())
     @php ($photoFileName = $dq->getDisplayQuestionAsked()->getQuestionImage()->getGrfFileName())
 	<div class="row">
     	<div class="col-sm-1">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" style="margin-top: 12px" 
-                  	name="queids[]" value="{{ $queid }}" {{ $queid == old('queid') ? 'checked' : ''}} />
+                  	name="queids[]" value="{{ $queId }}" {{ $queId == old('queId') ? 'checked' : ''}} />
             </div>
     	</div>
     	<div class="col-sm-2">

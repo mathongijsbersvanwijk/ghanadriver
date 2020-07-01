@@ -12,6 +12,10 @@ class TestConfigurationService {
 	public function find($idArr) {
 		return TestConfiguration::find($idArr);
 	}
+
+	public function findByTstId($tstId) {
+	    return TestConfiguration::where('tst_id', $tstId)->first();
+	}
 	
 /* 	public function findByPrimaryKey($companyId, $tst_id) {
 		return TestConfiguration::where('companyId', $companyId)->where('tst_id', $tst_id)->first();
