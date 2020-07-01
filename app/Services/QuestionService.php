@@ -91,7 +91,7 @@ class QuestionService {
 
 	public function findQuestionAskedArtifacts($userId) {
 	    $loa = DB::select(DB::raw(
-	        "SELECT pp.que_id, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
+	        "SELECT q.id, pp.que_id, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
 	        "FROM quagga_question q " .
 	        "LEFT JOIN quagga_pose_part pp ON q.que_id = pp.que_id " .
 	        "LEFT JOIN quagga_tekst tk ON pp.med_id = tk.med_id " .

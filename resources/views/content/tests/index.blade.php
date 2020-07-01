@@ -15,7 +15,7 @@
   			</a>
     	</div>
     	<div class="col-sm-2 gdtip">
-		    <a class="btn btn-primary" href="/questions/{!! $tst->getQueId() !!}/edittext" role="button">Edit text</a>
+		    <a class="btn btn-primary" href="/questions/{!! $tst->question_id !!}/edittext" role="button">Edit text</a>
     	</div>
 		<div>&nbsp;</div>
     </div>

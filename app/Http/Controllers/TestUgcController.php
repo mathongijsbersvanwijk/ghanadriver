@@ -27,11 +27,11 @@ class TestUgcController extends Controller
     
     public function chosenquestions(Request $request, $tstid, QuestionService $qs) {
         // $tstid is null the first time
-        $queIdArr = $request->get('queids');
+        $idArr = $request->get('ids');
         $ldq = $request->session()->get('ldq');
         $ldqchosen = new Collection();
         foreach ($ldq as $dq) {
-            if (in_array($dq->getQueId(), $queIdArr)) {
+            if (in_array($dq->getId(), $idArr)) {
                 $ldqchosen->push($dq);            
             }
         }
@@ -49,7 +49,7 @@ class TestUgcController extends Controller
     public function store(Request $request, TestConfigurationService $tcfs) {
         $tcfs->save($request->all(), Auth::user());
         
-        return redirect()->route('content.tests.index'); // generated
+        return redirect()->route('tests.index'); 
     }
     
     public function show(TestConfiguration $question) {

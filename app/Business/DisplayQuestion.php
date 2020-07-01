@@ -6,17 +6,26 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Collection;
 
 class DisplayQuestion {
-	private $queId;
-	private $que;
+    private $id;
+    private $queId;
+    private $que;
 	private $dqask;
 	private $ldqalt;
 	private $cattitle;
 	
-	public function __construct($queId) {
+    public function __construct($queId) {
 		$this->queId = $queId;
 		$this->que = new Question();
 		$this->dqask = new DisplayQuestionAsked();
 		$this->ldqalt = new Collection();
+	}
+	
+	public function getId() {
+	    return $this->id;
+	}
+	
+	public function setId($id) {
+	    $this->id = $id;
 	}
 	
 	public function getQueId() {

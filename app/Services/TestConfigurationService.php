@@ -19,7 +19,7 @@ class TestConfigurationService {
 	}
 	
 	public function findAllByUser($user) {
-	    return TestConfiguration::has('owner', $user)->get();
+	    return TestConfiguration::where('user_id', $user->id)->get();
 	}
 	
 	public function save($untypedArr, $user) {
@@ -32,17 +32,16 @@ class TestConfigurationService {
 	    $tcf->owner()->associate($user);
 	    $tcf->save();
 	    
-	    $queIdArr = $untypedArr['queids'];
+	    $idArr = $untypedArr['ids'];
 	    $tquArr = array();
-	    for ($i = 0; $i < sizeof($queIdArr); $i++) {
-	        $tqu = new TestQuestion(['test_id' => $tcf->id, 'question_id' => $queIdArr[$i], 'seq_id' => $i + 1]);
+	    for ($i = 0; $i < sizeof($idArr); $i++) {
+	        $tqu = new TestQuestion(['test_id' => $tcf->id, 'question_id' => $idArr[$i], 'seq_id' => $i + 1]);
 	        $tquArr[] = $tqu;
 	    }
 	    $tcf->questions()->saveMany($tquArr);
 	    
 	    return $tcf;
 	}
-	
 	
 /* 	public function findByPrimaryKey($companyId, $tst_id) {
 		return TestConfiguration::where('companyId', $companyId)->where('tst_id', $tst_id)->first();

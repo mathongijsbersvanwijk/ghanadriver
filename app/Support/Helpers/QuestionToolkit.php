@@ -25,6 +25,7 @@ class QuestionToolkit {
             $i = 0; 
             while ($i < sizeof($loa)) {
                 $dq = new DisplayQuestion($loa[$i]->que_id);
+                $dq->setId($loa[$i]->id);
                 $ldq->push($dq);
                 
                 $medId = $loa[$i]->med_id;
