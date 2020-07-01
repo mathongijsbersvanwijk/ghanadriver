@@ -12,4 +12,8 @@ class TestConfiguration extends Model
     public function owner() {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function questions() {
+        return $this->hasMany(TestQuestion::class, 'test_id');
+    }
 }

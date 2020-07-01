@@ -13,13 +13,16 @@ use Illuminate\Support\Facades\Auth;
 class TestUgcController extends Controller
 {
     public function index(TestConfigurationService $tcfs) {
+        $ltst = $tcfs->findAllByUser(Auth::user());
+        
+        return view('content.tests.index', compact('ltst'));
     }
     
     public function create(Request $request, QuestionService $qs) {
         $ldq = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
         $request->session()->put('ldq', $ldq);
         
-        return view('content.tests.choosequestions', compact('ldq'));
+        return view('content.tests.create', compact('ldq'));
     }
     
     public function chosenquestions(Request $request, $tstid, QuestionService $qs) {
@@ -43,16 +46,8 @@ class TestUgcController extends Controller
         return view('content.tests.sortquestions', compact('ldqchosen'));
     }
     
-    public function store(Request $request) {
-        $queIdArr = $request->get('queids');
-
-        // save testconfig 
-        
-        // create one-to-many relationship
-        
-        // use saveMany
-        
-        
+    public function store(Request $request, TestConfigurationService $tcfs) {
+        $tcfs->save($request->all(), Auth::user());
         
         return redirect()->route('content.tests.index'); // generated
     }
@@ -64,7 +59,7 @@ class TestUgcController extends Controller
     public function edit(TestConfiguration $question) {
     
         
-        return view('content.tests.choosequestions', compact('ldq'));
+        return view('content.tests.create', compact('ldq'));
     }
     
     public function update(Request $request, TestConfiguration $question) {

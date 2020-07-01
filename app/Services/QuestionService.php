@@ -112,12 +112,12 @@ class QuestionService {
 		return $loa;
 	}
 		
-	public function saveQuestion($qt, $qi, $ldqalt, $user = null) {
+	public function saveQuestion($qt, $qi, $ldqalt, $user) {
 	    $que = new Question();
 	    DB::transaction(function () use ($que, $qi, $qt, $ldqalt, $user) {
 	        $maxQueId = DB::table('quagga_question')->max('que_id'); // should be > 10000
 	        $que->que_id = $maxQueId + 1;
-	        $que->owner()->associate($user == null ? Auth::user() : $user);
+	        $que->owner()->associate($user);
 	        $que->save();
 	        
 	        $qtr = new QuestionTextResource();
