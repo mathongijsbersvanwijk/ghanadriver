@@ -9,13 +9,13 @@
     </div>
     @foreach($ltst as $tst)
     <div class="row">
-    	<div class="col-sm-8 gdtip">
+    	<div class="col-sm-10">
     		<a href="/z/render/{!! $tst->id !!}/5" alt="Check your question" title="Check your question">
-	       	   	<p style="margin-top: 5px">{!! $tst->tst_description !!}</p>
+	       	   	{!! $tst->tst_description !!}
   			</a>
     	</div>
-    	<div class="col-sm-2 gdtip">
-		    <a class="btn btn-primary" href="/questions/{!! $tst->question_id !!}/edittext" role="button">Edit text</a>
+    	<div class="col-sm-2">
+		    <a class="btn btn-primary" href="{{ route('tests.edit', ['test' => $tst->id]) }}" role="button">Edit</a>
     	</div>
 		<div>&nbsp;</div>
     </div>

@@ -9,16 +9,18 @@
 </div>
 <div class="row">
   <div class="col-sm-12">
-    <form action="{{ route('tests.store') }}" method="post">
+    <form action="{{ $id == 0 ? route('tests.store') : route('tests.update', ['test' => $id]) }}" method="post">
     <div id="draggablePanelList" class="">
     @csrf
+	<input name="id" type="hidden" value="{!! $id !!}" />
+	<input type="hidden" name="_method" value="put">
     @foreach($ldqchosen as $dq)
-    @php ($id = $dq->getId())
+    @php ($dqid = $dq->getId())
     @php ($asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents())
     @php ($photoFileName = $dq->getDisplayQuestionAsked()->getQuestionImage()->getGrfFileName())
     <div class="panel panel-info">
         <div class="panel-heading">
-			<input name="ids[]" type="hidden" value="{!! $id !!}" />
+			<input name="dqids[]" type="hidden" value="{!! $dqid !!}" />
             <div class="col-sm-12">
                	<img class="img-fluid" src="/storage/thumb/{!! $photoFileName !!}" />&nbsp;&nbsp;&nbsp;{!! $asked !!}
             </div>
@@ -29,8 +31,8 @@
     </div>
     <button type="submit" id="submit" class="btn btn-primary">Save</button>
 	</form>
-    </div><!--end col-->
-  </div><!--end row-->
+    </div>
+  </div>
 </div>
 @endsection
 

@@ -7,17 +7,18 @@
             <h5>Choose questions to go in your test</h5>
         </div>
     </div>
-	<form action="{{ route('tests.chosenquestions', ['tstid' => 0]) }}" method="post">
+	<form action="{{ route('tests.chosenquestions') }}" method="post">
 	@csrf
+	<input name="id" type="hidden" value="{!! isset($test) ? $test->id : 0 !!}" />
     @foreach($ldq as $dq)
-    @php ($id = $dq->getId())
+    @php ($dqid = $dq->getId())
     @php ($asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents())
     @php ($photoFileName = $dq->getDisplayQuestionAsked()->getQuestionImage()->getGrfFileName())
 	<div class="row">
     	<div class="col-sm-1">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" style="margin-top: 12px" 
-                  	name="ids[]" value="{{ $id }}" {{ $id == old('id') ? 'checked' : ''}} />
+                  	name="dqids[]" value="{{ $dqid }}" {{ $dqid == old('dqid') ? 'checked' : ''}} />
             </div>
     	</div>
     	<div class="col-sm-2">
