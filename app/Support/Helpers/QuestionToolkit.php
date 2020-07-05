@@ -24,21 +24,17 @@ class QuestionToolkit {
         if ($loa != null && sizeof($loa) > 0) {
             $i = 0; 
             while ($i < sizeof($loa)) {
-                $dq = new DisplayQuestion($loa[$i]->que_id);
-                $dq->setId($loa[$i]->id);
-                $ldq->push($dq);
-                
                 $medId = $loa[$i]->med_id;
                 $medType = $loa[$i]->med_type;
                 $tek = $loa[$i]->tek_contents;
                 $grfFn = $loa[$i]->grf_filename;
-                QuestionToolkit::fillQuestionAsked($dq, $medId, $medType, $tek, $grfFn);
-                $i++;
                 
-                $medId = $loa[$i]->med_id;
-                $medType = $loa[$i]->med_type;
-                $tek = $loa[$i]->tek_contents;
-                $grfFn = $loa[$i]->grf_filename;
+                if ($medType == 'T') {
+                    $dq = new DisplayQuestion($loa[$i]->que_id);
+                    $dq->setId($loa[$i]->id);
+                    $ldq->push($dq);
+                }
+
                 QuestionToolkit::fillQuestionAsked($dq, $medId, $medType, $tek, $grfFn);
                 $i++;
             }

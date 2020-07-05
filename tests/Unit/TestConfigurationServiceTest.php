@@ -19,9 +19,9 @@ class TestConfigurationServiceTest extends TestCase {
 	}
 
 	public function  testFindQuestions() {
-	    $tcf = $this->tcfs->find(6);
+	    $tcf = $this->tcfs->find(2);
 	    $this->assertNotNull($tcf);
-	    $this->assertEquals(2, sizeof($tcf->questions));
+	    $this->assertEquals(10, sizeof($tcf->questions));
 	    echo $tcf->tst_description.PHP_EOL;
 	}
 }

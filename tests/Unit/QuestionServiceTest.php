@@ -30,18 +30,14 @@ class QuestionServiceTest extends TestCase {
 	}
 	
 	public function testGetDisplayQuestions() {
-	    $ldq = QuestionToolkit::getDisplayQuestionsByUser(2, $this->qs);
-	    $this->assertEquals(3, sizeof($ldq));
+	    $ldq = QuestionToolkit::getDisplayQuestionsByUser(1, $this->qs);
+	    $this->assertEquals(319, sizeof($ldq));
 	}
 	
 	public function testFindBySingleCategory() {
 		$ques = $this->qs->findBySingleCategory(1);
-		$this->assertEquals(44, sizeof($ques));
+		$this->assertEquals(41, sizeof($ques));
 		$ques = $this->qs->findBySingleCategory(12);
 		$this->assertEquals(28, sizeof($ques));
 	}
-	
-	public function testSaveQuestion() {
-        $this->assertTrue(true);
-    }
 }

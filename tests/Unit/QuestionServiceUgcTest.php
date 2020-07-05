@@ -42,7 +42,7 @@ class QuestionServiceUgcTest extends TestCase {
 	    $dq = QuestionToolkit::getDisplayQuestionById($que->que_id, $this->qs);
 	    $dqask = $dq->getDisplayQuestionAsked();
 	    $this->assertEquals('Can you park here?', $dqask->getQuestionText()->getTekContents());
-	    $this->assertEquals('testparking.jpg', $dqask->getQuestionImage()->getGrfFileName());
+	    $this->assertEquals('10001_testparking.jpg', $dqask->getQuestionImage()->getGrfFileName());
 	    
 	    $dqalt = $dq->getDisplayQuestionAlternative(1);
 	    $this->assertEquals('Yes', $dqalt->getQuestionText()->getTekContents());

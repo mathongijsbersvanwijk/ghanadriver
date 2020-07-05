@@ -38,7 +38,7 @@ class QuestionUgcController extends Controller
         $qi = QuestionToolkit::createImage(0, 'B', $photo->getClientOriginalname());
         $qt = QuestionToolkit::createText(0, 'T', $fmd[0]['value']); // $fmd[0]['name'] == 'asked'
         
-        if (sizeof($fmd) > 5) {
+        if (sizeof($fmd) > 6) {
             throw new Exception("more than 4 alternatives for question given");
         }
         
