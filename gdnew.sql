@@ -1332,7 +1332,7 @@ CREATE TABLE `quagga_test` (
 
 LOCK TABLES `quagga_test` WRITE;
 /*!40000 ALTER TABLE `quagga_test` DISABLE KEYS */;
-INSERT INTO `quagga_test` VALUES (1,101,0,'T',NULL,10,9,NULL,2,NULL,NULL),(2,102,0,'T',NULL,10,9,NULL,2,NULL,NULL),(3,103,9310,'T','Ghana profile',10,9,NULL,2,NULL,NULL),(4,203,9410,'T','Cameroon profile',10,9,NULL,2,NULL,NULL);
+INSERT INTO `quagga_test` VALUES (1,101,0,'T',NULL,10,9,NULL,1,NULL,NULL),(2,102,0,'T',NULL,10,9,NULL,1,NULL,NULL),(3,103,9310,'T','Ghana profile',10,9,NULL,1,NULL,NULL),(4,203,9410,'T','Cameroon profile',10,9,NULL,1,NULL,NULL);
 /*!40000 ALTER TABLE `quagga_test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1385,7 +1385,7 @@ CREATE TABLE `quagga_test_question` (
   KEY `quagga_test_question_question_id_foreign` (`question_id`),
   CONSTRAINT `quagga_test_question_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `quagga_question` (`id`),
   CONSTRAINT `quagga_test_question_test_id_foreign` FOREIGN KEY (`test_id`) REFERENCES `quagga_test` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1394,6 +1394,7 @@ CREATE TABLE `quagga_test_question` (
 
 LOCK TABLES `quagga_test_question` WRITE;
 /*!40000 ALTER TABLE `quagga_test_question` DISABLE KEYS */;
+INSERT INTO `quagga_test_question` VALUES (1,1,127,1,NULL),(2,1,182,2,NULL),(3,1,5,3,NULL),(4,1,175,4,NULL),(5,1,1,5,NULL),(6,1,120,6,NULL),(7,1,214,7,NULL),(8,1,58,8,NULL),(9,1,3,9,NULL),(10,1,154,10,NULL),(11,2,157,1,NULL),(12,2,213,2,NULL),(13,2,121,3,NULL),(14,2,163,4,NULL),(15,2,186,5,NULL),(16,2,2,6,NULL),(17,2,172,7,NULL),(18,2,35,8,NULL),(19,2,219,9,NULL),(20,2,168,10,NULL);
 /*!40000 ALTER TABLE `quagga_test_question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1590,4 +1591,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-01 16:38:40
+-- Dump completed on 2020-07-05 14:39:34

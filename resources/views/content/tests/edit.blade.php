@@ -18,7 +18,7 @@
     	<div class="col-sm-1">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" style="margin-top: 12px" 
-                  	name="dqids[]" value="{{ $dqid }}" {{ $dqid == old('dqid') ? 'checked' : ''}} />
+                  	name="dqids[]" value="{{ $dqid }}" {{ in_array($dqid, $dqidarr) ? 'checked' : '' }} />
             </div>
     	</div>
     	<div class="col-sm-2">

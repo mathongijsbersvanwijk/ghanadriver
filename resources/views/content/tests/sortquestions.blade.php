@@ -13,7 +13,9 @@
     <div id="draggablePanelList" class="">
     @csrf
 	<input name="id" type="hidden" value="{!! $id !!}" />
-	<input type="hidden" name="_method" value="put">
+	@if ($id > 0)
+		<input type="hidden" name="_method" value="put">
+	@endif
     @foreach($ldqchosen as $dq)
     @php ($dqid = $dq->getId())
     @php ($asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents())

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Business\DisplayQuestion;
 use App\Business\DisplayQuestionAlternative;
 use App\Models\Question;
-use App\Models\User;
 use App\Services\ImageService;
 use App\Services\QuestionService;
 use App\Support\Helpers\QuestionToolkit;
@@ -12,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Exception;
 
 class QuestionUgcController extends Controller
 {
@@ -37,6 +37,10 @@ class QuestionUgcController extends Controller
         $photo = $request->file('photo');
         $qi = QuestionToolkit::createImage(0, 'B', $photo->getClientOriginalname());
         $qt = QuestionToolkit::createText(0, 'T', $fmd[0]['value']); // $fmd[0]['name'] == 'asked'
+        
+        if (sizeof($fmd) > 5) {
+            throw new Exception("more than 4 alternatives for question given");
+        }
         
         $ldqalt = new Collection();
         $i = 1;
@@ -82,6 +86,7 @@ class QuestionUgcController extends Controller
     }
     
     public function show(Question $question) {
+        // implicit retrieval of question is done by Laravel
         return redirect('/z/render/'.$question->que_id.'/5');
     }
 
@@ -139,7 +144,7 @@ class QuestionUgcController extends Controller
         $dq = new DisplayQuestion($queId);
         $dq = QuestionToolkit::getDisplayQuestion($dq, $qs);
         
-        // todo a lot
+        // todo: a lot
     }
         
     public function destroy(Question $question) {

@@ -6,10 +6,10 @@ use App\Models\TestConfiguration;
 use App\Services\QuestionService;
 use App\Services\TestConfigurationService;
 use App\Support\Helpers\QuestionToolkit;
+use App\Support\Helpers\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class TestUgcController extends Controller
 {
@@ -21,9 +21,10 @@ class TestUgcController extends Controller
     
     public function create(Request $request, QuestionService $qs) {
         $ldq = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
+        $dqidarr = [];
         $request->session()->put('ldq', $ldq);
         
-        return view('content.tests.edit', compact('ldq'));
+        return view('content.tests.edit', compact('ldq', 'dqidarr'));
     }
     
     public function chosenquestions(Request $request, QuestionService $qs) {
@@ -58,17 +59,14 @@ class TestUgcController extends Controller
     }
     
     public function edit(Request $request, TestConfiguration $test, QuestionService $qs) {
-        // implicit retrieval of test is done by Laravel
         $ldq = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
+        $dqidarr = Utils::queidArray($test->questions);
         $request->session()->put('ldq', $ldq);
         
-        // todo: merge existing questions into full list
-        
-        return view('content.tests.edit', compact('ldq', 'test'));
+        return view('content.tests.edit', compact('ldq', 'dqidarr', 'test'));
     }
     
     public function update(Request $request, TestConfiguration $test, TestConfigurationService $tcfs) {
-        error_log('Some update  ..................  '.$test->id);
         $tcfs->update($request->all(), Auth::user());
         
         return redirect()->route('tests.index');
