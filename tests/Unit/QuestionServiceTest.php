@@ -35,8 +35,8 @@ class QuestionServiceTest extends TestCase {
 	}
 	
 	public function testFindBySingleCategory() {
-		$ques = $this->qs->findBySingleCategory(1);
-		$this->assertEquals(41, sizeof($ques));
+		$ques = $this->qs->findBySingleCategory(2);
+		$this->assertEquals(47, sizeof($ques));
 		$ques = $this->qs->findBySingleCategory(12);
 		$this->assertEquals(28, sizeof($ques));
 	}

@@ -15,10 +15,6 @@ class TestConfigurationService {
 		return TestConfiguration::find($id);
 	}
 
-	public function findByTstId($tstId) {
-	    return TestConfiguration::where('tst_id', $tstId)->first();
-	}
-	
 	public function findAllByUser($user) {
 	    return TestConfiguration::where('user_id', $user->id)->get();
 	}

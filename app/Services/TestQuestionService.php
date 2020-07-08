@@ -12,8 +12,8 @@ class TestQuestionService {
 		return TestQuestion::findOrFail($id);
 	}
 
-	public function findByTstId($tst_id) {
-		return TestQuestion::where('tst_id', $tst_id)->get();
+	public function findByTest($tst_id) {
+		return TestQuestion::where('test_id', $tst_id)->get();
 	}
 
 // 	public function save($untypedArr) {

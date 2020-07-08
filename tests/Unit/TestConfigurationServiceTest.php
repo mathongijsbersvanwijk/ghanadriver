@@ -13,7 +13,7 @@ class TestConfigurationServiceTest extends TestCase {
  	}
 	
  	public function  testFindByTstId() {
-	    $tcf = $this->tcfs->findByTstId(['tst_id' => 103]);
+	    $tcf = $this->tcfs->find(3);
 		$this->assertNotNull($tcf);
 		echo $tcf->tst_description.PHP_EOL;
 	}

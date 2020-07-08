@@ -25,7 +25,7 @@
         		<div class="col-sm-6">
         			<form name="fm1" method="post" action="/z/start" class="form-horizontal">
         					@csrf
-        					<input type="hidden" name="tstId" value="103">
+        					<input type="hidden" name="tstId" value="3">
         					<input type="hidden" name="op" value="2">
         					<input type="hidden" name="mode" value="1">
         					<input type="submit" value="Start training" class="btn btn-primary">
@@ -33,7 +33,7 @@
         			<p>Feedback is given, click for next question (or previous), GHC summary is available</p>
         			<form name="fm2" method="post" action="/z/start" class="horizontal nel">
         					@csrf
-        					<input type="hidden" name="tstId" value="103">
+        					<input type="hidden" name="tstId" value="3">
         					<input type="hidden" name="op" value="2">
         					<input type="hidden" name="mode" value="2">
         					<input type="submit" value="Start examination" class="btn btn-primary">
