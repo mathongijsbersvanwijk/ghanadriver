@@ -1377,9 +1377,8 @@ CREATE TABLE `quagga_test_question` (
   `test_id` bigint(20) unsigned NOT NULL,
   `question_id` bigint(20) unsigned NOT NULL,
   `que_id` int(11) NOT NULL DEFAULT '0',
-  `seq_id` int(11) DEFAULT NULL,
+  `seq_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `question_id_UNIQUE` (`question_id`),
   KEY `quagga_test_question_test_id_foreign` (`test_id`),
   KEY `quagga_test_question_question_id_foreign` (`question_id`),
   CONSTRAINT `quagga_test_question_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `quagga_question` (`id`),
@@ -1590,4 +1589,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-08 13:13:04
+-- Dump completed on 2020-07-08 14:36:48

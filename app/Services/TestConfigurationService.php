@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Models\Question;
 use App\Models\TestConfiguration;
 use App\Models\TestQuestion;
 use Illuminate\Support\Facades\DB;
@@ -45,10 +46,11 @@ class TestConfigurationService {
     	    }
         
     	    $idArr = $untypedArr['dqids'];
+    	    $ques = Question::whereIn('id', $idArr)->get();
     	    $tquArr = array();
     	    for ($i = 0; $i < sizeof($idArr); $i++) {
-    	        // todo: find a better solution for filling que_id then adding 10000 
-    	        $tqu = new TestQuestion(['test_id' => $tcf->id, 'question_id' => $idArr[$i], 'que_id' => 10000 + $idArr[$i], 'seq_id' => $i + 1]);
+    	        $que = $ques->where('id', $idArr[$i])->first();
+    	        $tqu = new TestQuestion(['test_id' => $tcf->id, 'question_id' => $idArr[$i], 'que_id' => $que->que_id, 'seq_id' => $i + 1]);
     	        $tquArr[] = $tqu;
     	    }
     	    $tcf->questions()->saveMany($tquArr);
