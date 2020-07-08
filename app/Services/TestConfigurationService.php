@@ -47,7 +47,8 @@ class TestConfigurationService {
     	    $idArr = $untypedArr['dqids'];
     	    $tquArr = array();
     	    for ($i = 0; $i < sizeof($idArr); $i++) {
-    	        $tqu = new TestQuestion(['test_id' => $tcf->id, 'question_id' => $idArr[$i], 'seq_id' => $i + 1]);
+    	        // todo: find a better solution for filling que_id then adding 10000 
+    	        $tqu = new TestQuestion(['test_id' => $tcf->id, 'question_id' => $idArr[$i], 'que_id' => 10000 + $idArr[$i], 'seq_id' => $i + 1]);
     	        $tquArr[] = $tqu;
     	    }
     	    $tcf->questions()->saveMany($tquArr);

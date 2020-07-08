@@ -115,7 +115,7 @@ class QuestionService {
 	public function saveQuestion($qt, $qi, $ldqalt, $user) {
 	    $que = new Question();
 	    DB::transaction(function () use ($que, $qi, $qt, $ldqalt, $user) {
-	        $maxQueId = DB::table('quagga_question')->max('que_id'); // should be > 10000
+	        $maxQueId = DB::table('quagga_question')->max('que_id'); // should be > 11000
 	        $que->que_id = $maxQueId + 1;
 	        $que->owner()->associate($user);
 	        $que->save();
@@ -165,7 +165,7 @@ class QuestionService {
 	            $qalt->save();
 	        }
 	        
-	        $catids = [1];
+	        $catids = [21];
 	        if ($catids != null) {
 	            $this->saveCategorizations($que, $catids);
 	        }
