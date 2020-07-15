@@ -12,6 +12,7 @@ class DisplayQuestion {
 	private $dqask;
 	private $ldqalt;
 	private $cattitle;
+	private $status;
 	
     public function __construct($queId) {
 		$this->queId = $queId;
@@ -72,6 +73,14 @@ class DisplayQuestion {
 		return $this->que->categorizations()->get();
 	}
 
+	public function getStatus() {
+	    return $this->status;
+	}
+	
+	public function setStatus($status) {
+	    $this->status = $status;
+	}
+	
 /* 	public static function getArticleByCategory($catId) {
 		$as = App::make('articleservice');
  		$arts = $as->findBySingleCategory($catId);

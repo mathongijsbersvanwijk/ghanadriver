@@ -18,7 +18,7 @@ Route::post('/dynsubmit', 'ContentController@dynsubmit')->name('dynsubmit');
 
 Auth::routes();
 
-Route::group(['middleware'=>['auth']], function(){
+Route::group(['middleware'=>['auth']], function() {
     Route::get('/momo/dvlaform', 'MomoController@momoDvlaForm')->name('momoDvlaForm');
     Route::get('/momo/checkout', 'MomoController@momoCheckout')->name('momoCheckout');
     Route::post('/momo/requesttopay', 'MomoController@momoRequestToPay')->name('momoRequestToPay');
@@ -35,6 +35,16 @@ Route::group(['middleware'=>['auth']], function(){
     Route::post('tests/chosenquestions','TestUgcController@chosenquestions')->name('tests.chosenquestions');
     Route::get('tests/{id}/sortquestions','TestUgcController@sortquestions')->name('tests.sortquestions');
     Route::resource('tests','TestUgcController');
+
+    Route::get('admin/questions/index/{status}','AdminController@index')->name('admin.questions.index');
+    Route::get('admin/questions/index','AdminController@index')->name('admin.questions.index');
+    Route::get('admin/questions/{id}/edit','AdminController@edit')->name('admin.questions.edit');
+    Route::post('admin/questions/assess','AdminController@assess')->name('admin.questions.assess');
+
+//     Route::get('admin/tests/index/{status}','AdminController@index')->name('admin.tests.index');
+//     Route::get('admin/tests/index','AdminController@index')->name('admin.tests.index');
+//     Route::get('admin/tests/{id}/edit','AdminController@edit')->name('admin.tests.edit');
+//     Route::post('admin/tests/assess','AdminController@assess')->name('admin.tests.assess');
 });
 
 

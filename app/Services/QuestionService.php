@@ -34,6 +34,10 @@ class QuestionService {
 		return $this->findByCategoryImpl($cats, 0, 0);
 	}
 	
+	public function findAllByStatus($status) {
+	    return Question::where('status', $status)->get();
+	}
+	
 	private function findByCategoryImpl($cats, $lastid, $limit) {
 		if ($cats == null || ($cats != null && sizeof($cats) == 0)) {
 			return new Collection();
@@ -89,7 +93,7 @@ class QuestionService {
  		return $loa;		
 	}
 
-	public function findQuestionAskedArtifacts($userId) {
+	public function findQuestionAskedArtifactsByUser($userId) {
 	    $loa = DB::select(DB::raw(
 	        "SELECT q.id, pp.que_id, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
 	        "FROM quagga_question q " .
@@ -97,6 +101,19 @@ class QuestionService {
 	        "LEFT JOIN quagga_tekst tk ON pp.med_id = tk.med_id " .
 	        "LEFT JOIN quagga_graphic grf ON pp.med_id = grf.med_id " .
 	        "WHERE q.user_id = ". $userId . " ORDER BY q.id, seq"
+	        ));
+	    
+	    return $loa;
+	}
+	
+	public function findQuestionAskedArtifactsByStatus($status) {
+	    $loa = DB::select(DB::raw(
+	        "SELECT q.id, q.status, pp.que_id, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
+	        "FROM quagga_question q " .
+	        "LEFT JOIN quagga_pose_part pp ON q.que_id = pp.que_id " .
+	        "LEFT JOIN quagga_tekst tk ON pp.med_id = tk.med_id " .
+	        "LEFT JOIN quagga_graphic grf ON pp.med_id = grf.med_id " .
+	        ($status != null ? "WHERE q.status = '". $status . "'" : "") . " ORDER BY q.id, seq"
 	        ));
 	    
 	    return $loa;
@@ -117,6 +134,7 @@ class QuestionService {
 	    DB::transaction(function () use ($que, $qi, $qt, $ldqalt, $user) {
 	        $maxQueId = DB::table('quagga_question')->max('que_id'); // should be > 11000
 	        $que->que_id = $maxQueId + 1;
+	        $que->status = 'UPLOADED';
 	        $que->owner()->associate($user);
 	        $que->save();
 	        

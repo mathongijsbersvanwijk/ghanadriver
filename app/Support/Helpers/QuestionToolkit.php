@@ -19,10 +19,21 @@ class QuestionToolkit {
     }
     
     public static function getDisplayQuestionsByUser($userId, QuestionService $qs) {
-        $loa = $qs->findQuestionAskedArtifacts($userId);
+        $loa = $qs->findQuestionAskedArtifactsByUser($userId);
+        
+        return QuestionToolkit::getDisplayQuestions($loa, $qs);
+    }
+    
+    public static function getDisplayQuestionsByStatus($status, QuestionService $qs) {
+        $loa = $qs->findQuestionAskedArtifactsByStatus($status);
+        
+        return QuestionToolkit::getDisplayQuestions($loa, $qs);
+    }
+    
+    private static function getDisplayQuestions($loa, QuestionService $qs) {
         $ldq = new Collection();
         if ($loa != null && sizeof($loa) > 0) {
-            $i = 0; 
+            $i = 0;
             while ($i < sizeof($loa)) {
                 $medId = $loa[$i]->med_id;
                 $medType = $loa[$i]->med_type;
@@ -32,9 +43,10 @@ class QuestionToolkit {
                 if ($medType == 'T') {
                     $dq = new DisplayQuestion($loa[$i]->que_id);
                     $dq->setId($loa[$i]->id);
+                    $dq->setStatus($loa[$i]->status);
                     $ldq->push($dq);
                 }
-
+                
                 QuestionToolkit::fillQuestionAsked($dq, $medId, $medType, $tek, $grfFn);
                 $i++;
             }
@@ -42,7 +54,7 @@ class QuestionToolkit {
         
         return $ldq;
     }
-    
+        
     public static function getDisplayQuestion($dq, QuestionService $qs) {
 		$loa = $qs->findQuestionArtifacts($dq->getQueId());
 		if ($loa != null && sizeof($loa) > 0) {
