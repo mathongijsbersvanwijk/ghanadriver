@@ -8,9 +8,9 @@ use App\Models\QuestionAlternative;
 use App\Models\QuestionAsked;
 use App\Models\QuestionImageResource;
 use App\Models\QuestionTextResource;
+use App\Models\User;
 use App\Support\Helpers\Utils;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class QuestionService {
@@ -95,7 +95,7 @@ class QuestionService {
 
 	public function findQuestionAskedArtifactsByUser($userId) {
 	    $loa = DB::select(DB::raw(
-	        "SELECT q.id, pp.que_id, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
+	        "SELECT q.id, q.status, pp.que_id, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
 	        "FROM quagga_question q " .
 	        "LEFT JOIN quagga_pose_part pp ON q.que_id = pp.que_id " .
 	        "LEFT JOIN quagga_tekst tk ON pp.med_id = tk.med_id " .
@@ -212,6 +212,15 @@ class QuestionService {
 				$que->categorizations()->save($cgn);
 			}
 		}
+	}
+	
+	public function update($untypedArr) {
+	    $que = new Question();
+	    $que->exists = true;
+	    $que->id = $untypedArr['id'];
+	    $que->status = $untypedArr['status'];
+	    $que->reason = $untypedArr['reason'];
+	    $que->save();
 	}
 	
 	// just a test

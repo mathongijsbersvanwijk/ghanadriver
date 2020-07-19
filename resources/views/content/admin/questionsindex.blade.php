@@ -22,7 +22,7 @@
     @php ($asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents())
     <div class="row">
     	<div class="col-sm-8 gdtip">
-    		<a href="/z/render/{!! $dq->getQueId() !!}/5" alt="Check your question" title="Check your question">
+    		<a href="{{ route('admin.questions.show', ['id' => $dq->getId()]) }}" >
 	       	   	<p style="margin-top: 5px">{!! $asked !!}</p>
   			</a>
     	</div>

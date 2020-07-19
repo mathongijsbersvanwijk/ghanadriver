@@ -25,7 +25,6 @@ Route::group(['middleware'=>['auth']], function() {
     Route::put('/momocallback', 'MomoController@momoCallback')->name('momoCallback');
 
     Route::get('questions/check','QuestionUgcController@check')->name('check');
-    //Route::post('questions/fetch','QuestionUgcController@fetch')->name('fetch');
     Route::get('questions/{queid}/editphoto','QuestionUgcController@editphoto')->name('questions.editphoto');
     Route::get('questions/{queid}/edittext','QuestionUgcController@edittext')->name('questions.edittext');
     Route::post('questions/updatephoto','QuestionUgcController@updatephoto')->name('questions.updatephoto');
@@ -35,17 +34,13 @@ Route::group(['middleware'=>['auth']], function() {
     Route::post('tests/chosenquestions','TestUgcController@chosenquestions')->name('tests.chosenquestions');
     Route::get('tests/{id}/sortquestions','TestUgcController@sortquestions')->name('tests.sortquestions');
     Route::resource('tests','TestUgcController');
-
-    Route::get('admin/questions/index/{status}','AdminController@index')->name('admin.questions.index');
-    Route::get('admin/questions/index','AdminController@index')->name('admin.questions.index');
-    Route::get('admin/questions/{id}/edit','AdminController@edit')->name('admin.questions.edit');
-    Route::post('admin/questions/assess','AdminController@assess')->name('admin.questions.assess');
-
-//     Route::get('admin/tests/index/{status}','AdminController@index')->name('admin.tests.index');
-//     Route::get('admin/tests/index','AdminController@index')->name('admin.tests.index');
-//     Route::get('admin/tests/{id}/edit','AdminController@edit')->name('admin.tests.edit');
-//     Route::post('admin/tests/assess','AdminController@assess')->name('admin.tests.assess');
 });
 
-
+Route::group(['middleware'=>['auth', 'admin']], function() {
+    Route::get('admin/questions/index/{status}','AdminController@index')->name('admin.questions.index');
+    Route::get('admin/questions/index','AdminController@index')->name('admin.questions.index');
+    Route::get('admin/questions/{id}','AdminController@show')->name('admin.questions.show');
+    Route::post('admin/questions/updatestatus','AdminController@updatestatus')->name('admin.questions.updatestatus');
+});
+    
     
