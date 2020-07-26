@@ -34,13 +34,13 @@ class QuestionUgcController extends Controller
         $fm = $request->input('fm');
         $fmd = json_decode($fm, true);
 
+        if (sizeof($fmd) > 6) {
+            throw new Exception("more than 4 alternatives to answer a question are not allowed");
+        }
+        
         $photo = $request->file('photo');
         $qi = QuestionToolkit::createImage(0, 'B', $photo->getClientOriginalname());
         $qt = QuestionToolkit::createText(0, 'T', $fmd[0]['value']); // $fmd[0]['name'] == 'asked'
-        
-        if (sizeof($fmd) > 6) {
-            throw new Exception("more than 4 alternatives for question given");
-        }
         
         $ldqalt = new Collection();
         $i = 1;
@@ -134,17 +134,40 @@ class QuestionUgcController extends Controller
     
     public function updatetext(Request $request, QuestionService $qs) {
         $this->validate($request, [
-            'queid'         => 'required', // hidden input
-            'asked'         => 'required',
-            'iscorrect'     => 'required',
-            'alternative'   => 'required',
+            'queid'             => 'required',
+            'asked'             => 'required',
+            'askedmedid'        => 'required',
+            'alternative'       => 'required',
+            'alternativemedid'  => 'required',
+            'iscorrect'         => 'required',
         ]);
         
-        $queId = $request->input('queid');
-        $dq = new DisplayQuestion($queId);
-        $dq = QuestionToolkit::getDisplayQuestion($dq, $qs);
+        if (sizeof($request->input('alternative')) > 4) {
+            throw new Exception("more than 4 alternatives to answer a question are not allowed");
+        }
         
-        // todo: a lot
+        $queId = $request->input('queid');
+        $qt = QuestionToolkit::createText($request->input('askedmedid'), 'T', $request->input('asked')); 
+        
+        $altArr = $request->input('alternative');
+        $ldqalt = new Collection();
+        $i = 0;
+        while ($i < sizeof($altArr)) {
+            $dqalt = null;
+            if ($request->input('iscorrect') == $i) {
+                $dqalt = new DisplayQuestionAlternative($i + 1, 1);
+            } else {
+                $dqalt = new DisplayQuestionAlternative($i + 1, 0);
+            }
+            
+            $dqalt->setQuestionText(QuestionToolkit::createText($request->input('alternativemedid')[$i], 'T', $request->input('alternative')[$i]));
+            $ldqalt->push($dqalt);
+            $i++;
+        }
+        
+        $qs->updateText($queId, $qt, $ldqalt, Auth::user());
+        
+        return redirect('/z/render/'.$queId.'/5');
     }
         
     public function destroy(Question $question) {

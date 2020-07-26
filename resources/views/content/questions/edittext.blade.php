@@ -4,7 +4,9 @@
 @isset($dq) 
 	@php 
 		$asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents();
+		$askedmedid = $dq->getDisplayQuestionAsked()->getQuestionText()->getMedId();
 		$photoFileName = $dq->getDisplayQuestionAsked()->getQuestionImage()->getGrfFileName();
+		$ldqalt = $dq->getListDisplayQuestionAlternative();
 	@endphp
 @endisset
 <div class="container">
@@ -15,7 +17,9 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-        <form id="fm" name="fm" role="form" action="" enctype="multipart/form-data" method="post" autocomplete="off">
+        <form id="fm" name="fm" role="form" action="{{ route('questions.updatetext') }}" method="post" autocomplete="off">
+			@csrf
+			<input type="hidden" name="queid" value="{{ $dq->getQueId() ?? '' }}" >
             <div class="form-group row">
 				<img class="img-fluid" src="/storage/img/{!! $photoFileName !!}"/>
             </div>
@@ -24,6 +28,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-12">
+					<input type="hidden" name="askedmedid" value="{!! $askedmedid !!}">
                     <input class="form-control" type="text" 
                     	id="asked" name="asked" value="{{ $asked ?? '' }}" placeholder="for example: Is it allowed to park here?">
                     <!-- span class="invalid-feedback asked-feedback" role="alert"></span -->
@@ -32,37 +37,36 @@
             <div class="form-group row">
                 <div class="col-sm-12">Give the possible multiple choice answers and indicate the correct one with the orange radio-button (press <span class="fa fa-plus gs"></span> to add more options)</div>
             </div>
-            <div class="form-group row controls"> 
-                <div class="entry input-group col-sm-12">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="radio" name="iscorrect" aria-label="Radio button for following text input" checked="checked">
+            <div class="form-group row controls">
+   				@php ($i = 0)
+    			@foreach ($ldqalt as $dqa) 
+    				@php ($qtt = $dqa->getQuestionText())
+    				@if ($qtt != null)
+                        <div class="entry input-group col-sm-12">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="radio" name="iscorrect" value="{!! $i !!}" aria-label="Radio button for following text input" {!! $dqa->isCorrect() ? "checked" : "" !!}>
+                                </div>
+                            </div>
+							<input type="hidden" name="alternativemedid[]" value="{!! $qtt->getMedId() !!}">
+                            <input class="form-control" type="text" 
+                            	name="alternative[]" value="{!! $qtt->getTekContents() !!}" placeholder="for example: Yes" />
+                            <span class="input-group-btn">
+			    				@if ($i < sizeof($ldqalt) - 1)
+                                <button class="btn btn-danger btn-remove" type="button">
+                                    <span class="fa fa-minus"></span>
+                                </button>
+                                @else
+                                <button class="btn btn-success btn-add" type="button">
+                                    <span class="fa fa-plus"></span>
+                                </button>
+                                @endif
+                            </span>
+        	                <!-- span class="invalid-feedback alternative-feedback" role="alert"></span -->
                         </div>
-                    </div>
-                    <input class="form-control" type="text" 
-                    	name="alternative" value="" placeholder="for example: Yes" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-danger btn-remove" type="button">
-                            <span class="fa fa-minus"></span>
-                        </button>
-                    </span>
-	                <!-- span class="invalid-feedback alternative-feedback" role="alert"></span -->
-                </div>
-                <div class="entry input-group col-sm-12">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="radio" name="iscorrect" aria-label="Radio button for following text input">
-                        </div>
-                    </div>
-                    <input class="form-control" type="text" 
-                    	name="alternative" value="" placeholder="for example: No" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-success btn-add" type="button">
-                            <span class="fa fa-plus"></span>
-                        </button>
-                    </span>
-	                <!-- span class="invalid-feedback alternative-feedback" role="alert"></span -->
-                </div>
+    				@endif
+			        @php ($i++)
+    			@endforeach
             </div>
             <div class="form-feedback"><p></p></div>
             <button type="submit" id="submit" class="btn btn-primary">Save</button>
@@ -79,7 +83,7 @@ $(function() {
         e.preventDefault();
 
     	var countAlt = $('.controls').children().length;
-    	if (countAlt > 3) {
+    	if (countAlt > 3) { 
     		formFeedback("Number of possible answers should not be more than 4");
     		return false;
     	}		
@@ -89,6 +93,7 @@ $(function() {
     	    newEntry = $(currentEntry.clone(true)).appendTo(controlForm);
 
         newEntry.find('input').val('');
+        newEntry.find('input:radio[name=iscorrect]').val(countAlt - 1);
         controlForm.find('.entry:not(:last) .btn-add')
             .removeClass('btn-add').addClass('btn-remove')
             .removeClass('btn-success').addClass('btn-danger')
@@ -120,16 +125,22 @@ $(function() {
             $(this).removeClass('input-feedback');
         }
     });    
+
+    $('#fm').submit(function () {
+        if (!formIsValid()) {
+            return false;
+        }
+    });
 });
 function formIsValid() {
-    if (!$('#asked').val()) {
+    if (!$('#asked').val() || $('#asked').val() == "Please enter text") {
     	formFeedback("Please enter text for the question you want to ask");
 		return false;
     }
 
 	var alternativeEmpty = false;
-	$('input:text[name=alternative]').each(function () {
-	    if (!$(this).val()) {
+	$("input:text[name='alternative[]']").each(function () {
+	    if (!$(this).val() || $(this).val() == "Please enter text") {
 		    alternativeEmpty = true;
 			return false;
 		}	 
@@ -151,11 +162,11 @@ function formIsValid() {
 	}		
 
 	var countAlt = $('.controls').children().length;
-	if (countAlt < 2) {
+	if (countAlt < 2) { 
 		formFeedback("Number of possible answers should be at least 2");
 		return false;
 	}		
-	if (countAlt > 4) {
+	if (countAlt > 4) { 
 		formFeedback("Number of possible answers should not be more than 4");
 		return false;
 	}		

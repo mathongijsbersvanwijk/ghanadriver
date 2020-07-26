@@ -37,9 +37,9 @@
 	       	   	<p style="margin-top: 5px">{!! $asked !!}</p>
   			</a>
     	</div>
-    	<div class="col-sm-2">{!! $dq->getStatus() !!}</div>
-
-		<div>&nbsp;</div>
+    	<div class="col-sm-2">
+       	   	<p style="margin-top: 5px">{!! $dq->getStatus() !!}</p>
+    	</div>
     </div>
     @endforeach
 </div>

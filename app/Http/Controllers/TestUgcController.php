@@ -10,6 +10,7 @@ use App\Support\Helpers\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class TestUgcController extends Controller
 {
@@ -49,6 +50,9 @@ class TestUgcController extends Controller
     }
     
     public function store(Request $request, TestConfigurationService $tcfs) {
+        if (sizeof($request->get('dqids')) > 20) {
+            throw new Exception("more than 20 questions in a test are not allowed");
+        }
         $tcfs->save($request->all(), Auth::user());
         
         return redirect()->route('tests.index'); 

@@ -36,7 +36,7 @@
                 <div class="entry input-group col-sm-12">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <input type="radio" name="iscorrect" aria-label="Radio button for following text input" checked="checked">
+                            <input type="radio" name="iscorrect" aria-label="Radio button for following text input" checked>
                         </div>
                     </div>
                     <input class="form-control" type="text" 
@@ -197,14 +197,14 @@ function formIsValid() {
 		return false;
     }
     	
-    if (!$('#asked').val()) {
+    if (!$('#asked').val() || $('#asked').val() == "Please enter text") {
     	formFeedback("Please enter text for the question you want to ask");
 		return false;
     }
 
 	var alternativeEmpty = false;
 	$('input:text[name=alternative]').each(function () {
-	    if (!$(this).val()) {
+	    if (!$(this).val() || $(this).val() == "Please enter text") {
 		    alternativeEmpty = true;
 			return false;
 		}	 

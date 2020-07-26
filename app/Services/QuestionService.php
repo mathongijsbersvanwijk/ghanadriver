@@ -223,6 +223,45 @@ class QuestionService {
 	    $que->save();
 	}
 	
+	public function updateText($queId, $qt, $ldqalt, $user) {
+	    DB::transaction(function () use ($queId, $qt, $ldqalt, $user) {
+	        $que = $this->findByQueId($queId);
+	        $que->status = 'UPLOADED';
+	        $que->save();
+
+	        $qtr = new QuestionTextResource();
+	        $qtr->exists = true;
+	        $qtr->med_id = $qt->getMedId();
+	        $qtr->med_type = $qt->getMedType();
+	        $qtr->tek_contents = $qt->getTekContents();
+	        $qtr->save();
+
+	        $this->deleteAlternatives($queId); 
+	        foreach ($ldqalt as $dqalt) {
+	            $qtr = new QuestionTextResource();
+	            $maxMedtxtId = DB::table('quagga_tekst')->max('med_id');
+	            $qtr->med_id = $maxMedtxtId + 1;
+	            $qtr->med_type = $dqalt->getQuestionText()->getMedType();
+	            $qtr->tek_contents = $dqalt->getQuestionText()->getTekContents();
+	            $qtr->save();
+	            
+	            $qalt = new QuestionAlternative();
+	            $qalt->que_id = $que->que_id;
+	            $qalt->alt_id = $dqalt->getAltId();
+	            $qalt->med_id = $qtr->med_id;
+	            $qalt->med_type = $qtr->med_type;
+	            $qalt->alt_correct = $dqalt->isCorrect() ? 1 : 0;
+	            $qalt->save();
+	        }
+	    });
+	}
+	
+	private function deleteAlternatives($queId) {
+	    $alts = QuestionAlternative::where('que_id', $queId)->get();
+	    DB::table('quagga_tekst')->whereIn('med_id', Utils::medidArray($alts))->delete();
+	    DB::table('quagga_alternative')->where('que_id', '=', $queId)->delete();
+	}
+	
 	// just a test
 	public function countMetaValues() {
 		$loa = $this->findQuestionArtifacts('3225');

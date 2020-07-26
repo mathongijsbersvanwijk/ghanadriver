@@ -26,6 +26,14 @@ class Utils {
 	    return $a;
 	}
 	
+	public static function medidArray($items) {
+	    $a = array();
+	    foreach ($items as $item) {
+	        $a[] = $item->med_id;
+	    }
+	    return $a;
+	}
+	
 	public static function uriToArray($uri) {
 		$arr = explode('/', $uri);
 		$arrnew = array();
