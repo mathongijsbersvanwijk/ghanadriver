@@ -134,7 +134,7 @@ class QuestionToolkit {
 		$qi = new QuestionImage(); 
 		$qi->setMedid($medId); 
 		$qi->setMedType($medType); 
-		$qi->setGrfFileName ($grfFn); 
+		$qi->setGrfFileName($grfFn); 
 		
 		return $qi;
 	}

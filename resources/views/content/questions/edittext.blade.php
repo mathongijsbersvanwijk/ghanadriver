@@ -12,7 +12,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h5>Update your question text or possible answers</h5>
+            <h5>Update your question text or possible answers below</h5>
         </div>
     </div>
     <div class="row">
@@ -21,7 +21,7 @@
 			@csrf
 			<input type="hidden" name="queid" value="{{ $dq->getQueId() ?? '' }}" >
             <div class="form-group row">
-				<img class="img-fluid" src="/storage/img/{!! $photoFileName !!}"/>
+                <div class="col-sm-12"><img class="img-fluid" src="/storage/img/{!! $photoFileName !!}"/></div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-12">Write the question you want to ask about this photo</div>

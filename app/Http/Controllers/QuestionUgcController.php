@@ -113,23 +113,27 @@ class QuestionUgcController extends Controller
     }
 
     public function updatephoto(Request $request, QuestionService $qs, ImageService $is) {
+        Log::info($request->input('fm'));
+        
         $this->validate($request, [
             'fm'    => 'required',
             'photo' => 'image|required|mimes:jpeg,png,jpg,gif,svg',
         ]);
         
+        $fm = $request->input('fm');
+        $fmd = json_decode($fm, true);
+        
         $photo = $request->file('photo');
         Log::info($photo->getClientOriginalname());
-        $qi = QuestionToolkit::createImage(0, 'B', $photo->getClientOriginalname());
+
+        $queId = $fmd[0]['value'];
+        $qi = QuestionToolkit::createImage($fmd[1]['value'], 'B', $photo->getClientOriginalname()); // $fmd[1]['name'] == 'askedmedid'
         
-        $id = $request->input('id');
-        // todo
-        //$que = $qs->updateQuestionPhoto($id, $qi, new User(['id' => 1]));
-        //$request->session()->put('que', $que);
+        $que = $qs->updatePhoto($queId, $qi, Auth::user());
+        $request->session()->put('que', $que);
         
-        $is->save($photo);
-       
-        return response()->json(['success' => 'ok then']);
+        $is->save($photo, $que->que_id);
+        // return is void, because redirect is done on complete event in editphoto.blade.php
     }
     
     public function updatetext(Request $request, QuestionService $qs) {

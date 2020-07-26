@@ -223,9 +223,26 @@ class QuestionService {
 	    $que->save();
 	}
 	
+	public function updatePhoto($queId, $qi, $user) {
+	    $que = $this->findByQueId($queId);
+	    DB::transaction(function () use ($que, $qi, $user) {
+	        $que->status = 'UPLOADED';
+	        $que->save();
+	        
+	        $qir = new QuestionImageResource();
+	        $qir->exists = true;
+	        $qir->med_id = $qi->getMedId();
+	        $qir->med_type = $qi->getMedType();
+	        $qir->grf_filename = $que->que_id."_".$qi->getGrfFileName();
+	        $qir->save();
+	    });
+	    
+        return $que;
+	}
+	
 	public function updateText($queId, $qt, $ldqalt, $user) {
-	    DB::transaction(function () use ($queId, $qt, $ldqalt, $user) {
-	        $que = $this->findByQueId($queId);
+	    $que = $this->findByQueId($queId);
+	    DB::transaction(function () use ($que, $qt, $ldqalt, $user) {
 	        $que->status = 'UPLOADED';
 	        $que->save();
 
@@ -236,7 +253,7 @@ class QuestionService {
 	        $qtr->tek_contents = $qt->getTekContents();
 	        $qtr->save();
 
-	        $this->deleteAlternatives($queId); 
+	        $this->deleteAlternatives($que->que_id); 
 	        foreach ($ldqalt as $dqalt) {
 	            $qtr = new QuestionTextResource();
 	            $maxMedtxtId = DB::table('quagga_tekst')->max('med_id');

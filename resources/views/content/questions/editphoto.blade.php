@@ -3,8 +3,8 @@
 @section('content')
 @isset($dq) 
 	@php
-		$id = $dq->getQue()->id;
 		$asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents();
+		$askedmedid = $dq->getDisplayQuestionAsked()->getQuestionImage()->getMedId();
 		$photoFileName = $dq->getDisplayQuestionAsked()->getQuestionImage()->getGrfFileName();
 	@endphp
 @endisset
@@ -17,12 +17,13 @@
     <div class="row">
         <div class="col-sm-12">
         <form id="fm" role="form" action="" enctype="multipart/form-data" method="put" autocomplete="off">
+			<input type="hidden" name="queid" value="{{ $dq->getQueId() ?? '' }}" >
             <div class="form-group row">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
+					<input type="hidden" name="askedmedid" value="{!! $askedmedid !!}">
 	                <div class="dropzone col-sm-6" id="photo" name="photo"></div>
-                </div>
-                <div class="col-sm-6">
- 	               <img class="img-fluid" src="/storage/img/{!! $photoFileName !!}"/>
+	                <div class="pl-3 pt-3">Below is your current (old) photo</div>
+ 	            	<img class="img-fluid p-3" src="/storage/img/{!! $photoFileName !!}"/>
                 </div>
             </div>
             <div class="form-feedback"><p></p></div>
@@ -39,7 +40,7 @@
 Dropzone.prototype.defaultOptions.dictDefaultMessage = "Choose photo";
 Dropzone.prototype.defaultOptions.dictRemoveFile = "Remove photo";
 Dropzone.options.photo = {
-    url: '{{ route('questions.updatephoto', ['id' => $id]) }}',
+    url: '{{ route('questions.updatephoto') }}',
     paramName: 'photo',
     autoProcessQueue: false,
     uploadMultiple: false,
