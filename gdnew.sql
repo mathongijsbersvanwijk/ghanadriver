@@ -1331,7 +1331,7 @@ CREATE TABLE `quagga_test` (
 
 LOCK TABLES `quagga_test` WRITE;
 /*!40000 ALTER TABLE `quagga_test` DISABLE KEYS */;
-INSERT INTO `quagga_test` VALUES (1,0,'T',NULL,10,9,NULL,1,NULL,NULL),(2,0,'T',NULL,10,9,NULL,1,NULL,NULL),(3,9310,'T','Ghana profile',10,9,NULL,1,NULL,NULL),(4,9410,'T','Cameroon profile',10,9,NULL,1,NULL,NULL),(101,NULL,'T','my test',10,9,NULL,2,'2020-07-08 09:11:30','2020-07-08 09:12:19');
+INSERT INTO `quagga_test` VALUES (1,0,'T','GhanaDriver test 1',10,9,NULL,1,NULL,NULL),(2,0,'T','GhanaDriver test 2',10,9,NULL,1,NULL,NULL),(3,9310,'T','Ghana profile',10,9,NULL,1,NULL,NULL),(4,9410,'T','Cameroon profile',10,9,NULL,1,NULL,NULL),(101,0,'T','my test',10,9,NULL,2,'2020-07-08 09:11:30','2020-07-08 09:12:19');
 /*!40000 ALTER TABLE `quagga_test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1590,4 +1590,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-02 15:24:49
+-- Dump completed on 2020-08-02 15:27:01
