@@ -14,6 +14,12 @@ use Exception;
 
 class TestUgcController extends Controller
 {
+    public function all(TestConfigurationService $tcfs) {
+        $ltst = $tcfs->findAllPredefined();
+        
+        return view('content.tests.run', compact('ltst'));
+    }
+    
     public function index(TestConfigurationService $tcfs) {
         $ltst = $tcfs->findAllByUser(Auth::user());
         
@@ -23,6 +29,7 @@ class TestUgcController extends Controller
     public function create(Request $request, QuestionService $qs) {
         $ldq = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
         $dqidarr = [];
+        $request->session()->put('ldq', $ldq);
         
         return view('content.tests.edit', compact('ldq', 'dqidarr'));
     }
@@ -72,6 +79,7 @@ class TestUgcController extends Controller
     public function edit(Request $request, TestConfiguration $test, QuestionService $qs) {
         $ldq = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
         $dqidarr = Utils::queidArray($test->questions);
+        $request->session()->put('ldq', $ldq);
         
         return view('content.tests.edit', compact('ldq', 'dqidarr', 'test'));
     }

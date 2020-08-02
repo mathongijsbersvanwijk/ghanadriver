@@ -18,7 +18,7 @@
 	</div>
     <div class="row">
         <div class="col-sm-12">
-            <h5>Choose questions to go in your test</h5>
+            <h5>Choose questions to go into your test</h5>
         </div>
     </div>
     @foreach($ldq as $dq)

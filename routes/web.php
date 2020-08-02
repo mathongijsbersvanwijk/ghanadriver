@@ -2,9 +2,10 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index');
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/ridehailing', 'HomeController@ridehailing')->name('ridehailing');
 Route::get('/dvla', 'HomeController@dvla')->name('dvla');
+Route::get('/tests/all','TestUgcController@all')->name('tests.all');
 
 Route::post('/z/start', 'ZebraController@starttest')->name('start');
 Route::post('/z/question', 'ZebraController@answerQuestionAndProceed')->name('question');

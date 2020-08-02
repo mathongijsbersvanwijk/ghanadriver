@@ -12,12 +12,16 @@ class TestConfigurationService {
 		return TestConfiguration::all();
 	}
 	
-	public function find($id) {
-		return TestConfiguration::find($id);
+	public function findAllPredefined() {
+	    return TestConfiguration::where('pro_id', 0)->withCount('questions')->get();
 	}
-
+	
 	public function findAllByUser($user) {
-	    return TestConfiguration::where('user_id', $user->id)->get();
+	    return TestConfiguration::where('user_id', $user->id)->withCount('questions')->get();
+	}
+	
+	public function find($id) {
+	    return TestConfiguration::find($id);
 	}
 	
 	public function save($untypedArr, $user) {
@@ -34,6 +38,7 @@ class TestConfigurationService {
     public function saveTestConfiguration($untypedArr, $tcf, $user) {
         DB::transaction(function () use ($untypedArr, $tcf, $user) {
     	    $tcf->id = isset($untypedArr['id']) ? $untypedArr['id'] : null;
+    	    $tcf->pro_id = 0;
     	    $tcf->tst_type = 'T';
     	    $tcf->tst_description = $untypedArr['desc'];
     	    $tcf->tst_count_tqu = 10; //$untypedArr['tst_count_tqu'];
