@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h5>Change your question photo</h5>
+            <h3>Change your question photo</h3>
         </div>
     </div>
     <div class="row">

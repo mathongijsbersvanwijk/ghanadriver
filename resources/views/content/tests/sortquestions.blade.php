@@ -4,7 +4,7 @@
 <div class="container">
 <div class="row">
     <div class="col-sm-12">
-        <h5>Sort your questions</h5>
+        <h3>Sort the questions in your test</h3>
     </div>
 </div>
 <div class="row">
@@ -16,6 +16,17 @@
 	@if ($id > 0)
 		<input type="hidden" name="_method" value="put">
 	@endif
+	<div class="form-group row">
+		<div class="col-sm-12">
+			<h4>"{!! $desc !!}"</h4>
+		</div>
+	</div>
+	<input type="hidden" name="desc" value="{!! $desc !!}">
+    <div class="row">
+        <div class="col-sm-12">
+            <h5>Click a question, then drag and drop it into the right place</h5>
+        </div>
+    </div>
     @foreach($ldqchosen as $dq)
     @php ($dqid = $dq->getId())
     @php ($asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents())

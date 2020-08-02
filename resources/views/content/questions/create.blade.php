@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h5>Create your own question</h5>
+            <h3>Create your question</h3>
         </div>
     </div>
     <div class="row">

@@ -35,7 +35,7 @@ class TestConfigurationService {
         DB::transaction(function () use ($untypedArr, $tcf, $user) {
     	    $tcf->id = isset($untypedArr['id']) ? $untypedArr['id'] : null;
     	    $tcf->tst_type = 'T';
-    	    $tcf->tst_description = 'my test'; //$untypedArr['tst_description'];
+    	    $tcf->tst_description = $untypedArr['desc'];
     	    $tcf->tst_count_tqu = 10; //$untypedArr['tst_count_tqu'];
     	    $tcf->tst_count_min_success = 9; //$untypedArr['tst_count_min_success'];
     	    $tcf->owner()->associate($user);

@@ -23,7 +23,6 @@ class TestUgcController extends Controller
     public function create(Request $request, QuestionService $qs) {
         $ldq = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
         $dqidarr = [];
-        $request->session()->put('ldq', $ldq);
         
         return view('content.tests.edit', compact('ldq', 'dqidarr'));
     }
@@ -32,6 +31,7 @@ class TestUgcController extends Controller
         $id = $request->input('id');
         $idArr = $request->get('dqids');
         $ldq = $request->session()->get('ldq');
+        $desc = $request->input('desc');
         $ldqchosen = new Collection();
         foreach ($ldq as $dq) {
             if (in_array($dq->getId(), $idArr)) {
@@ -39,14 +39,16 @@ class TestUgcController extends Controller
             }
         }
         $request->session()->put('ldqchosen', $ldqchosen);
+        $request->session()->put('desc', $desc);
         
         return redirect()->route('tests.sortquestions', ['id' => $id]);
     }
     
     public function sortquestions(Request $request, $id) {
         $ldqchosen = $request->session()->get('ldqchosen');
+        $desc = $request->session()->get('desc');
         
-        return view('content.tests.sortquestions', compact('ldqchosen', 'id'));
+        return view('content.tests.sortquestions', compact('ldqchosen', 'id', 'desc'));
     }
     
     public function store(Request $request, TestConfigurationService $tcfs) {
@@ -65,12 +67,14 @@ class TestUgcController extends Controller
     public function edit(Request $request, TestConfiguration $test, QuestionService $qs) {
         $ldq = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
         $dqidarr = Utils::queidArray($test->questions);
-        $request->session()->put('ldq', $ldq);
         
         return view('content.tests.edit', compact('ldq', 'dqidarr', 'test'));
     }
     
     public function update(Request $request, TestConfiguration $test, TestConfigurationService $tcfs) {
+        if (sizeof($request->get('dqids')) > 20) {
+            throw new Exception("more than 20 questions in a test are not allowed");
+        }
         $tcfs->update($request->all(), Auth::user());
         
         return redirect()->route('tests.index');

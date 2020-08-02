@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h5>Your own questions</h5>
+            <h3>Your own questions</h3>
         </div>
     </div>
     @foreach($ldq as $dq)
@@ -33,7 +33,7 @@
 		<div>&nbsp;</div>
     </div>
     @endforeach
-    <a class="btn btn-primary" href="{{ route('questions.create') }}" role="button">Create your own question</a>
+    <a class="btn btn-primary" href="{{ route('questions.create') }}" role="button">Create your question</a>
 </div>
 @endsection
 

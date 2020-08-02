@@ -8,10 +8,10 @@ use App\Models\QuestionAlternative;
 use App\Models\QuestionAsked;
 use App\Models\QuestionImageResource;
 use App\Models\QuestionTextResource;
-use App\Models\User;
 use App\Support\Helpers\Utils;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 class QuestionService {
 	public function findAll() {
@@ -225,6 +225,9 @@ class QuestionService {
 	
 	public function updatePhoto($queId, $qi, $user) {
 	    $que = $this->findByQueId($queId);
+	    if ($user != $que->owner) {
+	        throw new Exception("no permission");
+	    }
 	    DB::transaction(function () use ($que, $qi, $user) {
 	        $que->status = 'UPLOADED';
 	        $que->save();
@@ -242,6 +245,9 @@ class QuestionService {
 	
 	public function updateText($queId, $qt, $ldqalt, $user) {
 	    $que = $this->findByQueId($queId);
+	    if ($user != $que->owner) {
+	        throw new Exception("no permission");
+	    }
 	    DB::transaction(function () use ($que, $qt, $ldqalt, $user) {
 	        $que->status = 'UPLOADED';
 	        $que->save();

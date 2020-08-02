@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h5>Filter questions on status</h5>
+            <h3>Filter questions on status</h3>
         </div>
     </div>
     <div class="row">
