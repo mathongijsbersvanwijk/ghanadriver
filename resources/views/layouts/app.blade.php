@@ -71,8 +71,12 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                    <a class="dropdown-item" href="{{ route('tests.index') }}">Your own tests</a>
-                                    <a class="dropdown-item" href="{{ route('questions.index') }}">Your own questions</a>
+                                    @if(Auth::user()->role->id > 1)
+                                        <a class="dropdown-item" href="{{ route('tests.index') }}">Your own tests</a>
+                                        <a class="dropdown-item" href="{{ route('questions.index') }}">Your own questions</a>
+                                    @else
+                                        <a class="dropdown-item" href="{{ route('admin.questions.index') }}">Status questions</a>
+                                    @endif
                                 </div>
                             </li>
                         @endguest

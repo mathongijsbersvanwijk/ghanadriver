@@ -33,10 +33,15 @@ class TestUgcController extends Controller
         $ldq = $request->session()->get('ldq');
         $desc = $request->input('desc');
         $ldqchosen = new Collection();
+        $atLeastOne = false;
         foreach ($ldq as $dq) {
             if (in_array($dq->getId(), $idArr)) {
                 $ldqchosen->push($dq);            
+                $atLeastOne = true;
             }
+        }
+        if (!$atLeastOne) {
+            throw new Exception("no questions included in the test");
         }
         $request->session()->put('ldqchosen', $ldqchosen);
         $request->session()->put('desc', $desc);

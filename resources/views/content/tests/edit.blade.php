@@ -7,7 +7,7 @@
             <h3>{!! isset($test) ? "Edit your test" : "Create your test" !!}</h3>
         </div>
     </div>
-	<form action="{{ route('tests.chosenquestions') }}" method="post">
+	<form id="fm" name="fm" action="{{ route('tests.chosenquestions') }}" method="post">
 	@csrf
 	<input name="id" type="hidden" value="{!! isset($test) ? $test->id : 0 !!}" />
 	<div class="form-group row">
@@ -48,8 +48,41 @@
         </div>
     </div>
     <br/>
+    <div class="form-feedback"><p></p></div>
     <button type="submit" class="btn btn-primary">Save and sort</button>
     </form>
 </div>
 @endsection
+
+@section('script')
+<script>
+$(function() {
+    $('#fm').submit(function () {
+        if (!formIsValid()) {
+            return false;
+        }
+    });
+});
+function formIsValid() {
+	var atLeastOneIsChecked = $('input:checkbox').is(':checked');
+	  
+    if (!atLeastOneIsChecked) {
+    	formFeedback("At least 1 question should be included");
+		return false;
+    }
+
+    formFeedback("");
+	return true;
+}
+function formFeedback(message) {
+    if (message != "") {
+        $('div.form-feedback p').html(message);
+        $('div.form-feedback').show();
+    } else {
+    	$('div.form-feedback').hide();
+    }
+}
+</script>
+@endsection
+
 

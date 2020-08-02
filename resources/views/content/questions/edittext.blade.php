@@ -157,7 +157,7 @@ function formIsValid() {
 		}	 
     });
 	if (!radioButtonChecked) {
-		formFeedback("1 possible answer should be checked as correct");
+		formFeedback("1 possible answer should be chosen as correct");
 		return false;
 	}		
 

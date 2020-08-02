@@ -22,6 +22,9 @@
     @php ($asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents())
     @php ($qi = $dq->getDisplayQuestionAsked()->getQuestionImage())
     <div class="row">
+    	<div class="col-sm-2">
+       	   	<p style="margin-top: 5px">{!! $dq->getId() !!} / {!! $dq->getQueId() !!}</p>
+    	</div>
     	<div class="col-sm-2 gdtip">
         	@if ($qi != null && $qi->getGrfFileName() != null)
         		<a href="/questions/{!! $dq->getQueId() !!}/editphoto">
@@ -32,7 +35,7 @@
 	       	   	<p style="margin-top: 5px">Text only</p>
         	@endif
     	</div>
-    	<div class="col-sm-8 gdtip">
+    	<div class="col-sm-6 gdtip">
     		<a href="{{ route('admin.questions.show', ['id' => $dq->getId()]) }}" >
 	       	   	<p style="margin-top: 5px">{!! $asked !!}</p>
   			</a>
