@@ -19,5 +19,8 @@ class PredefinedTstTest extends TestCase {
 	public function  testGenerate() {
 		$pt = new PredefinedTest(2, $this->tcfs, $this->tqs);
 		$this->assertNotNull($pt);
+		$this->assertEquals(10, sizeof($pt->getQueIds()));
+	
+		
 	}
 }

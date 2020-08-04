@@ -73,12 +73,25 @@ class UserTstTest extends TestCase {
 	}
 		
 	public function testNavigationDeep() {
-		$ut = new UserTest(1);
-		$ut->createTest(2, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
-		
-		$tqu = $ut->getNextQuestion(0);
-		$dq = $tqu->loadQuestion($this->qs);
-		$this->assertEquals(3218, $dq->getQueId());
+	    $ut = new UserTest(1);
+	    $ut->createTest(2, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
+	    
+	    $tqu = $ut->getNextQuestion(0);
+	    $dq = $tqu->loadQuestion($this->qs);
+	    $this->assertEquals(3218, $dq->getQueId());
+	    $cattitle = $dq->getCategoryTitle();
+	    $this->assertEquals("road-junctions", $cattitle);
+	}
+	
+	public function testNavigationDeepUgc() {
+	    $ut = new UserTest(1);
+	    $ut->createTest(101, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
+	    
+	    $tqu = $ut->getNextQuestion(0);
+	    $dq = $tqu->loadQuestion($this->qs);
+	    $this->assertEquals(11002, $dq->getQueId());
+	    $cattitle = $dq->getCategoryTitle();
+	    $this->assertEquals("user-generated", $cattitle);
 	}
 	
 	public function testAnswerQuestionCorrectly() {

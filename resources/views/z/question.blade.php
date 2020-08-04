@@ -113,7 +113,7 @@ $(function(){
 	@endif
 	@php ($qi = $dq->getDisplayQuestionAsked()->getQuestionImage())
 	@if ($qi != null)
-		<div class="image-container"><img class="img-fluid" src="/img/{!! $qi->getGrfFileName() !!}" /></div>
+		<div class="image-container"><img class="img-fluid" src="/storage/img/{!! $qi->getGrfFileName() !!}" /></div>
 		<div class="zebra-image-bottom"></div>
 	@endif
 
@@ -166,7 +166,7 @@ $(function(){
 						</strong>
 			      		<div class="feature-image">  		 
 							<a href="javascript:doAnswerQuestion('{!! $dqa->getAltId() !!}');">
-								<img class="img-fluid" src="/img/{!! $qii->getGrfFileName() !!}" />
+								<img class="img-fluid" src="/storage/img/{!! $qii->getGrfFileName() !!}" />
 							</a>	
 						</div>
 					</div>

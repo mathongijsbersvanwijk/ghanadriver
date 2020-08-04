@@ -31,7 +31,7 @@ CREATE TABLE `articles` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `articles` (
 
 LOCK TABLES `articles` WRITE;
 /*!40000 ALTER TABLE `articles` DISABLE KEYS */;
-INSERT INTO `articles` VALUES (1,'general','SA.html',0,'2018-10-21 08:15:14','2018-10-21 08:15:14',NULL),(2,'defensive-driving','SB.html',0,'2018-10-21 08:15:14','2018-10-21 08:15:14',NULL),(3,'emergency','SC.html',0,'2018-10-21 08:15:14','2018-10-21 08:15:14',NULL),(4,'lines-and-lanes','SD.html',0,'2018-10-21 08:15:14','2018-10-21 08:15:14',NULL),(5,'overtaking','SE.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(6,'road-junctions','SF.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(7,'roundabouts','SG.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(8,'reversing','SH.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(9,'lights','SI.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(10,'waiting-and-parking','SJ.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(11,'warning-signs','SW.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(12,'prohibitory-signs','SP.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(13,'mandatory-signs','SM.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(14,'informatory-signs','SX.html',0,'2018-10-21 08:15:16','2018-10-21 08:15:16',NULL),(15,'vertical-signalling','C1.html',0,'2018-10-21 08:15:16','2018-10-21 08:15:16',NULL),(16,'breakdowns-and-accidents','TB.html',0,'2018-10-21 06:15:14','2018-10-21 06:15:14',NULL),(17,'motorways','TM.html',0,'2018-10-21 06:15:14','2018-10-21 06:15:14',NULL),(18,'railway-level-crossings','TR.html',0,'2018-10-21 06:15:14','2018-10-21 06:15:14',NULL),(20,'contents','Version2015.html',0,'2018-10-21 08:15:16','2018-10-21 08:15:16',NULL);
+INSERT INTO `articles` VALUES (1,'general','SA.html',0,'2018-10-21 08:15:14','2018-10-21 08:15:14',NULL),(2,'defensive-driving','SB.html',0,'2018-10-21 08:15:14','2018-10-21 08:15:14',NULL),(3,'emergency','SC.html',0,'2018-10-21 08:15:14','2018-10-21 08:15:14',NULL),(4,'lines-and-lanes','SD.html',0,'2018-10-21 08:15:14','2018-10-21 08:15:14',NULL),(5,'overtaking','SE.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(6,'road-junctions','SF.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(7,'roundabouts','SG.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(8,'reversing','SH.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(9,'lights','SI.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(10,'waiting-and-parking','SJ.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(11,'warning-signs','SW.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(12,'prohibitory-signs','SP.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(13,'mandatory-signs','SM.html',0,'2018-10-21 08:15:15','2018-10-21 08:15:15',NULL),(14,'informatory-signs','SX.html',0,'2018-10-21 08:15:16','2018-10-21 08:15:16',NULL),(15,'vertical-signalling','C1.html',0,'2018-10-21 08:15:16','2018-10-21 08:15:16',NULL),(16,'breakdowns-and-accidents','TB.html',0,'2018-10-21 06:15:14','2018-10-21 06:15:14',NULL),(17,'motorways','TM.html',0,'2018-10-21 06:15:14','2018-10-21 06:15:14',NULL),(18,'railway-level-crossings','TR.html',0,'2018-10-21 06:15:14','2018-10-21 06:15:14',NULL),(20,'contents','Version2015.html',0,'2018-10-21 08:15:16','2018-10-21 08:15:16',NULL),(21,'user-generated','SA.html',0,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL);
 /*!40000 ALTER TABLE `articles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1331,7 +1331,7 @@ CREATE TABLE `quagga_test` (
 
 LOCK TABLES `quagga_test` WRITE;
 /*!40000 ALTER TABLE `quagga_test` DISABLE KEYS */;
-INSERT INTO `quagga_test` VALUES (1,0,'T','GhanaDriver test 1',10,9,NULL,1,NULL,NULL),(2,0,'T','GhanaDriver test 2',10,9,NULL,1,NULL,NULL),(3,9310,'T','Ghana profile',10,9,NULL,1,NULL,NULL),(4,9410,'T','Cameroon profile',10,9,NULL,1,NULL,NULL),(101,0,'T','my test',10,9,NULL,2,'2020-07-08 09:11:30','2020-07-08 09:12:19');
+INSERT INTO `quagga_test` VALUES (1,0,'T','GhanaDriver test 1',10,9,NULL,1,NULL,NULL),(2,0,'T','GhanaDriver test 2',10,9,NULL,1,NULL,NULL),(3,9310,'T','Ghana profile',10,9,NULL,1,NULL,NULL),(4,9410,'T','Cameroon profile',10,9,NULL,1,NULL,NULL),(101,0,'T','My first test',2,1,NULL,2,'2020-07-08 09:11:30','2020-07-08 09:12:19');
 /*!40000 ALTER TABLE `quagga_test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1590,4 +1590,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-02 15:27:01
+-- Dump completed on 2020-08-04 22:28:58

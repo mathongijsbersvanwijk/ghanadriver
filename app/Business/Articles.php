@@ -2,7 +2,6 @@
 namespace App\Business;
 
 use App\Services\ArticleService;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 
 class Articles {
@@ -25,8 +24,3 @@ class Articles {
 		return $this->arts->where('title', $title);
 	}
 }	
-
-
-
-
-

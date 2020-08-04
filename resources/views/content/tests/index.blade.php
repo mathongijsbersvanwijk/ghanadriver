@@ -10,7 +10,7 @@
     @foreach($ltst as $tst)
     <div class="row">
     	<div class="col-sm-10">
-       	   	{!! $tst->tst_description !!} ({!! $tst->questions_count !!} questions)
+       	   	{!! $tst->tst_description !!} ({!! $tst->tst_count_tqu !!} questions)
     	</div>
     	<div class="col-sm-2">
 		    <a class="btn btn-primary" href="{{ route('tests.edit', ['test' => $tst->id]) }}" role="button">Edit</a>

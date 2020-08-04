@@ -2,7 +2,7 @@
     <div class="card-body">
         <h5>Ghana Highway Code</h5>
         <ul>
-        	<li><a href="/z/booknav/general">Roundabouts</a></li>
+        	<li><a href="/z/booknav/general">General</a></li>
         	<li><a href="/z/booknav/defensive-driving">Defensive driving</a></li>
         	<li><a href="/z/booknav/emergency">Emergency</a></li>
         	<li><a href="/z/booknav/lines-and-lanes">Lines and lanes</a></li>

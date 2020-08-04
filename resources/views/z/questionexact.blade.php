@@ -91,7 +91,7 @@ function doAnswerQuestion(alt) {
 						</strong>
 			      		<div class="feature-image">  		 
 							<a href="javascript:doAnswerQuestion('{!! $dqa->getAltId() !!}');">
-								<img class="img-fluid" src="/img/{!! $qii->getGrfFileName() !!}" />
+								<img class="img-fluid" src="/storage/img/{!! $qii->getGrfFileName() !!}" />
 							</a>	
 						</div>
 					</div>
