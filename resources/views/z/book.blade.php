@@ -59,6 +59,7 @@
 			    @default
 			        <span>Something went wrong, please try again</span>
 			@endswitch
+			<a class="btn btn-primary" href="{{ route('render', ['id' => 0, 'op' => 3]) }}" role="button">Back to your test</a>
 		</div>
 	</div>
 </div>

@@ -62,7 +62,7 @@
 </div>
 @endsection
 
-@section('nav-rh')
+@section('nav-ridehailing')
 <div class="card">
     <div class="card-body">
         <a class="nav-link" href="/ridehailing">

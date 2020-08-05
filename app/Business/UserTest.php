@@ -216,5 +216,13 @@ class UserTest {
 		
 		return $cats;
 	}
+
+	public function getCountTestQuestions() {
+	    return $this->test->getTcf()->tst_count_tqu;
+	}
+	
+	public function getCountMinSuccess() {
+	    return $this->test->getTcf()->tst_count_min_success;
+	}
 }	
 

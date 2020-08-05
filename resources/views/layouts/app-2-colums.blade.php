@@ -31,55 +31,18 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                    <!-- Left side of navbar -->
                     <ul class="navbar-nav mr-auto">
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
+                    <!-- Middle of navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
 							<a href="https://www.facebook.com/GhanaDriver-280709168700063/"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('render', ['id' => 0, 'op' => 3]) }}">Your test</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('ridehailing') }}">Ride hailing</a>
-                        </li>
-                        <!-- li class="nav-item">
-                            <a class="nav-link" href="{{ route('dvla') }}">DVLA</a>
-                        </li -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                    @if(Auth::user()->role->id > 1)
-                                        <a class="dropdown-item" href="{{ route('tests.index') }}">Your own tests</a>
-                                        <a class="dropdown-item" href="{{ route('questions.index') }}">Your own questions</a>
-                                    @else
-                                        <a class="dropdown-item" href="{{ route('admin.questions.index') }}">Status questions</a>
-                                    @endif
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+
+					@include('layouts.nav')
                 </div>
             </div>
         </nav>
@@ -101,9 +64,9 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-						@include('z.nav')
+						@include('z.navbook')
                         &nbsp;
-			            @yield('nav-rh')
+			            @yield('nav-ridehailing')
                     </div>
                 </div>
             </div>

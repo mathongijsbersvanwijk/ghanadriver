@@ -5,15 +5,15 @@
 	<h1>Your session has expired, please </h1><a href="/testyourself">Start again</a>
 @endif
 @php if ($ut == null) return; @endphp	
-@php if ($ut == null) return; @endphp	
 @php ($correctAnswers = $ut->getCountAnswers()[0])
 @php ($wrongAnswers = $ut->getCountAnswers()[1])
+@php ($minCorrect = $ut->getCountMinSuccess())
 
 <audio id="successSound" src="/mp3/success.mp3" preload="auto"></audio>
 <audio id="failureSound" src="/mp3/failure.mp3" preload="auto"></audio>
 
 <script>
-@if ($correctAnswers > 8) {
+@if ($correctAnswers >= $minCorrect) {
 	document.getElementById('successSound').play();
 @else 
 	document.getElementById('failureSound').play();
@@ -21,8 +21,8 @@
 </script>
 
 <div class="container">
-	<div class="{!! $correctAnswers > 8 ? 'success' : 'fault' !!}">
-		<h2>{!! $correctAnswers > 8 ? 'Great, you did it!' : 'Sorry, not yet done' !!}</h2>
+	<div class="{!! $correctAnswers >= $minCorrect ? 'success' : 'fault' !!}">
+		<h2>{!! $correctAnswers >= $minCorrect ? 'Great, you did it!' : 'Sorry, not yet done' !!}</h2>
 	</div>
 
 	<div class="row">
@@ -39,7 +39,7 @@
 				</tr>
 		        <tr>
 					<td>Not answered:</td>
-					<td width="20" align="right"><strong>{!! 10 - $correctAnswers - $wrongAnswers !!}</strong></td>
+					<td width="20" align="right"><strong>{!! $ut->getCountTestQuestions() - $correctAnswers - $wrongAnswers !!}</strong></td>
 				</tr>
 		        <tr>
 					<td colspan="2"><hr/></td>
