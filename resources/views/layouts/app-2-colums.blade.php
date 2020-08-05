@@ -19,9 +19,11 @@
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Scripts -->
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v8.0&appId=200685819943351&autoLogAppEvents=1" nonce="eruJCcAe"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
+    <div id="fb-root"></div>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">

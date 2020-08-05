@@ -57,6 +57,11 @@
         			@endswitch
         		</div>
         	</div>
+        	<div class="row">
+        		<div class="col-sm-12">
+					<div class="fb-like" data-href="http://ghanadriver.com" data-width="" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
+	        	</div>
+        	</div>
         </div>
     </div>
 </div>
