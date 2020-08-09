@@ -69,7 +69,7 @@ Dropzone.options.photo = {
                 if (file.size > 100000) {
                     file.toobig(100); 
                 } else {                
-                    if (file.width < 640 || file.height < 480 || file.size == 0) {
+                    if (file.width < 384 || file.height < 256 || file.size == 0) {
                         file.rejectDimensions();
                     } else {
                         file.acceptDimensions();

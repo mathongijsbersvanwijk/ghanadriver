@@ -10,6 +10,7 @@ use App\Support\Helpers\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Exception;
 
 class TestUgcController extends Controller
@@ -27,7 +28,10 @@ class TestUgcController extends Controller
     }
     
     public function create(Request $request, QuestionService $qs) {
-        $ldq = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
+        $ldqall = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
+        $ldq = $ldqall->filter(function ($dq, $key) {
+            return $dq->getStatus() == "APPROVED";
+        });
         $dqidarr = [];
         $request->session()->put('ldq', $ldq);
         
@@ -77,7 +81,10 @@ class TestUgcController extends Controller
     }
     
     public function edit(Request $request, TestConfiguration $test, QuestionService $qs) {
-        $ldq = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
+        $ldqall = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
+        $ldq = $ldqall->filter(function ($dq, $key) {
+            return $dq->getStatus() == "APPROVED";
+        });
         $dqidarr = Utils::queidArray($test->questions);
         $request->session()->put('ldq', $ldq);
         

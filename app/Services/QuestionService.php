@@ -277,6 +277,8 @@ class QuestionService {
 	            $qalt->save();
 	        }
 	    });
+
+	    return $que;
 	}
 	
 	private function deleteAlternatives($queId) {

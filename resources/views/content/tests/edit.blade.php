@@ -43,7 +43,7 @@
     @endforeach
     <div class="row">
         <div class="col-sm-12">
-            <img align="left" src="/art/success.png" />&nbsp;&nbsp;So when will people succeed for your test? 
+            <img align="left" src="/art/success.png" />&nbsp;&nbsp;So when do people succeed for your test? 
             When no more than 1 question has been answered wrongly. So if your test contains 5 questions, then at least 4 questions must be answered correctly.
         </div>
     </div>

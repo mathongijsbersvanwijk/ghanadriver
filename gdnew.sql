@@ -1568,7 +1568,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `users_role_id_foreign` (`role_id`),
   CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1577,7 +1577,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,1,'Dr. Demond O\'Kon','sierra.brown@example.org','2020-05-03 07:52:05','$2y$10$BFzsynE/t9KWscMfu3YuKeZ7qclHhS/m1duPxoauGkKGuUJBAVpNy','+3006742234154','JQgxhDvupdNI8stOD3OGHxVSOhnsbiG8bprdHad0RF7QNoxgJjEWA5J60d8M','2020-05-03 07:52:05','2020-05-03 07:52:05'),(2,2,'Mathon','mathon@xs4all.nl',NULL,'$2y$10$TaUkRZdjEksqDaTOyfed4.YBpsj23Mb/nJZ4Yd4ZZ3XJDEPvsd1y2','0123412345','rmVpU1zwNKRhxGPgTTjUl9emwotnguli39tEAP1ZkrlGOlW5Z0vx2HsfCSxf','2020-05-05 06:12:42','2020-05-05 06:12:42');
+INSERT INTO `users` VALUES (1,1,'Admin','zebraverkeer@gmail.com',NULL,'$2y$10$5WtVdiOrEl2d.lxNoBAjk.A3qi5KFisncqFDXGAGJ1qeq/7GSzhY2','0454512345',NULL,'2020-08-09 07:15:16','2020-08-09 07:15:16'),(2,2,'Mathon','mathon@xs4all.nl',NULL,'$2y$10$TaUkRZdjEksqDaTOyfed4.YBpsj23Mb/nJZ4Yd4ZZ3XJDEPvsd1y2','0123412345','rmVpU1zwNKRhxGPgTTjUl9emwotnguli39tEAP1ZkrlGOlW5Z0vx2HsfCSxf','2020-05-05 06:12:42','2020-05-05 06:12:42');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1590,4 +1590,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-05 11:01:16
+-- Dump completed on 2020-08-09 11:19:03

@@ -3,7 +3,9 @@ namespace App\Http\Controllers;
 
 use App\Business\DisplayQuestion;
 use App\Business\DisplayQuestionAlternative;
+use App\Mail\QuestionUploaded;
 use App\Models\Question;
+use App\Models\User;
 use App\Services\ImageService;
 use App\Services\QuestionService;
 use App\Support\Helpers\QuestionToolkit;
@@ -11,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Exception;
 
 class QuestionUgcController extends Controller
@@ -62,6 +65,9 @@ class QuestionUgcController extends Controller
         $request->session()->put('que', $que);
         
         $is->save($photo, $que->que_id);
+        
+        $this->notifyAdmin($que, "created", $qt->getTekContents(), null);
+        
         // return is void, because redirect is done on complete event in create.blade.php
         // return response()->json(['success'=>$imageName]);
     }
@@ -133,6 +139,9 @@ class QuestionUgcController extends Controller
         $request->session()->put('que', $que);
         
         $is->save($photo, $que->que_id);
+        
+        $this->notifyAdmin($que, "updated photo", null, public_path('storage/img/'.$queId."_".$photo->getClientOriginalname()));
+        
         // return is void, because redirect is done on complete event in editphoto.blade.php
     }
     
@@ -169,12 +178,19 @@ class QuestionUgcController extends Controller
             $i++;
         }
         
-        $qs->updateText($queId, $qt, $ldqalt, Auth::user());
+        $que = $qs->updateText($queId, $qt, $ldqalt, Auth::user());
+        
+        $this->notifyAdmin($que, "updated text", $qt->getTekContents(), null);
         
         return redirect('/z/render/'.$queId.'/5');
     }
         
     public function destroy(Question $question) {
         //
+    }
+
+    private function notifyAdmin(Question $question, $action, $asked, $pathToPhoto) {
+        $admin = User::findOrFail(1);
+        Mail::to($admin)->send(new QuestionUploaded($question, $action, $asked, $pathToPhoto));
     }
 }
