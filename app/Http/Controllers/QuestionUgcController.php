@@ -66,7 +66,7 @@ class QuestionUgcController extends Controller
         
         $is->save($photo, $que->que_id);
         
-        $this->notifyAdmin($que, "created", $qt->getTekContents(), null);
+        $this->notifyAdmin($que, "created", $qt->getTekContents(), public_path('storage/img/'.$que->que_id."_".$photo->getClientOriginalname()));
         
         // return is void, because redirect is done on complete event in create.blade.php
         // return response()->json(['success'=>$imageName]);

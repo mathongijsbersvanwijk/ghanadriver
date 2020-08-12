@@ -6,14 +6,17 @@
     </div>
     <div class="row">
     	<div class="col-sm-12">
-    		<h4><a href="{{ route('admin.questions.show', ['id' => $id]) }}">See the question</a></h4>
+    		<h4><a href="{{ route('admin.questions.show', ['id' => $id]) }}">Approve or reject question</a></h4>
     	</div>
-    	<div class="col-sm-12">
-  			@if ($asked != null)
-				{!! $asked !!}  				
-  			@else
+		@if ($asked != null)
+	    	<div class="col-sm-12">
+				<p>{!! $id !!}. {!! $asked !!}<p>  				
+			</div>
+		@endif
+		@if ($pathToPhoto != null)
+			<div class="col-sm-12">
   			   <img src="{{ $message->embed($pathToPhoto) }}">
-  			@endif
-    	</div>
+			</div>
+		@endif
     </div>
 </div>

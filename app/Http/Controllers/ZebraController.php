@@ -11,8 +11,9 @@ use App\Services\TestConfigurationService;
 use App\Services\TestQuestionService;
 use App\Services\UserTestResultService;
 use App\Support\Helpers\WebConstants;
-use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class ZebraController extends Controller
 {
@@ -21,8 +22,8 @@ class ZebraController extends Controller
         $tstId = $request->input('tstId');
         $op = $request->input('op');
         $mode = $request->input('mode');
-
-        $userId = $request->session()->getId();
+        
+        $userId = Auth::user() == null ? $request->session()->getId() : Auth::user()->id;
         $ut = new UserTest($userId);
 
         $ut->createTest($tstId, $op, $mode, $tcfs, $pcs, $qs, $tqs);

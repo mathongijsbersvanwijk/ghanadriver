@@ -1,9 +1,9 @@
 <!-- Right side of navbar -->
 <ul class="navbar-nav ml-auto">
     <!-- Authentication Links -->
-    <li class="nav-item">
+    <!-- li class="nav-item">
         <a class="nav-link" href="{{ route('tests.all') }}">Custom tests</a>
-    </li>
+    </li -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('ridehailing') }}">Ride hailing</a>
     </li>
@@ -28,11 +28,13 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
-                @if(Auth::user()->role->id > 1)
+                @if(Auth::user()->role->id == 2)
                     <a class="dropdown-item" href="{{ route('questions.index') }}">Your own questions</a>
                     <a class="dropdown-item" href="{{ route('tests.index') }}">Your own tests</a>
                 @else
-                    <a class="dropdown-item" href="{{ route('admin.questions.index') }}">Status questions</a>
+                    @if(Auth::user()->role->id == 1)
+                        <a class="dropdown-item" href="{{ route('admin.questions.index') }}">Status questions</a>
+                    @endif
                 @endif
             </div>
         </li>
