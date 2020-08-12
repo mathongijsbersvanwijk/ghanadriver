@@ -13,7 +13,7 @@ class TestQuestionServiceTest extends TestCase {
 	}
 	
 	public function  testFindByTest() {
-		$tqus = $this->tqs->findByTest(102);
+		$tqus = $this->tqs->findByTest(2);
 		$this->assertEquals(10, sizeof($tqus));
 	}
 }

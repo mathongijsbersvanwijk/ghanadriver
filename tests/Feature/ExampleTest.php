@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ExampleTest extends TestCase
 {
@@ -14,6 +14,10 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
+        $user = new User(['id' => 1, 'name' => 'Mathon']);
+        echo $user;
+        echo $user->name;
+        
         $response = $this->get('/');
 
         $response->assertStatus(200);

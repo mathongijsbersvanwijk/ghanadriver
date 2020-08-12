@@ -11,7 +11,7 @@ use App\Services\QuestionService;
 class ProfiledTest extends Test {
 
 	public function __construct($tstId, TestConfigurationService $tcfs, ProfileCategoryService $pcs, QuestionService $qs) {
-		$this->tcf = $tcfs->find(['companyId' => 10131, 'tst_id' => $tstId]);
+	    $this->tcf = $tcfs->find($tstId);
 		$this->makeTest($pcs, $qs);
 	}
 

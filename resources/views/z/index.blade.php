@@ -25,7 +25,7 @@
         		<div class="col-sm-6">
         			<form name="fm1" method="post" action="/z/start" class="form-horizontal">
         					@csrf
-        					<input type="hidden" name="tstId" value="103">
+        					<input type="hidden" name="tstId" value="3">
         					<input type="hidden" name="op" value="2">
         					<input type="hidden" name="mode" value="1">
         					<input type="submit" value="Start training" class="btn btn-primary">
@@ -33,7 +33,7 @@
         			<p>Feedback is given, click for next question (or previous), GHC summary is available</p>
         			<form name="fm2" method="post" action="/z/start" class="horizontal nel">
         					@csrf
-        					<input type="hidden" name="tstId" value="103">
+        					<input type="hidden" name="tstId" value="3">
         					<input type="hidden" name="op" value="2">
         					<input type="hidden" name="mode" value="2">
         					<input type="submit" value="Start examination" class="btn btn-primary">
@@ -57,12 +57,17 @@
         			@endswitch
         		</div>
         	</div>
+        	<div class="row">
+        		<div class="col-sm-12">
+					<div class="fb-like" data-href="http://ghanadriver.com" data-width="" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
+	        	</div>
+        	</div>
         </div>
     </div>
 </div>
 @endsection
 
-@section('nav-rh')
+@section('nav-ridehailing')
 <div class="card">
     <div class="card-body">
         <a class="nav-link" href="/ridehailing">

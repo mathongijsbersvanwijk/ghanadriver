@@ -28,13 +28,13 @@ class UserTstTest extends TestCase {
 	public function testCreatePredefined() {
 		$ut = new UserTest(1);
 		// predefined test
-		$ut->createTest(102, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
+		$ut->createTest(2, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
 		$this->assertNotNull($ut);
 	}
 	
 	public function testNavigationShallow() {
 		$ut = new UserTest(1);
-		$ut->createTest(102, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
+		$ut->createTest(2, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
 		
 		$tqu = $ut->getNextQuestion(0);
 		$this->assertEquals(1, $ut->getCurrentTquid());
@@ -73,17 +73,30 @@ class UserTstTest extends TestCase {
 	}
 		
 	public function testNavigationDeep() {
-		$ut = new UserTest(1);
-		$ut->createTest(102, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
-		
-		$tqu = $ut->getNextQuestion(0);
-		$dq = $tqu->loadQuestion($this->qs);
-		$this->assertEquals(3218, $dq->getQueId());
+	    $ut = new UserTest(1);
+	    $ut->createTest(2, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
+	    
+	    $tqu = $ut->getNextQuestion(0);
+	    $dq = $tqu->loadQuestion($this->qs);
+	    $this->assertEquals(3218, $dq->getQueId());
+	    $cattitle = $dq->getCategoryTitle();
+	    $this->assertEquals("road-junctions", $cattitle);
+	}
+	
+	public function testNavigationDeepUgc() {
+	    $ut = new UserTest(1);
+	    $ut->createTest(101, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
+	    
+	    $tqu = $ut->getNextQuestion(0);
+	    $dq = $tqu->loadQuestion($this->qs);
+	    $this->assertEquals(11002, $dq->getQueId());
+	    $cattitle = $dq->getCategoryTitle();
+	    $this->assertEquals("user-generated", $cattitle);
 	}
 	
 	public function testAnswerQuestionCorrectly() {
 		$ut = new UserTest(1);
-		$ut->createTest(102, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
+		$ut->createTest(2, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
 
 		$tqu = $ut->getNextQuestion(3);
 		$dq = $tqu->loadQuestion($this->qs);
@@ -102,7 +115,7 @@ class UserTstTest extends TestCase {
 	
 	public function testAnswerQuestionWrongly() {
 		$ut = new UserTest(1);
-		$ut->createTest(102, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
+		$ut->createTest(2, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
 		
 		$tqu = $ut->getNextQuestion(4);
 		$dq = $tqu->loadQuestion($this->qs);
@@ -118,7 +131,7 @@ class UserTstTest extends TestCase {
 	
 	public function testAnswerQuestionNull() {
 		$ut = new UserTest(1);
-		$ut->createTest(102, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
+		$ut->createTest(2, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
 		
 		$tqu = $ut->getNextQuestion(1);
 		$dq = $tqu->loadQuestion($this->qs);
@@ -130,7 +143,7 @@ class UserTstTest extends TestCase {
 	
 	public function testCountAnswers() {
 		$ut = new UserTest(1);
-		$ut->createTest(102, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
+		$ut->createTest(2, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
 		
 		$tqu = $ut->getNextQuestion(3);
 		$dq = $tqu->loadQuestion($this->qs);
@@ -163,7 +176,7 @@ class UserTstTest extends TestCase {
 		
 	public function testStop() {
 		$ut = new UserTest(1);
-		$ut->createTest(102, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
+		$ut->createTest(2, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
 		
 		$tqu = $ut->getNextQuestion(3);
 		$dq = $tqu->loadQuestion($this->qs);
@@ -186,7 +199,7 @@ class UserTstTest extends TestCase {
 
 	public function testFaultsOnly() {
 		$ut = new UserTest(1);
-		$ut->createTest(102, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
+		$ut->createTest(2, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
 		
 		$tqu = $ut->getNextQuestion(2);
 		$dq = $tqu->loadQuestion($this->qs);
@@ -219,7 +232,7 @@ class UserTstTest extends TestCase {
 
 	public function testGetCategoriesFaultAnswers() {
 		$ut = new UserTest(1);
-		$ut->createTest(102, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
+		$ut->createTest(2, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
 		
 		$tqu = $ut->getNextQuestion(4);
 		$dq = $tqu->loadQuestion($this->qs);

@@ -19,61 +19,32 @@
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Scripts -->
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v8.0&appId=200685819943351&autoLogAppEvents=1" nonce="eruJCcAe"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
+    <div id="fb-root"></div>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-		        <a class="navbar-brand" href="#"><img src='/vendor/landing-page/img/gdlogo.jpg' style='width: 300px' /></a>
+		        <a class="navbar-brand" href="/"><img src='/vendor/landing-page/img/gdlogo.jpg' style='width: 300px' /></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                    <!-- Left side of navbar -->
                     <ul class="navbar-nav mr-auto">
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
+                    <!-- Middle of navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
 							<a href="https://www.facebook.com/GhanaDriver-280709168700063/"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('render', ['id' => 0, 'op' => 3]) }}">Your test</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('ridehailing') }}">Ride hailing</a>
-                        </li>
-                        <!-- li class="nav-item">
-                            <a class="nav-link" href="{{ route('dvla') }}">DVLA</a>
-                        </li -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+
+					@include('layouts.nav')
                 </div>
             </div>
         </nav>
@@ -95,9 +66,9 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-						@include('z.nav')
+						@include('z.navbook')
                         &nbsp;
-			            @yield('nav-rh')
+			            @yield('nav-ridehailing')
                     </div>
                 </div>
             </div>

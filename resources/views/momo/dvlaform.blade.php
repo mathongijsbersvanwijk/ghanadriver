@@ -59,11 +59,11 @@
 				<label for="service_type" class="col-sm-2 col-form-label">Service type</label>
 				<div class="col-sm-10">
                     <input class="@error('service_type') is-invalid @enderror" type="radio" name="service_type" id="none" 
-                    	value="" style="display:none" {{ old('service_type') ? 'checked' : ''}}>
+                    	value="" style="display:none" {{ old('service_type') ? 'checked' : ''}} />
 					@foreach (App\Support\Constants::SERVICE_TYPE as $st) 
                         <div class="form-check form-check-inline">
                             <input class="form-check-input @error('service_type') is-invalid @enderror" type="radio" 
-                              	name="service_type" id="{{ $st }}" value="{{ $st }}" {{ $st == old('service_type') ? 'checked' : ''}}>
+                              	name="service_type" id="{{ $st }}" value="{{ $st }}" {{ $st == old('service_type') ? 'checked' : ''}} />
                             <label class="form-check-label" for="{{ $st }}">{{ $st }}</label>
                         </div>
 					@endforeach
@@ -78,11 +78,11 @@
 				<label for="payment_option" class="col-sm-2 col-form-label">Payment option</label>
 				<div class="col-sm-10">
                     <input class="@error('payment_option') is-invalid @enderror" type="radio" name="payment_option" id="none" 
-                    	value="" style="display:none" {{ old('payment_option') ? 'checked' : ''}}>
+                    	value="" style="display:none" {{ old('payment_option') ? 'checked' : ''}} />
 					@foreach (App\Support\Constants::PAYMENT_OPTION as $po) 
                         <div class="form-check form-check-inline">
                             <input class="form-check-input @error('payment_option') is-invalid @enderror" type="radio" 
-                              	name="payment_option" id="{{ $po }}" value="{{ $po }}" {{ $po == old('payment_option') ? 'checked' : ''}}>
+                              	name="payment_option" id="{{ $po }}" value="{{ $po }}" {{ $po == old('payment_option') ? 'checked' : ''}} />
                             <label class="form-check-label" for="{{ $po }}">{{ $po == 'MTN_MOMO' ? 'MTN MoMo' : 'Cash' }}</label>
                         </div>
 					@endforeach

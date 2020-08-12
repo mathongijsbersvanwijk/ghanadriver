@@ -20,7 +20,7 @@ class ProfiledTstTest extends TestCase {
 	}
 	
 	public function  testGenerate() {
-		$pt = new ProfiledTest(103, $this->tcfs, $this->pcs, $this->qs);
+		$pt = new ProfiledTest(3, $this->tcfs, $this->pcs, $this->qs);
 		$this->assertNotNull($pt);
 		$this->assertEquals(10, sizeof($pt->getQueIds()));
 	}

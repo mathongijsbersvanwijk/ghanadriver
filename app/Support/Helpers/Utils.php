@@ -11,12 +11,27 @@ class Utils {
 	}
 	
 	public static function idArray($items) {
-		$a = array();
-		foreach ($items as $item) {
-			array_push($a, $item->id);
-			// better $a[] = $item->id;
-		}
-		return $a;
+	    $a = array();
+	    foreach ($items as $item) {
+	        $a[] = $item->id;
+	    }
+	    return $a;
+	}
+	
+	public static function queidArray($items) {
+	    $a = array();
+	    foreach ($items as $item) {
+	        $a[] = $item->question_id;
+	    }
+	    return $a;
+	}
+	
+	public static function medidArray($items) {
+	    $a = array();
+	    foreach ($items as $item) {
+	        $a[] = $item->med_id;
+	    }
+	    return $a;
 	}
 	
 	public static function uriToArray($uri) {

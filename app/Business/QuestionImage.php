@@ -6,10 +6,6 @@ class QuestionImage {
 	protected $medType;
 	protected $grfFileName;
 
-	//protected $table = 'quagga_graphic';
-    //protected $primaryKey = array('med_id', 'med_type');
-    //protected $fillable = ['med_id', 'med_type', 'grf_code', 'grf_filename'];
-
 	/**
 	 * @return mixed
 	 */

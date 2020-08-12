@@ -131,7 +131,7 @@ return [
 
     'custom' => [
         'telephone' => [
-            'numeric' => 'The mobile number must be 10 digits (starting with 0)',
+            'numeric' => 'The mobile number must be numeric',
             'digits' => 'The mobile number must be 10 digits (starting with 0)',
         ],
     ],

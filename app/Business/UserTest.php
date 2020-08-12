@@ -42,7 +42,7 @@ class UserTest {
 
 	public function stopTest(UserTestResultService $utrs) {
 		$this->countAnwers();
-		$this->utr = $utrs->saveUserTestResult($this->utr, $this->userId, $this->test->getTcf()->tst_id, $this->test->getTcf()->pro_id, 
+		$this->utr = $utrs->saveUserTestResult($this->utr, $this->userId, $this->test->getTcf()->id, $this->test->getTcf()->pro_id, 
 				$this->countAnswers[0], $this->mode);
 	}
 
@@ -215,6 +215,14 @@ class UserTest {
 		}
 		
 		return $cats;
+	}
+
+	public function getCountTestQuestions() {
+	    return $this->test->getTcf()->tst_count_tqu;
+	}
+	
+	public function getCountMinSuccess() {
+	    return $this->test->getTcf()->tst_count_min_success;
 	}
 }	
 

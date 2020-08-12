@@ -8,7 +8,7 @@ class ArticleServiceTest extends TestCase {
   	public function test1() {
   		$a = App::make('articles');
   		$articles = $a->getAll();
-  		$this->assertEquals(19, sizeof($articles));
+  		$this->assertEquals(20, sizeof($articles));
  	}
  	
  	public function test2() {

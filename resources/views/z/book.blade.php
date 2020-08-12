@@ -53,9 +53,13 @@
 			    @case(20)
 					@include('z.theory.VERSION2015')
 			        @break
+			    @case(21)
+					@include('z.theory.SA')
+			        @break
 			    @default
 			        <span>Something went wrong, please try again</span>
 			@endswitch
+			<a class="btn btn-primary" href="{{ route('render', ['id' => 0, 'op' => 3]) }}" role="button">Back to your test</a>
 		</div>
 	</div>
 </div>

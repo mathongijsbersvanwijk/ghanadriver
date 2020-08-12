@@ -140,3 +140,115 @@ body {
     color: #3B5998;
     margin-bottom: 4px;
 }
+.asked-feedback #asked-error {
+	font-weight: 700;
+}
+.alternative-feedback #alternative-error {
+	font-weight: 700;
+}
+.input-feedback {
+    color: #ff0000;
+	font-weight: 700;
+	outline: 2px solid red;
+}    
+.form-feedback {
+    color: #ff0000;
+	font-weight: 700;
+}    
+.entry:not(:first-of-type) {
+    margin-top: 10px;
+}
+.dropzone {
+    margin-left: 16px;
+    min-height: 100px;
+}
+.dz-progress {
+	display: none;
+}
+.dropzone .dz-preview .dz-error-message {
+	top: 144px;
+	left: -30px;
+	width: 180px;
+}
+.dropzone .dz-preview .dz-error-message::after {
+	top: -6px;
+	left: 80px;
+}
+.dropzone .dz-message .dz-button {
+	background-color: rgb(16, 40, 18);
+	border-bottom-color: rgb(16, 40, 18);
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-image-outset: 0;
+	border-image-repeat: stretch;
+	border-image-slice: 100%;
+	border-image-source: none;
+	border-image-width: 1;
+	border-left-color: rgb(16, 40, 18);
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-color: rgb(16, 40, 18);
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-color: rgb(16, 40, 18);
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	box-sizing: border-box;
+	color: rgb(255, 255, 255);
+	cursor: pointer;
+	display: inline-block;
+	font-family: Nunito, sans-serif;
+	font-size: 14.4px;
+	font-weight: 400;
+	line-height: 23.0333px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	overflow: visible;
+	overflow-wrap: break-word;
+	overflow-x: visible;
+	overflow-y: visible;
+	padding-bottom: 6px;
+	padding-left: 12px;
+	padding-right: 12px;
+	padding-top: 6px;
+	text-align: center;
+	text-transform: none;
+	transition-delay: 0s, 0s, 0s, 0s;
+	transition-duration: 0.15s, 0.15s, 0.15s, 0.15s;
+	transition-property: color, background-color, border-color, box-shadow;
+	transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+}
+.gdtip {
+	position: relative;
+	display: inline-block;
+}
+.gdtip .gdtiptext {
+	visibility: hidden;
+	width: 80px;
+	background-color: rgb(16, 40, 18);
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	
+	/* Position the gdtip */
+	position: absolute;
+	z-index: 1;
+	top: 34px;
+	left: 24px;
+}
+.gdtip:hover .gdtiptext {
+	visibility: visible;
+}
+#draggablePanelList .panel-heading {
+	cursor: move;
+}
+#draggablePanelList2 .panel-heading {
+	cursor: move;
+}

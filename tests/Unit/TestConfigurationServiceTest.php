@@ -12,9 +12,16 @@ class TestConfigurationServiceTest extends TestCase {
 		$this->tcfs = new TestConfigurationService;	
  	}
 	
-	public function  testFind() {
-		$tcf = $this->tcfs->find(['companyId' => 10131, 'tst_id' => 103]);
+ 	public function  testFindByTstId() {
+	    $tcf = $this->tcfs->find(3);
 		$this->assertNotNull($tcf);
 		echo $tcf->tst_description.PHP_EOL;
+	}
+
+	public function  testFindQuestions() {
+	    $tcf = $this->tcfs->find(2);
+	    $this->assertNotNull($tcf);
+	    $this->assertEquals(10, sizeof($tcf->questions));
+	    echo $tcf->tst_description.PHP_EOL;
 	}
 }
