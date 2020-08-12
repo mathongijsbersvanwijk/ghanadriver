@@ -37,7 +37,7 @@ class QuestionServiceUgcTest extends TestCase {
     	
     	$que = $this->qs->saveQuestion($qt, $qi, $ldqalt, new User(['id' => 1])) ;
 	    $this->assertEquals(1003, $que->id);
-	    $this->assertEquals(10003, $que->que_id);
+	    $this->assertEquals(11003, $que->que_id);
 	    
 	    $dq = QuestionToolkit::getDisplayQuestionById($que->que_id, $this->qs);
 	    $dqask = $dq->getDisplayQuestionAsked();
