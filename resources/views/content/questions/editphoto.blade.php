@@ -66,7 +66,7 @@ Dropzone.options.photo = {
 
         this.on('thumbnail', function(file) {
             if (file.accepted !== false) {
-                if (file.size > 5000000) {
+                if (file.size > 8000000) {
                     file.toobig(8); // Mb
                 } else {                
                     if (file.width < 384 || file.height < 256 || file.size == 0) {
