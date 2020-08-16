@@ -66,7 +66,7 @@ Dropzone.options.photo = {
 
         this.on('thumbnail', function(file) {
             if (file.accepted !== false) {
-                if (file.size > 100000) {
+                if (file.size > 5000000) {
                     file.toobig(8); // Mb
                 } else {                
                     if (file.width < 384 || file.height < 256 || file.size == 0) {
@@ -102,7 +102,8 @@ Dropzone.options.photo = {
         	done("The image must be at least 384px x 256px")
         };
         file.toobig = function(max) {
-        	done("File is too big: " + file.size / 1000000 + "Mb, max filesize is " + max + " Mb")
+        	siz = Math.round((file.size / 1000000 + Number.EPSILON) * 100) / 100;
+        	done("File is too big: " + siz + " Mb, max filesize is " + max + " Mb")
         };
     }
 }

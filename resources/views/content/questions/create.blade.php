@@ -140,7 +140,8 @@ Dropzone.options.photo = {
         	done("The image must be at least 384px x 256px")
         };
         file.toobig = function(max) {
-        	done("File is too big: " + file.size / 1000000 + "Mb, max filesize is " + max + " Mb")
+        	siz = Math.round((file.size / 1000000 + Number.EPSILON) * 100) / 100;
+        	done("File is too big: " + siz + " Mb, max filesize is " + max + " Mb")
         };
     }
 }
