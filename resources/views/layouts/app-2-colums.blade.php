@@ -75,7 +75,7 @@
         </main>
     	<footer class="footer">
     		<div class="span12 text-center">
-		    	&copy; 2020 GhanaDriver.com
+		    	&copy; 2020 GhanaDriver.com&nbsp;&nbsp;&nbsp;<a href="/privacypolicy">Privacy Policy</a>
 	    	</div>
         </footer>
     </div>
