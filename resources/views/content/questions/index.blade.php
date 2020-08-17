@@ -23,9 +23,10 @@
         	@endif
     	</div>
     	<div class="col-sm-8 gdtip">
-    		<a href="/z/render/{!! $dq->getQueId() !!}/5" alt="Check your question" title="Check your question">
+       	   	<p style="margin-top: 5px">{!! $asked !!}</p>
+    		<!-- a href="/z/render/{!! $dq->getQueId() !!}/5" alt="Check your question" title="Check your question">
 	       	   	<p style="margin-top: 5px">{!! $asked !!}</p>
-  			</a>
+  			</a -->
     	</div>
     	<div class="col-sm-2 gdtip">
 		    <a class="btn btn-primary" href="/questions/{!! $dq->getQueId() !!}/edittext" role="button">Edit text</a>

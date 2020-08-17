@@ -18,13 +18,15 @@
         <div class="col-sm-12">
         <form id="fm" role="form" action="" enctype="multipart/form-data" method="put" autocomplete="off">
 			<input type="hidden" name="queid" value="{{ $dq->getQueId() ?? '' }}" >
+			<input type="hidden" name="askedmedid" value="{!! $askedmedid !!}">
             <div class="form-group row">
-                <div class="col-sm-12">
-					<input type="hidden" name="askedmedid" value="{!! $askedmedid !!}">
-	                <div class="dropzone col-sm-6" id="photo" name="photo"></div>
-	                <div class="pl-3 pt-3">Below is your current (old) photo</div>
- 	            	<img class="img-fluid p-3" src="/storage/img/{!! $photoFileName !!}"/>
-                </div>
+                <div class="dropzone" id="photo" name="photo"></div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12">Below is your current (old) photo</div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12"><img class="img-fluid" src="/storage/img/{!! $photoFileName !!}"/></div>
             </div>
             <div class="form-feedback"><p></p></div>
             <button type="submit" id="submit" class="btn btn-primary">Save</button>
