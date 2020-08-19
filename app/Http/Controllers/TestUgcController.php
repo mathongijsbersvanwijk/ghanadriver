@@ -100,7 +100,9 @@ class TestUgcController extends Controller
         return redirect()->route('tests.index');
     }
     
-    public function destroy(TestConfiguration $testConfiguration) {
-        //
+    public function destroy(TestConfiguration $test, TestConfigurationService $tcfs) {
+        $tcfs->delete($test);
+        
+        return redirect()->back()->with('message', 'Your test has been deleted');
     }
 }

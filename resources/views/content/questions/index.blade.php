@@ -7,6 +7,13 @@
             <h3>Your own questions</h3>
         </div>
     </div>
+	@if (sizeof($ldq) == 0)
+    <div class="row">
+    	<div class="col-sm-12">
+    		<p class="text-info">You do not have any questions yet<p>
+	    </div>
+    </div>
+	@endif
     @foreach($ldq as $dq)
     @php ($asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents())
     @php ($qi = $dq->getDisplayQuestionAsked()->getQuestionImage())
@@ -22,11 +29,14 @@
 	       	   	<p style="margin-top: 5px">Text only</p>
         	@endif
     	</div>
-    	<div class="col-sm-8 gdtip">
+    	<div class="col-sm-6 gdtip">
        	   	<p style="margin-top: 5px">{!! $asked !!}</p>
     		<!-- a href="/z/render/{!! $dq->getQueId() !!}/5" alt="Check your question" title="Check your question">
 	       	   	<p style="margin-top: 5px">{!! $asked !!}</p>
   			</a -->
+    	</div>
+    	<div class="col-sm-2 gdtip">
+       	   	<p style="margin-top: 5px">{!! $dq->getStatus() !!}</p>
     	</div>
     	<div class="col-sm-2 gdtip">
 		    <a class="btn btn-primary" href="/questions/{!! $dq->getQueId() !!}/edittext" role="button">Edit text</a>

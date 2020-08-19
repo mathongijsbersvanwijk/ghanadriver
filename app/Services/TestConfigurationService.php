@@ -65,4 +65,9 @@ class TestConfigurationService {
         
 	    return $tcf;
 	}
+
+	public function delete($test) {
+	    $test->questions()->delete();
+	    $test->delete();
+	}
 }

@@ -21,6 +21,13 @@
             <h5>Choose questions to go into your test</h5>
         </div>
     </div>
+	@if (sizeof($ldq) == 0)
+    <div class="row">
+    	<div class="col-sm-12">
+    		<p class="text-info">You do not have any approved questions yet. Upload questions <a href="{{ route('questions.index') }}">here</a> or wait for approval<p>
+	    </div>
+    </div>
+	@endif
     @foreach($ldq as $dq)
     @php ($dqid = $dq->getId())
     @php ($asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents())
