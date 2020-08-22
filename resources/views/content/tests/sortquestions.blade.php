@@ -10,7 +10,6 @@
 <div class="row">
   <div class="col-sm-12">
     <form action="{{ $id == 0 ? route('tests.store') : route('tests.update', ['test' => $id]) }}" method="post">
-    <div id="sortable" class="ui-sortable collection">   
     @csrf
 	<input name="id" type="hidden" value="{!! $id !!}" />
 	@if ($id > 0)
@@ -27,6 +26,7 @@
             <h5>Click a question, then drag and drop it downward or upward</h5>
         </div>
     </div>
+    <div id="sortable" class="ui-sortable collection">   
     @foreach($ldqchosen as $dq)
     @php ($dqid = $dq->getId())
     @php ($asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents())
