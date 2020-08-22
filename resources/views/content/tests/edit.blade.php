@@ -11,9 +11,10 @@
 	@csrf
 	<input name="id" type="hidden" value="{!! isset($test) ? $test->id : 0 !!}" />
 	<div class="form-group row">
-		<label for="desc" class="col-sm-2 col-form-label">Description</label>
-		<div class="col-sm-10">
-			<input type="text" class="form-control" id="desc" name="desc" value="{!! isset($test) ? $test->tst_description : '' !!}" />
+		<label for="desc" class="col-sm-1 col-form-label">Name</label>
+		<div class="col-sm-11">
+			<input type="text" class="form-control" 
+				id="desc" name="desc" value="{!! isset($test) ? $test->tst_description : '' !!}" placeholder="for example: Abena's test"/>
 		</div>
 	</div>
     <div class="row">
@@ -64,6 +65,21 @@
 @section('script')
 <script>
 $(function() {
+    $('#fm input[type="text"]').focus(function() {
+        if($(this).val() == "Please enter a name for your test") {
+            $(this).val('');
+        }
+	    formFeedback("");
+    });    
+
+    $('#fm input[type="text"]').blur(function() {
+        if(!$(this).val()) {
+            $(this).val("Please enter a name for your test").addClass('input-feedback');
+        } else{
+            $(this).removeClass('input-feedback');
+        }
+    });    
+
     $('#fm').submit(function () {
         if (!formIsValid()) {
             return false;
@@ -71,8 +87,12 @@ $(function() {
     });
 });
 function formIsValid() {
+    if (!$('#desc').val() || $('#desc').val() == "Please enter a name for your test") {
+    	formFeedback("Please enter a name for your test");
+		return false;
+    }
+	
 	var atLeastOneIsChecked = $('input:checkbox').is(':checked');
-	  
     if (!atLeastOneIsChecked) {
     	formFeedback("At least 1 question should be included");
 		return false;

@@ -30,6 +30,7 @@
             </div>
             <div class="form-feedback"><p></p></div>
             <button type="submit" id="submit" class="btn btn-primary">Save</button>
+            <div class="form-onemoment"><p></p></div>
         </form>
         </div>
     </div>
@@ -89,6 +90,7 @@ Dropzone.options.photo = {
  
         // send all the form data along with the files:
         this.on('sending', function(data, xhr, formData) {
+        	oneMoment();
             var form = JSON.stringify($('#fm').serializeArray());
             formData.append('fm', form);
             //formData.append('asked', jQuery('#asked').val());
@@ -101,11 +103,11 @@ Dropzone.options.photo = {
     accept: function(file, done) {
         file.acceptDimensions = done;
         file.rejectDimensions = function() {
-        	done("The image must be at least 384px x 256px")
+        	done("Image must be at least 384px x 256px")
         };
         file.toobig = function(max) {
         	siz = Math.round((file.size / 1000000 + Number.EPSILON) * 100) / 100;
-        	done("File is too big: " + siz + " Mb, max filesize is " + max + " Mb")
+        	done("Image is too big: " + siz + " Mb, max filesize is " + max + " Mb")
         };
     }
 }
@@ -125,6 +127,10 @@ function formFeedback(message) {
     } else {
     	$('div.form-feedback').hide();
     }
+}
+function oneMoment() {
+    $('div.form-onemoment p').html("One moment please ...");
+    $('div.form-onemoment').show();
 }
 </script>
 @endsection
