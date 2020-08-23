@@ -30,7 +30,7 @@ class AdminController extends Controller
         $que = $qs->update($request->all());
 
         if ($request->input('status') == "REJECTED") {
-            $dq = QuestionToolkit::getDisplayQuestionById($que->id, $qs);
+            $dq = QuestionToolkit::getDisplayQuestionById($que->que_id, $qs);
             $asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents();
             $pathToPhoto = public_path('storage/img/'.$dq->getDisplayQuestionAsked()->getQuestionImage()->getGrfFileName());
             
