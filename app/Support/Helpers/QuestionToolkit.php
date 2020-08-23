@@ -44,6 +44,7 @@ class QuestionToolkit {
                     $dq = new DisplayQuestion($loa[$i]->que_id);
                     $dq->setId($loa[$i]->id);
                     $dq->setStatus($loa[$i]->status);
+                    $dq->setReason($loa[$i]->reason);
                     $ldq->push($dq);
                 }
                 

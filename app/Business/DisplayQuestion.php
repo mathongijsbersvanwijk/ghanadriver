@@ -13,6 +13,7 @@ class DisplayQuestion {
 	private $ldqalt;
 	private $cattitle;
 	private $status;
+	private $reason;
 	
     public function __construct($queId) {
 		$this->queId = $queId;
@@ -79,6 +80,14 @@ class DisplayQuestion {
 	
 	public function setStatus($status) {
 	    $this->status = $status;
+	}
+	
+	public function getReason() {
+	    return $this->reason;
+	}
+	
+	public function setReason($reason) {
+	    $this->reason = $reason;
 	}
 	
 /* 	public static function getArticleByCategory($catId) {

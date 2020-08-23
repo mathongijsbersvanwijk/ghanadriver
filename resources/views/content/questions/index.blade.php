@@ -43,7 +43,15 @@
     	</div>
 		<div>&nbsp;</div>
     </div>
+	@if ($dq->getStatus() == 'REJECTED')
+    <div class="row">
+    	<div class="col-sm-12">
+            <img align="left" src="/art/error.png" />&nbsp;&nbsp;Reason for rejection: {!! $dq->getReason() !!}
+    	</div>
+    </div>
+	@endif
     @endforeach
+    <hr/>
     <div class="row">
         <div class="col-sm-12">
             <img align="left" src="/art/success.png" />&nbsp;&nbsp;When you are done (even one question is fine) you can put your questions in a test <a href="{{ route('tests.index') }}">HERE</a>.

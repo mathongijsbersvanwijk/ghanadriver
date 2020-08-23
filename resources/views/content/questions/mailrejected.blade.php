@@ -21,5 +21,8 @@
     	<div class="col-sm-12">
     		<h4><a href="{{ route('questions.index') }}">See your questions</a></h4>
     	</div>
+    	<div class="col-sm-12">
+    		<p>Kind regards, GhanaDriver</p>
+    	</div>
     </div>
 </div>

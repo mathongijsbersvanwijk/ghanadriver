@@ -95,7 +95,7 @@ class QuestionService {
 
 	public function findQuestionAskedArtifactsByUser($userId) {
 	    $loa = DB::select(DB::raw(
-	        "SELECT q.id, q.status, pp.que_id, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
+	        "SELECT q.id, q.status, q.reason, pp.que_id, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
 	        "FROM quagga_question q " .
 	        "LEFT JOIN quagga_pose_part pp ON q.que_id = pp.que_id " .
 	        "LEFT JOIN quagga_tekst tk ON pp.med_id = tk.med_id " .
@@ -108,7 +108,7 @@ class QuestionService {
 	
 	public function findQuestionAskedArtifactsByStatus($status) {
 	    $loa = DB::select(DB::raw(
-	        "SELECT q.id, q.status, pp.que_id, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
+	        "SELECT q.id, q.status, q.reason, pp.que_id, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
 	        "FROM quagga_question q " .
 	        "LEFT JOIN quagga_pose_part pp ON q.que_id = pp.que_id " .
 	        "LEFT JOIN quagga_tekst tk ON pp.med_id = tk.med_id " .
@@ -218,6 +218,7 @@ class QuestionService {
 	    $que = new Question();
 	    $que->exists = true;
 	    $que->id = $untypedArr['id'];
+	    $que->que_id = $untypedArr['que_id'];
 	    $que->status = $untypedArr['status'];
 	    $que->reason = $untypedArr['reason'];
 	    $que->save();

@@ -49,6 +49,7 @@
 		<div>&nbsp;</div>
     </div>
     @endforeach
+    <hr/>
     <div class="row">
         <div class="col-sm-12">
             <img align="left" src="/art/success.png" />&nbsp;&nbsp;So when do people succeed for your test? 
