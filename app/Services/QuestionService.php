@@ -221,6 +221,8 @@ class QuestionService {
 	    $que->status = $untypedArr['status'];
 	    $que->reason = $untypedArr['reason'];
 	    $que->save();
+	    
+	    return $que;
 	}
 	
 	public function updatePhoto($queId, $qi, $user) {

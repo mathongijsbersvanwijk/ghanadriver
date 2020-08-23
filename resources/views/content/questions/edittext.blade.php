@@ -12,7 +12,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h3>Update your question text or possible answers below</h3>
+            <h3>Update your question text or multiple choice answers below</h3>
         </div>
     </div>
     <div class="row">
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-sm-12">Give the possible multiple choice answers and indicate the correct one with the orange radio-button (press <span class="fa fa-plus gs"></span> to add more options)</div>
+                <div class="col-sm-12">Give the multiple choice answers (for the public to choose from) and indicate the correct one with the orange radio-button (press <span class="fa fa-plus gs"></span> to add more options)</div>
             </div>
             <div class="form-group row controls">
    				@php ($i = 0)

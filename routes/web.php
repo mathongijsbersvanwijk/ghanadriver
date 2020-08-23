@@ -3,9 +3,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/ridehailing', 'HomeController@ridehailing')->name('ridehailing');
+Route::get('/createyourown', 'HomeController@createyourown')->name('createyourown');
 Route::get('/dvla', 'HomeController@dvla')->name('dvla');
 Route::get('/privacypolicy', 'HomeController@privacypolicy')->name('privacypolicy');
+Route::get('/ridehailing', 'HomeController@ridehailing')->name('ridehailing');
 Route::get('/tests/all','TestUgcController@all')->name('tests.all');
 
 Route::post('/z/start', 'ZebraController@starttest')->name('start');

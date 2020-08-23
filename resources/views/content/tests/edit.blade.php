@@ -11,8 +11,8 @@
 	@csrf
 	<input name="id" type="hidden" value="{!! isset($test) ? $test->id : 0 !!}" />
 	<div class="form-group row">
-		<label for="desc" class="col-sm-1 col-form-label">Name</label>
-		<div class="col-sm-11">
+		<label for="desc" class="col-sm-2 col-form-label">Name</label>
+		<div class="col-sm-10">
 			<input type="text" class="form-control" 
 				id="desc" name="desc" value="{!! isset($test) ? $test->tst_description : '' !!}" placeholder="for example: Abena's test"/>
 		</div>
@@ -25,7 +25,7 @@
 	@if (sizeof($ldq) == 0)
     <div class="row">
     	<div class="col-sm-12">
-    		<p class="text-info">You do not have any approved questions yet. Upload questions <a href="{{ route('questions.index') }}">here</a> or wait for approval<p>
+    		<p class="text-info">You do not have any approved questions yet. Upload questions <a href="{{ route('questions.index') }}">HERE</a> or wait for approval<p>
 	    </div>
     </div>
 	@endif

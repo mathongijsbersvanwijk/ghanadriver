@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-sm-12">Give the possible multiple choice answers and indicate the correct one with the orange radio-button (press <span class="fa fa-plus gs"></span> to add more options)</div>
+                <div class="col-sm-12">Give the multiple choice answers (for the public to choose from) and indicate the correct one with the orange radio-button (press <span class="fa fa-plus gs"></span> to add more options)</div>
             </div>
             <div class="form-group row controls"> 
                 <div class="entry input-group col-sm-12">

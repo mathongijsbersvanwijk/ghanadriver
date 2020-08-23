@@ -21,17 +21,13 @@
 	@endif
     @foreach($ltst as $tst)
     <div class="row">
-    	<div class="col-sm-9">
+    	<div class="col-sm-8">
        	   	{!! $tst->tst_description !!} ({!! $tst->tst_count_tqu !!} questions)
     	</div>
-    	<div class="col-sm-1 mb-1">
-		    <a class="btn btn-primary" href="{{ route('tests.edit', ['test' => $tst->id]) }}" role="button">Edit</a>
+    	<div class="col-sm-4 mb-1">
+		    <a class="btn btn-primary mb-1 mr-1" href="{{ route('tests.edit', ['test' => $tst->id]) }}" role="button">Edit</a>
+		    <a class="btn btn-danger mb-1" href="javascript:deleteTest({!! $tst->id !!})" role="button">Delete ...</a>
     	</div>
-
-    	<div class="col-sm-2 mb-1">
-		    <a class="btn btn-danger" href="javascript:deleteTest({!! $tst->id !!})" role="button">Delete ...</a>
-    	</div>
-		<div>&nbsp;</div>
     </div>
     <form action="{{ route('tests.destroy', $tst->id) }}" method="POST" id="del-test-{!! $tst->id !!}" style="display:none;">
         @csrf

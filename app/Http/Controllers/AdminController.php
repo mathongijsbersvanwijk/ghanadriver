@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Business\UserTestQuestion;
+use App\Mail\QuestionRejected;
+use App\Models\Question;
+use App\Models\User;
 use App\Services\QuestionService;
 use App\Support\Helpers\QuestionToolkit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -23,8 +27,21 @@ class AdminController extends Controller
     }
     
     public function updatestatus(Request $request, QuestionService $qs) {
-        $qs->update($request->all());
+        $que = $qs->update($request->all());
+
+        if ($request->input('status') == "REJECTED") {
+            $dq = QuestionToolkit::getDisplayQuestionById($que->id, $qs);
+            $asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents();
+            $pathToPhoto = public_path('storage/img/'.$dq->getDisplayQuestionAsked()->getQuestionImage()->getGrfFileName());
+            
+            $this->notifyUser($que, $que->reason, $asked, $pathToPhoto);
+        }
         
         return redirect()->route('admin.questions.index');
+    }
+
+    private function notifyUser(Question $question, $reason, $asked, $pathToPhoto) {
+        $user = $question->owner;
+        Mail::to($user)->send(new QuestionRejected($question, $reason, $asked, $pathToPhoto));
     }
 }

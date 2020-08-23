@@ -44,6 +44,12 @@
 		<div>&nbsp;</div>
     </div>
     @endforeach
+    <div class="row">
+        <div class="col-sm-12">
+            <img align="left" src="/art/success.png" />&nbsp;&nbsp;When you are done (even one question is fine) you can put your questions in a test <a href="{{ route('tests.index') }}">HERE</a>.
+        </div>
+    </div>
+    <br/>
     <a class="btn btn-primary" href="{{ route('questions.create') }}" role="button">Create your question</a>
 </div>
 @endsection

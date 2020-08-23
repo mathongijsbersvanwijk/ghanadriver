@@ -7,15 +7,19 @@ class HomeController extends Controller
         return view('z.index');
     }
 
-    public function ridehailing() {
-        return view('home.ridehailing');
+    public function createyourown() {
+        return view('home.createyourown');
     }
-
+    
     public function dvla() {
         return view('home.dvla');
     }
-
+    
     public function privacypolicy() {
         return view('home.privacypolicy');
+    }
+
+    public function ridehailing() {
+        return view('home.ridehailing');
     }
 }
