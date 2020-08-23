@@ -48,6 +48,7 @@
     	<div class="col-sm-12">
             <img align="left" src="/art/error.png" />&nbsp;&nbsp;Reason for rejection: {!! $dq->getReason() !!}
     	</div>
+		<div>&nbsp;</div>
     </div>
 	@endif
     @endforeach
