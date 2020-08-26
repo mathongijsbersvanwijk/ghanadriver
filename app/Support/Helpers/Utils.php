@@ -26,6 +26,14 @@ class Utils {
 	    return $a;
 	}
 	
+	public static function testidArray($items) {
+	    $a = array();
+	    foreach ($items as $item) {
+	        $a[] = $item->test_id;
+	    }
+	    return $a;
+	}
+	
 	public static function medidArray($items) {
 	    $a = array();
 	    foreach ($items as $item) {

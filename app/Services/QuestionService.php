@@ -229,7 +229,7 @@ class QuestionService {
 	public function updatePhoto($queId, $qi, $user) {
 	    $que = $this->findByQueId($queId);
 	    if ($user != $que->owner) {
-	        throw new Exception("no permission");
+	        throw new Exception("permission denied");
 	    }
 	    DB::transaction(function () use ($que, $qi, $user) {
 	        $que->status = 'UPLOADED';
@@ -249,7 +249,7 @@ class QuestionService {
 	public function updateText($queId, $qt, $ldqalt, $user) {
 	    $que = $this->findByQueId($queId);
 	    if ($user != $que->owner) {
-	        throw new Exception("no permission");
+	        throw new Exception("permission denied");
 	    }
 	    DB::transaction(function () use ($que, $qt, $ldqalt, $user) {
 	        $que->status = 'UPLOADED';

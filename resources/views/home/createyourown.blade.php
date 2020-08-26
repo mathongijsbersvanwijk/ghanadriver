@@ -30,9 +30,9 @@
     <br/>
 	<div class="row">
 		<div class="col-sm-12">
-			<img class="img-fluid" src="/img/dvla.jpg">&nbsp;&nbsp;
-			<img class="img-fluid" src="/img/nrsc.jpg">&nbsp;&nbsp;
-			<img class="img-fluid" src="/img/nrsa.jpg">
+			<img class="img-fluid mb-2" src="/img/dvla.jpg">
+			<img class="img-fluid mb-2" src="/img/nrsc.jpg">
+			<img class="img-fluid mb-2" src="/img/nrsa.jpg">
 		</div>
 	</div>
 </div>

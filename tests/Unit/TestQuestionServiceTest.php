@@ -12,8 +12,8 @@ class TestQuestionServiceTest extends TestCase {
 		$this->tqs = new TestQuestionService();
 	}
 	
-	public function  testFindByTest() {
-		$tqus = $this->tqs->findByTest(2);
+	public function testFindByTest() {
+		$tqus = $this->tqs->findByTest(1);
 		$this->assertEquals(10, sizeof($tqus));
 	}
 }

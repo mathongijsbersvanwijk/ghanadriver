@@ -13,9 +13,9 @@ class TestQuestionService {
 	}
 
 	public function findByTest($tst_id) {
-		return TestQuestion::where('test_id', $tst_id)->get();
+	    return TestQuestion::where('test_id', $tst_id)->get();
 	}
-
+	
 // 	public function save($untypedArr) {
 // 		$tq = new TestQuestion();
 // 		$tq->tst_id = $untypedArr['tst_id'];
