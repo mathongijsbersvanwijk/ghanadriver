@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Exceptions\NoPermissionException;
 use App\Models\Categorization;
 use App\Models\Category;
 use App\Models\Question;
@@ -11,7 +12,6 @@ use App\Models\QuestionTextResource;
 use App\Support\Helpers\Utils;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Exception;
 
 class QuestionService {
 	public function findAll() {
@@ -229,7 +229,7 @@ class QuestionService {
 	public function updatePhoto($queId, $qi, $user) {
 	    $que = $this->findByQueId($queId);
 	    if ($user != $que->owner) {
-	        throw new Exception("permission denied");
+	        throw new NoPermissionException();
 	    }
 	    DB::transaction(function () use ($que, $qi, $user) {
 	        $que->status = 'UPLOADED';
@@ -249,7 +249,7 @@ class QuestionService {
 	public function updateText($queId, $qt, $ldqalt, $user) {
 	    $que = $this->findByQueId($queId);
 	    if ($user != $que->owner) {
-	        throw new Exception("permission denied");
+	        throw new NoPermissionException();
 	    }
 	    DB::transaction(function () use ($que, $qt, $ldqalt, $user) {
 	        $que->status = 'UPLOADED';

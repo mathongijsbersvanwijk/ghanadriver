@@ -76,7 +76,7 @@ class QuestionUgcController extends Controller
         $que = $request->session()->get('que');
         
         if ($que == null) {
-            return view('errors.app')->withErrors(["something-wrong"=>"Something went wrong!"]);
+            return view('errors.app')->withErrors("something went wrong");
         }
         
         return redirect('/z/render/'.$que->que_id.'/5');

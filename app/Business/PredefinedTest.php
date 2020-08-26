@@ -17,7 +17,9 @@ class PredefinedTest extends Test {
 		$lqueIds = new Collection();
 		$ltqu = $tqs->findByTest($this->tcf->id); 
 		foreach ($ltqu as $tqu) {
-		    $lqueIds->push($tqu->que_id);
+		    if ($tqu->refersToQuestion->status == 'APPROVED') {
+		        $lqueIds->push($tqu->que_id);
+		    }
 		}
 		$this->queIds = Utils::itemsArray($lqueIds);
 		//dd($this->queIds);

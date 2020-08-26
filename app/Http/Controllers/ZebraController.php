@@ -3,7 +3,9 @@ namespace App\Http\Controllers;
 
 use App\Business\UserTest;
 use App\Business\UserTestQuestion;
+use App\Exceptions\NoPermissionException;
 use App\Exceptions\RedoFaultsNotPossibleException;
+use App\Models\Question;
 use App\Services\ArticleService;
 use App\Services\ProfileCategoryService;
 use App\Services\QuestionService;
@@ -44,7 +46,7 @@ class ZebraController extends Controller
         if ($ut != null) {
             // answer current
             if ($altId > 0) {
-                $utq = $ut->answerQuestion($tquId, $altId);
+                $ut->answerQuestion($tquId, $altId);
             }
             // redirect
             if ($op == WebConstants::STOP_TEST) {
@@ -84,7 +86,11 @@ class ZebraController extends Controller
 
     public function render(Request $request, $id, $op, $page = WebConstants::QUESTION_PAGE) {
         if ($op == WebConstants::EXACT_QUESTION) {
-            $utq = new UserTestQuestion($id);
+            $que = Question::where('que_id', $id)->first();
+            $utq = new UserTestQuestion($que->que_id);
+            if (Auth::user() == null || (Auth::user() != $que->owner && Auth::user()->role->id != 1)) {
+                throw new NoPermissionException();
+            }
             return view('z.questionexact', compact('utq'));
         }
         

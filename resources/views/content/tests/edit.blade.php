@@ -19,7 +19,7 @@
 	</div>
     <div class="row">
         <div class="col-sm-12">
-            <h5>Choose questions to go into your test</h5>
+            <h5>Choose questions (only approved are shown) to go into your test</h5>
         </div>
     </div>
 	@if (sizeof($ldq) == 0)
@@ -56,7 +56,12 @@
             When no more than 1 question has been answered wrongly. So if your test contains 5 questions, then at least 4 questions must be answered correctly.
         </div>
     </div>
-    <br/>
+    <hr/>
+    <div class="row">
+        <div class="col-sm-12">
+            <img align="left" src="/art/success.png" />&nbsp;&nbsp;If you need to update a question, go <a href="{{ route('questions.index') }}">HERE</a>.
+        </div>
+    </div>
     <div class="form-feedback"><p></p></div>
     <button type="submit" class="btn btn-primary">Save and sort</button>
     </form>

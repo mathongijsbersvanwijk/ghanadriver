@@ -55,7 +55,7 @@
     <hr/>
     <div class="row">
         <div class="col-sm-12">
-            <img align="left" src="/art/success.png" />&nbsp;&nbsp;When you are done (even one question is fine) you can put your questions in a test <a href="{{ route('tests.index') }}">HERE</a>.
+            <img align="left" src="/art/success.png" />&nbsp;&nbsp;When you are done (even one question is fine) you can put your APPROVED questions in a test <a href="{{ route('tests.index') }}">HERE</a>.
         </div>
     </div>
     <br/>
