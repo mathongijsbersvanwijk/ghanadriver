@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\TestConfiguration;
 use App\Services\QuestionService;
 use App\Services\TestConfigurationService;
+use App\Services\UserTestResultService;
 use App\Support\Helpers\QuestionToolkit;
 use App\Support\Helpers\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Exception;
 
 class TestUgcController extends Controller
@@ -19,6 +19,12 @@ class TestUgcController extends Controller
         $ltst = $tcfs->findAllPredefined();
         
         return view('content.tests.run', compact('ltst'));
+    }
+    
+    public function results(UserTestResultService $utrs) {
+        $lcutr = $utrs->countResultsPerTest();
+        
+        return view('content.tests.results', compact('lcutr'));
     }
     
     public function index(TestConfigurationService $tcfs) {

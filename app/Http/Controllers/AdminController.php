@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Business\UserTestQuestion;
 use App\Mail\QuestionRejected;
 use App\Models\Question;
-use App\Models\User;
 use App\Services\QuestionService;
+use App\Services\TestConfigurationService;
 use App\Support\Helpers\QuestionToolkit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -26,9 +26,12 @@ class AdminController extends Controller
         return view('z.questionexact', compact('utq', 'que'));
     }
     
-    public function updatestatus(Request $request, QuestionService $qs) {
+    public function updatestatus(Request $request, QuestionService $qs, TestConfigurationService $tcfs) {
         $que = $qs->update($request->all());
-
+        if ($que->status == "APPROVED") {
+            $tcfs->correctTotalInTestsWithQuestion($que->id, true);
+        }
+            
         if ($request->input('status') == "REJECTED") {
             $dq = QuestionToolkit::getDisplayQuestionById($que->que_id, $qs);
             $asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents();

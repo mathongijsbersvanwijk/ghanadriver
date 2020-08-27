@@ -8,6 +8,7 @@ Route::get('/dvla', 'HomeController@dvla')->name('dvla');
 Route::get('/privacypolicy', 'HomeController@privacypolicy')->name('privacypolicy');
 Route::get('/ridehailing', 'HomeController@ridehailing')->name('ridehailing');
 Route::get('/tests/all','TestUgcController@all')->name('tests.all');
+Route::get('/tests/results','TestUgcController@results')->name('tests.results');
 
 Route::post('/z/start', 'ZebraController@starttest')->name('start');
 Route::post('/z/question', 'ZebraController@answerQuestionAndProceed')->name('question');

@@ -101,7 +101,7 @@ class QuestionService {
 	        "LEFT JOIN quagga_tekst tk ON pp.med_id = tk.med_id " .
 	        "LEFT JOIN quagga_graphic grf ON pp.med_id = grf.med_id " .
 	        "WHERE q.user_id = ". $userId . " ORDER BY q.id, seq"
-	        ));
+	    ));
 	    
 	    return $loa;
 	}
@@ -114,7 +114,7 @@ class QuestionService {
 	        "LEFT JOIN quagga_tekst tk ON pp.med_id = tk.med_id " .
 	        "LEFT JOIN quagga_graphic grf ON pp.med_id = grf.med_id " .
 	        ($status != null ? "WHERE q.status = '". $status . "'" : "") . " ORDER BY q.id, seq"
-	        ));
+	    ));
 	    
 	    return $loa;
 	}

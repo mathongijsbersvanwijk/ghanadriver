@@ -93,18 +93,15 @@ class TestConfigurationService {
 	    return $tcf;
 	}
 
-	// NOT USED
-	public function removeUploadedQuestion($id) {
+	public function correctTotalInTestsWithQuestion($id, $increase) {
 	    $ltcf = $this->findAllByQuestion($id);
 	    foreach ($ltcf as $tcf) {
-	        $ltqu = $this->findApprovedQuestions($tcf->id);
-	        
-	        TestQuestion::where("test_id", $tcf->id)->delete();
-	        
-	        foreach ($tcf->questions as $tqu) {
-	            
+	        if ($increase) {
+	            $tcf->tst_count_tqu++;
+	        } else {
+	            $tcf->tst_count_tqu--;
 	        }
-	        $tcf->tst_count_tqu = 0;
+	        $tcf->save();
 	    }
 	}
 	

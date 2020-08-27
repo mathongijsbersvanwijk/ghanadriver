@@ -8,6 +8,7 @@ use App\Models\Question;
 use App\Models\User;
 use App\Services\ImageService;
 use App\Services\QuestionService;
+use App\Services\TestConfigurationService;
 use App\Support\Helpers\QuestionToolkit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -118,7 +119,7 @@ class QuestionUgcController extends Controller
         // implicit retrieval of question is done by Laravel
     }
 
-    public function updatephoto(Request $request, QuestionService $qs, ImageService $is) {
+    public function updatephoto(Request $request, QuestionService $qs, ImageService $is, TestConfigurationService $tcfs) {
         Log::info($request->input('fm'));
         
         $this->validate($request, [
@@ -136,6 +137,7 @@ class QuestionUgcController extends Controller
         $qi = QuestionToolkit::createImage($fmd[1]['value'], 'B', $photo->getClientOriginalname()); // $fmd[1]['name'] == 'askedmedid'
         
         $que = $qs->updatePhoto($queId, $qi, Auth::user());
+        $tcfs->correctTotalInTestsWithQuestion($que->id, false);
         $request->session()->put('que', $que);
         
         $is->save($photo, $que->que_id);
@@ -145,7 +147,7 @@ class QuestionUgcController extends Controller
         // return is void, because redirect is done on complete event in editphoto.blade.php
     }
     
-    public function updatetext(Request $request, QuestionService $qs) {
+    public function updatetext(Request $request, QuestionService $qs, TestConfigurationService $tcfs) {
         $this->validate($request, [
             'queid'             => 'required',
             'asked'             => 'required',
@@ -179,6 +181,7 @@ class QuestionUgcController extends Controller
         }
         
         $que = $qs->updateText($queId, $qt, $ldqalt, Auth::user());
+        $tcfs->correctTotalInTestsWithQuestion($que->id, false);
         
         $this->notifyAdmin($que, "updated text", $qt->getTekContents(), null);
         
