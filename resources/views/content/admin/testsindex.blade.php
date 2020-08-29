@@ -11,7 +11,7 @@
         <div class="col-sm-12">
 			<select id="status" name="status">
                 <option value="">all</option>
-                <option>UPLOADED</option>
+                <option>PENDING</option>
                 <option>APPROVED</option>
                 <option>REJECTED</option>
             </select>

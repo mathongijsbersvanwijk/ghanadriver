@@ -1,7 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h3>Question was rejected</h3>
+            <p>Hello,</p>
+            <p>We are sorry to inform you that your question was rejected.</p>
+    		<p>Kind regards, GhanaDriver</p>
         </div>
     </div>
     <div class="row">
@@ -20,9 +22,6 @@
 		@endif
     	<div class="col-sm-12">
     		<h4><a href="{{ route('questions.index') }}">See your questions</a></h4>
-    	</div>
-    	<div class="col-sm-12">
-    		<p>Kind regards, GhanaDriver</p>
     	</div>
     </div>
 </div>

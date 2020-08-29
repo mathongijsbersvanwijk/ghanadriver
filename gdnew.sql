@@ -1252,7 +1252,7 @@ DROP TABLE IF EXISTS `quagga_question`;
 CREATE TABLE `quagga_question` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `que_id` int(11) NOT NULL DEFAULT '0',
-  `status` enum('UPLOADED','APPROVED','REJECTED') NOT NULL DEFAULT 'APPROVED',
+  `status` enum('PENDING','APPROVED','REJECTED') NOT NULL DEFAULT 'APPROVED',
   `reason` varchar(255) DEFAULT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,

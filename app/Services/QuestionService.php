@@ -134,7 +134,7 @@ class QuestionService {
 	    DB::transaction(function () use ($que, $qi, $qt, $ldqalt, $user) {
 	        $maxQueId = DB::table('quagga_question')->max('que_id'); // should be > 11000
 	        $que->que_id = $maxQueId + 1;
-	        $que->status = 'UPLOADED';
+	        $que->status = 'PENDING';
 	        $que->owner()->associate($user);
 	        $que->save();
 	        
@@ -232,7 +232,7 @@ class QuestionService {
 	        throw new NoPermissionException();
 	    }
 	    DB::transaction(function () use ($que, $qi, $user) {
-	        $que->status = 'UPLOADED';
+	        $que->status = 'PENDING';
 	        $que->save();
 	        
 	        $qir = new QuestionImageResource();
@@ -252,7 +252,7 @@ class QuestionService {
 	        throw new NoPermissionException();
 	    }
 	    DB::transaction(function () use ($que, $qt, $ldqalt, $user) {
-	        $que->status = 'UPLOADED';
+	        $que->status = 'PENDING';
 	        $que->save();
 
 	        $qtr = new QuestionTextResource();

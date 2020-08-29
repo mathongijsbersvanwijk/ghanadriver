@@ -11,7 +11,7 @@ class Constants
     ];
     const PAYMENT_OPTION = ['MTN_MOMO','CASH',
     ];
-    const QUESTION_STATUS = ['UPLOADED','APPROVED', 'REJECTED',
+    const QUESTION_STATUS = ['PENDING','APPROVED', 'REJECTED',
     ];
 }
     

@@ -32,7 +32,7 @@ class QuestionUploaded extends Mailable
      * @return $this
      */
     public function build() {
-        return $this->view('content.admin.mail')->with(
+        return $this->view('content.admin.mailuploaded')->with(
             ['id' => $this->question->id,'asked' => $this->asked,'action' => $this->action, 'pathToPhoto' => $this->pathToPhoto
             ]);
     }

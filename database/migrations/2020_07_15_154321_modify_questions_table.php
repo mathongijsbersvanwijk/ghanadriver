@@ -13,7 +13,7 @@ class ModifyQuestionsTable extends Migration
      */
     public function up() {
         Schema::table('quagga_question', function ($table) {
-            $table->enum('status', ['UPLOADED', 'APPROVED', 'REJECTED'])->after('que_id')->default('APPROVED');
+            $table->enum('status', ['PENDING', 'APPROVED', 'REJECTED'])->after('que_id')->default('APPROVED');
             $table->string('reason')->after('status')->nullable();
             $table->dropColumn('que_help_url');
         });
