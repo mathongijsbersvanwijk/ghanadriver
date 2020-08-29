@@ -19,7 +19,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<p>For this you need to login. If you are not registered yet, you can <a href="{{ route('register') }}">Register here</a></p>
+			<p>For this you need to login as member. If you are not registered yet, you can <a href="{{ route('register') }}">Register here</a></p>
 		</div>
 	</div>
 	<div class="row">

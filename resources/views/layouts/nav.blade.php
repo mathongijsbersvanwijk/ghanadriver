@@ -1,11 +1,16 @@
 <!-- Right side of navbar -->
 <ul class="navbar-nav ml-auto">
-    <!-- Authentication Links -->
-    <!-- li class="nav-item">
-        <a class="nav-link" href="{{ route('tests.all') }}">Custom tests</a>
-    </li -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('ridehailing') }}">Ride hailing</a>
+        <a class="nav-link" href="{{ route('createyourown') }}">Create your own</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a id="testsDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            Members tests <span class="caret"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="testsDropdown">
+            <a class="dropdown-item" href="{{ route('tests.all') }}">Do a test</a>
+            <a class="dropdown-item" href="{{ route('tests.results') }}">Popularity</a>
+        </div>
     </li>
     <!-- li class="nav-item">
         <a class="nav-link" href="{{ route('dvla') }}">DVLA</a>
@@ -29,8 +34,8 @@
                     @csrf
                 </form>
                 @if(Auth::user()->role->id == 2)
-                    <a class="dropdown-item" href="{{ route('questions.index') }}">Your own questions</a>
-                    <a class="dropdown-item" href="{{ route('tests.index') }}">Your own tests</a>
+                    <a class="dropdown-item" href="{{ route('questions.index') }}">Questions I created</a>
+                    <a class="dropdown-item" href="{{ route('tests.index') }}">Tests I created</a>
                 @else
                     @if(Auth::user()->role->id == 1)
                         <a class="dropdown-item" href="{{ route('admin.questions.index') }}">Status questions</a>

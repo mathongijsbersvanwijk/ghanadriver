@@ -25,7 +25,7 @@
 	@if (sizeof($ldq) == 0)
     <div class="row">
     	<div class="col-sm-12">
-    		<p class="text-info">You do not have any approved questions yet. Upload questions <a href="{{ route('questions.index') }}">HERE</a> or wait for approval<p>
+    		<p class="text-info">You do not have any approved questions yet. Upload questions <a href="{{ route('questions.index') }}">HERE</a> or wait for approval.<p>
 	    </div>
     </div>
 	@endif

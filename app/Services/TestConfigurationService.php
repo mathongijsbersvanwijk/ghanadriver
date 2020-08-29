@@ -14,7 +14,7 @@ class TestConfigurationService {
 	}
 	
 	public function findAllPredefined() {
-	    return TestConfiguration::where('pro_id', 0)->get();
+	    return TestConfiguration::where('pro_id', 0)->where('tst_count_tqu', '>', 0)->get();
 	    //return TestConfiguration::where('pro_id', 0)->withCount('questions')->get();
 	}
 	

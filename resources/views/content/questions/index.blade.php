@@ -4,13 +4,13 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h3>Your own questions</h3>
+            <h3>Questions I created</h3>
         </div>
     </div>
 	@if (sizeof($ldq) == 0)
     <div class="row">
     	<div class="col-sm-12">
-    		<p class="text-info">You do not have any questions yet<p>
+    		<p class="text-info">You did not create any questions yet<p>
 	    </div>
     </div>
 	@endif

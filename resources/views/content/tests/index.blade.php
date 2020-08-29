@@ -9,13 +9,13 @@
     @endif
     <div class="row">
         <div class="col-sm-12">
-            <h3>Your own tests</h3>
+            <h3>Tests I created</h3>
         </div>
     </div>
 	@if (sizeof($ltst) == 0)
     <div class="row">
     	<div class="col-sm-12">
-    		<p class="text-info">You do not have any tests yet<p>
+    		<p class="text-info">You did not create any tests yet<p>
 	    </div>
     </div>
 	@endif
