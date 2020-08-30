@@ -1,6 +1,6 @@
 <!-- Right side of navbar -->
 <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
+    <!-- li class="nav-item">
         <a class="nav-link" href="{{ route('createyourown') }}">Create your own</a>
     </li>
     <li class="nav-item dropdown">
@@ -11,7 +11,7 @@
             <a class="dropdown-item" href="{{ route('tests.all') }}">Do a test</a>
             <a class="dropdown-item" href="{{ route('tests.results') }}">Popularity</a>
         </div>
-    </li>
+    </li -->
     <!-- li class="nav-item">
         <a class="nav-link" href="{{ route('dvla') }}">DVLA</a>
     </li -->

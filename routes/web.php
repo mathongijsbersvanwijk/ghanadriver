@@ -21,8 +21,9 @@ Route::get('/dynform', 'ContentController@dynform')->name('dynform');
 Route::post('/dynsubmit', 'ContentController@dynsubmit')->name('dynsubmit');
 
 Auth::routes();
+//Auth::routes(['verify' => true]);
 
-Route::group(['middleware'=>['auth']], function() {
+Route::group(['middleware'=>['auth']], function() { //add 'verified' in array
     Route::get('/momo/dvlaform', 'MomoController@momoDvlaForm')->name('momoDvlaForm');
     Route::get('/momo/checkout', 'MomoController@momoCheckout')->name('momoCheckout');
     Route::post('/momo/requesttopay', 'MomoController@momoRequestToPay')->name('momoRequestToPay');
