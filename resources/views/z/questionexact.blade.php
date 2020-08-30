@@ -99,10 +99,10 @@ function doAnswerQuestion(alt) {
 			@endforeach
 			</div> 
 	   	@endif
-	
 	</form>
-	<br/>
 	<div id="feedback"></div>
+	<br/>
+	<a class="btn btn-primary" href="{{ route('questions.index') }}" role="button">Back to your questions</a>
 
     @isset($que) 
 	<br/>

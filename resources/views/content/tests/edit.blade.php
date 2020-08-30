@@ -20,6 +20,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h5>Choose questions (only approved are shown) to go into your test</h5>
+    		<p class="text-info">If you do not see your questions, wait for your pending questions to be approved.<p>
         </div>
     </div>
 	@if (sizeof($ldq) == 0)

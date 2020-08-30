@@ -190,7 +190,6 @@ $(function(){
 		<input id="stopbutton" type="button" value="Stop" class="btn btn-primary" />
 	</form>
 	<br/>
-		
 	<div id="feedback"></div>
 </div>
 

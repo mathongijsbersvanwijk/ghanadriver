@@ -29,7 +29,7 @@ class UserTestResultService {
 	    if ($loa != null && sizeof($loa) > 0) {
 	        $i = 0;
 	        while ($i < sizeof($loa)) {
-	            $cutr = new CountUserTestResult($loa[$i]->descr, $loa[$i]->total);
+	            $cutr = new CountUserTestResult($loa[$i]->descr, $loa[$i]->name, $loa[$i]->total);
 	            $lcutr->push($cutr);
 	            $i++;
 	        }
@@ -40,9 +40,11 @@ class UserTestResultService {
 	
 	private function countResults() {
 	    $loa = DB::select(DB::raw(
-	        "SELECT tst_description as descr, count(exa_id) as total ". 
+	        "SELECT tst_description as descr, name, count(exa_id) as total ". 
             "FROM quagga_examination ".
-            "LEFT JOIN quagga_test ON tst_id = id WHERE tst_id != 3 GROUP by tst_id ORDER BY tst_id ASC"
+	        "LEFT JOIN quagga_test t ON tst_id = t.id ".
+	        "LEFT JOIN users u ON user_id = u.id ".
+	        "WHERE tst_id != 3 GROUP by tst_id ORDER BY tst_id ASC"
         ));
 	    
 	    return $loa;
