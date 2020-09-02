@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h3>Available tests</h3>
+            <h3>Available tests created by members</h3>
         </div>
     </div>
     @foreach($ltst as $tst)
