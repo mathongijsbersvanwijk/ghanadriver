@@ -59,6 +59,11 @@
         	</div>
         	<div class="row">
         		<div class="col-sm-12">
+				    <a class="btn btn-primary mt-3" href="{{ route('createyourown') }}" role="button">Create your own questions and tests, contribute to road safety!</a>
+	        	</div>
+        	</div>
+        	<div class="row">
+        		<div class="col-sm-12">
 					<div class="fb-like" data-href="http://ghanadriver.com" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
 	        	</div>
         	</div>
