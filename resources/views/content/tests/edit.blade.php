@@ -26,7 +26,7 @@
 	@if (sizeof($ldq) == 0)
     <div class="row">
     	<div class="col-sm-12">
-    		<p class="text-info">You do not have any approved questions yet. Upload questions <a href="{{ route('questions.index') }}">HERE</a> or wait for approval.<p>
+    		<p class="text-info">You do not have any approved questions yet. Create questions <a href="{{ route('questions.index') }}">HERE</a> or wait for approval.<p>
 	    </div>
     </div>
 	@endif
@@ -54,7 +54,7 @@
     <div class="row">
         <div class="col-sm-12">
             <img align="left" src="/art/success.png" />&nbsp;&nbsp;So when do people succeed for your test? 
-            When no more than 1 question has been answered wrongly. So if your test contains 5 questions, then at least 4 questions must be answered correctly.
+            When no more than 1 question has been answered wrongly. So if your test contains 3 questions, then at least 2 questions must be answered correctly.
         </div>
     </div>
     <hr/>
