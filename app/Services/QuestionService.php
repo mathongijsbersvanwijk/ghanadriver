@@ -166,6 +166,7 @@ class QuestionService {
 	        $qask->med_type = $qir->med_type;
 	        $qask->save();
 	        
+	        $i = 1;
 	        foreach ($ldqalt as $dqalt) {
 	            $qtr = new QuestionTextResource();
 	            $maxMedtxtId = DB::table('quagga_tekst')->max('med_id');
@@ -176,11 +177,12 @@ class QuestionService {
 	            
 	            $qalt = new QuestionAlternative();
 	            $qalt->que_id = $que->que_id;
-	            $qalt->alt_id = $dqalt->getAltId();
+	            $qalt->alt_id = $i;
 	            $qalt->med_id = $qtr->med_id; 
 	            $qalt->med_type = $qtr->med_type;
 	            $qalt->alt_correct = $dqalt->isCorrect() ? 1 : 0;
 	            $qalt->save();
+	            $i++;
 	        }
 	        
 	        $catids = [21];
@@ -263,6 +265,7 @@ class QuestionService {
 	        $qtr->save();
 
 	        $this->deleteAlternatives($que->que_id); 
+	        $i = 1;
 	        foreach ($ldqalt as $dqalt) {
 	            $qtr = new QuestionTextResource();
 	            $maxMedtxtId = DB::table('quagga_tekst')->max('med_id');
@@ -273,11 +276,12 @@ class QuestionService {
 	            
 	            $qalt = new QuestionAlternative();
 	            $qalt->que_id = $que->que_id;
-	            $qalt->alt_id = $dqalt->getAltId();
+	            $qalt->alt_id = $i;
 	            $qalt->med_id = $qtr->med_id;
 	            $qalt->med_type = $qtr->med_type;
 	            $qalt->alt_correct = $dqalt->isCorrect() ? 1 : 0;
 	            $qalt->save();
+	            $i++;
 	        }
 	    });
 
