@@ -27,7 +27,7 @@
     	</div>
     	<div class="col-sm-2 gdtip">
         	@if ($qi != null && $qi->getGrfFileName() != null)
-        		<a href="/questions/{!! $dq->getQueId() !!}/editphoto">
+        		<a href="{{ route('admin.questions.show', ['id' => $dq->getId()]) }}">
                	   	<img class="img-fluid" src="/storage/thumb/{!! $qi->getGrfFileName() !!}" 
 	               	   	onerror="this.onerror=null;this.src='/storage/thumb/empty.png';"/>
         		</a>
