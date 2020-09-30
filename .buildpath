@@ -31,22 +31,7 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry excluding="Support/" kind="src" path="vendor/bmatovu/laravel-mtn-momo/src">
-		<attributes>
-			<attribute name="composer" value="vendor"/>
-		</attributes>
-	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/bmatovu/laravel-mtn-momo/src/Support">
-		<attributes>
-			<attribute name="composer" value="vendor"/>
-		</attributes>
-	</buildpathentry>
-	<buildpathentry excluding="Support/" kind="src" path="vendor/bmatovu/oauth-negotiator/src">
-		<attributes>
-			<attribute name="composer" value="vendor"/>
-		</attributes>
-	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/bmatovu/oauth-negotiator/src/Support">
+	<buildpathentry kind="src" path="vendor/brick/math/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
@@ -121,6 +106,11 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
+	<buildpathentry kind="src" path="vendor/graham-campbell/result-type/src">
+		<attributes>
+			<attribute name="composer" value="vendor"/>
+		</attributes>
+	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/guzzlehttp/guzzle/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
@@ -146,17 +136,37 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
+	<buildpathentry kind="src" path="vendor/laravel/framework/src/Illuminate/Collections">
+		<attributes>
+			<attribute name="composer" value="vendor"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry kind="src" path="vendor/laravel/framework/src/Illuminate/Events">
+		<attributes>
+			<attribute name="composer" value="vendor"/>
+		</attributes>
+	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/laravel/framework/src/Illuminate/Foundation">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry excluding="Foundation/|Support/" kind="src" path="vendor/laravel/framework/src/Illuminate">
+	<buildpathentry kind="src" path="vendor/laravel/framework/src/Illuminate/Macroable">
+		<attributes>
+			<attribute name="composer" value="vendor"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry excluding="Collections/|Events/|Foundation/|Macroable/|Support/" kind="src" path="vendor/laravel/framework/src/Illuminate">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/laravel/framework/src/Illuminate/Support">
+		<attributes>
+			<attribute name="composer" value="vendor"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry kind="src" path="vendor/laravel/socialite/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
@@ -187,6 +197,11 @@
 		</attributes>
 	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/league/mime-type-detection/src">
+		<attributes>
+			<attribute name="composer" value="vendor"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry kind="src" path="vendor/league/oauth1-client/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
@@ -311,6 +326,11 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
+	<buildpathentry kind="src" path="vendor/psr/http-client/src">
+		<attributes>
+			<attribute name="composer" value="vendor"/>
+		</attributes>
+	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/psr/http-message/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
@@ -332,6 +352,11 @@
 		</attributes>
 	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/ralouphie/getallheaders/src">
+		<attributes>
+			<attribute name="composer" value="vendor"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry kind="src" path="vendor/ramsey/collection/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
