@@ -10,7 +10,7 @@
     @foreach($ltst as $tst)
     <div class="row">
     	<div class="col-sm-8">
-       	   	{!! $tst->tst_description !!} ({!! $tst->tst_count_tqu !!} questions, created by {{ $tst->owner->name }} )
+       	   	{!! $tst->tst_description !!} ({!! $tst->tst_count_tqu !!} questions)
     	</div>
     	<div class="col-sm-2">
 			<form method="post" action="/z/start" class="form-horizontal">
