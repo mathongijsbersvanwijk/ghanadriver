@@ -87,7 +87,11 @@ class TestUgcController extends Controller
     }
     
     public function edit(Request $request, TestConfiguration $test, QuestionService $qs) {
-        $ldqall = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
+        if (Auth::user()->role->id == 1) {
+            $ldqall = QuestionToolkit::getDisplayQuestionsByUser(null, $qs);
+        } else {
+            $ldqall = QuestionToolkit::getDisplayQuestionsByUser(Auth::user()->id, $qs);
+        }
         $ldq = $ldqall->filter(function ($dq, $key) {
             return $dq->getStatus() == "APPROVED";
         });

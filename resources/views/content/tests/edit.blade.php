@@ -33,7 +33,7 @@
     @foreach($ldq as $dq)
     @php ($dqid = $dq->getId())
     @php ($asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents())
-    @php ($photoFileName = $dq->getDisplayQuestionAsked()->getQuestionImage()->getGrfFileName())
+    @php ($qi = $dq->getDisplayQuestionAsked()->getQuestionImage())
 	<div class="row">
     	<div class="col-sm-1">
             <div class="form-check form-check-inline">
@@ -42,7 +42,10 @@
             </div>
     	</div>
     	<div class="col-sm-2">
-       	   	<img class="img-fluid" src="/storage/thumb/{!! $photoFileName !!}" />
+    		@if ($qi != null)
+       	   	<img class="img-fluid" src="/storage/thumb/{!! $qi->getGrfFileName() !!}" 
+	           	   	onerror="this.onerror=null;this.src='/storage/thumb/empty.png';"/>
+	        @endif   	 
     	</div>
     	<div class="col-sm-9 gdtip">
        	   	<p style="margin-top: 5px">{!! $asked !!}</p>

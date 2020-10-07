@@ -69,7 +69,7 @@ class TestConfigurationService {
     	    $tcf->pro_id = 0;
     	    $tcf->tst_type = 'T';
     	    $tcf->tst_description = $untypedArr['desc'];
-    	    $tcf->tst_count_tqu = sizeof($idArr); // todo: count the number of approved questions below and update this
+    	    $tcf->tst_count_tqu = sizeof($idArr); 
     	    $tcf->tst_count_min_success = sizeof($idArr) - 1;
     	    $tcf->owner()->associate($user);
     	    $tcf->save();
@@ -93,6 +93,21 @@ class TestConfigurationService {
 	    return $tcf;
 	}
 
+	public function updateQuestionInTestConfiguration($que, $id) {
+	    DB::transaction(function () use ($que, $id) {
+	        $tcf = TestConfiguration::findOrFail($id);
+	        $i = $tcf->questions()->count();
+	        $queInTest = $tcf->questions->contains(function($tqu, $key) use ($que) {
+	            return $tqu->question_id == $que->id;
+	        });
+            if (!$queInTest) {
+                $tqu = new TestQuestion(['test_id' => $tcf->id, 'question_id' => $que->id, 'que_id' => $que->que_id, 'seq_id' => $i + 1]);
+                $tqu->save();
+            }
+	        $this->correctTotalInTestsWithQuestion($que->id, true);
+	    });
+	}
+	    
 	public function correctTotalInTestsWithQuestion($id, $increase) {
 	    $ltcf = $this->findAllByQuestion($id);
 	    foreach ($ltcf as $tcf) {
@@ -101,6 +116,7 @@ class TestConfigurationService {
 	        } else {
 	            $tcf->tst_count_tqu--;
 	        }
+	        $tcf->tst_count_min_success = $tcf->tst_count_tqu - 1;
 	        $tcf->save();
 	    }
 	}

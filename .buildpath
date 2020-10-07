@@ -166,6 +166,11 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
+	<buildpathentry kind="src" path="vendor/laravel/socialite/src">
+		<attributes>
+			<attribute name="composer" value="vendor"/>
+		</attributes>
+	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/laravel/tinker/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
@@ -192,6 +197,11 @@
 		</attributes>
 	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/league/mime-type-detection/src">
+		<attributes>
+			<attribute name="composer" value="vendor"/>
+		</attributes>
+	</buildpathentry>
+	<buildpathentry kind="src" path="vendor/league/oauth1-client/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>

@@ -33,12 +33,11 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
-                @if(Auth::user()->role->id > 1)
-                    <a class="dropdown-item" href="{{ route('questions.index') }}">Questions I created</a>
-                    <a class="dropdown-item" href="{{ route('tests.index') }}">Tests I created</a>
-                @else
+                @if (Auth::user()->role->id == 1)
                     <a class="dropdown-item" href="{{ route('admin.questions.index') }}">Status questions</a>
                 @endif
+                <a class="dropdown-item" href="{{ route('questions.index') }}">Questions I created</a>
+                <a class="dropdown-item" href="{{ route('tests.index') }}">Tests I created</a>
             </div>
         </li>
     @endguest

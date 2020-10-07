@@ -7,6 +7,7 @@ use App\Mail\QuestionRejected;
 use App\Models\Question;
 use App\Services\QuestionService;
 use App\Services\TestConfigurationService;
+use App\Support\Constants;
 use App\Support\Helpers\QuestionToolkit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -29,7 +30,7 @@ class AdminController extends Controller
     public function updatestatus(Request $request, QuestionService $qs, TestConfigurationService $tcfs) {
         $que = $qs->update($request->all());
         if ($que->status == "APPROVED") {
-            $tcfs->correctTotalInTestsWithQuestion($que->id, true);
+            $tcfs->updateQuestionInTestConfiguration($que, Constants::TEST_CREATED_BY_MEMBERS);
         }
             
         if ($request->input('status') == "REJECTED") {

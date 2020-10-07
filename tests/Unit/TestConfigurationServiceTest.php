@@ -1,6 +1,7 @@
 <?php
 namespace Tests\Unit;
 
+use App\Models\TestQuestion;
 use App\Services\TestConfigurationService;
 use Tests\TestCase;
 
@@ -22,7 +23,11 @@ class TestConfigurationServiceTest extends TestCase {
 	    $tcf = $this->tcfs->find(2);
 	    $this->assertNotNull($tcf);
 	    $this->assertEquals(10, sizeof($tcf->questions));
-	    echo $tcf->tst_description.PHP_EOL;
+	    $this->assertEquals(10, $tcf->questions()->count());
+	    $ok = $tcf->questions->contains(function($value, $key) {
+	        return $value->que_id == 3429;
+	    });
+	    $this->assertTrue($ok);
 	}
 
 	public function testFindTestsWithQuestion() {

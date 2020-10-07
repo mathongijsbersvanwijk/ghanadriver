@@ -14,7 +14,10 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<p>To promote road safety, GhanaDriver introduces a new feature. You can now make a picture of any traffic situation you see, good or bad, upload it, add your question for the public about it. May be add more pictures and questions and put them in a test you create. This test will then be available in <a href="{{ route('tests.all') }}">Members tests</a> for the public to do and to give feedback on.</p>
+			<p>To promote road safety, GhanaDriver introduces a new feature. You can now make a picture of any traffic situation you see,
+			 good or bad, upload it, add your question for the public about it. After approval, your question is automatically put in 
+			 the "Test created by members", available in <a href="{{ route('tests.all') }}">Members tests</a> for 
+			 the public to do and to give feedback on. You can also create your own test.</p>
 		</div>
 	</div>
 	<div class="row">

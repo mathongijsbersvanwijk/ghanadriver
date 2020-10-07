@@ -19,8 +19,7 @@
     @foreach($lcutr as $cutr)
     <div class="row">
     	<div class="col-sm-8">
-			{!! $cutr->getDesc() !!} (created by {{ $cutr->getName() }} )
-			
+			{!! $cutr->getDesc() !!}
     	</div>
     	<div class="col-sm-4">
 			{!! $cutr->getTotal() !!}
