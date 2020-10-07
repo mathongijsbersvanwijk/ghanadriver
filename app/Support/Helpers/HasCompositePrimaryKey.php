@@ -3,7 +3,6 @@
 namespace App\Support\Helpers;
 
 use Exception;
-use Illuminate\Database\Eloquent\Builder;
 
 trait HasCompositePrimaryKey
 {
@@ -20,12 +19,10 @@ trait HasCompositePrimaryKey
     /**
      * Set the keys for a save update query.
      *
-     * @param  Builder $query
-     *
-     * @return Builder
-     * @throws Exception
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected function setKeysForSaveQuery(Builder $query)
+    protected function setKeysForSaveQuery($query)
     {
         foreach ($this->getKeyName() as $key) {
             if ( ! isset($this->$key)) {
@@ -37,7 +34,7 @@ trait HasCompositePrimaryKey
 
         return $query;
     }
-
+    
     /**
      * Execute a query for a single record by ID.
      *
