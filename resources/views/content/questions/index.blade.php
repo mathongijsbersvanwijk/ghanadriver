@@ -55,7 +55,8 @@
     <hr/>
     <div class="row">
         <div class="col-sm-12">
-            <img align="left" src="/art/success.png" />&nbsp;&nbsp;When you are done (even one question is fine) you can put your APPROVED questions in a test <a href="{{ route('tests.index') }}">HERE</a>.
+            <img align="left" src="/art/success.png" />&nbsp;&nbsp;After APPROVAL, your question is automatically put in the "Test created by members", available in 
+            <a href="{{ route('tests.all') }}">Members tests</a>. You can also put your APPROVED questions in a your own test <a href="{{ route('tests.index') }}">HERE</a>.
         </div>
     </div>
     <br/>
