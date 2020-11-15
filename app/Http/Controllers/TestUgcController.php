@@ -52,7 +52,7 @@ class TestUgcController extends Controller
         $ldqchosen = new Collection();
         $atLeastOne = false;
         foreach ($ldq as $dq) {
-            if (in_array($dq->getId(), $idArr)) {
+            if (in_array($dq->getQueId(), $idArr)) {
                 $ldqchosen->push($dq);            
                 $atLeastOne = true;
             }

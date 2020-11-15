@@ -42,7 +42,6 @@ class QuestionToolkit {
                 
                 if ($medType == 'T') {
                     $dq = new DisplayQuestion($loa[$i]->que_id);
-                    $dq->setId($loa[$i]->id);
                     $dq->setStatus($loa[$i]->status);
                     $dq->setReason($loa[$i]->reason);
                     $ldq->push($dq);
@@ -70,7 +69,7 @@ class QuestionToolkit {
 			$dq = new DisplayQuestion($queId);
 		}
 		
-		$que = $qs->findByQueId($loa[0]->que_id);
+		$que = $qs->find($loa[0]->que_id);
 		$dq->setQue($que);
 		
 		$dqask = $dq->getDisplayQuestionAsked(); 

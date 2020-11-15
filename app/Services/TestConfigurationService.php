@@ -22,8 +22,8 @@ class TestConfigurationService {
         return TestConfiguration::where('user_id', $user->id)->get();
     }
 
-    public function findAllByQuestion($id) {
-        $ltqu = TestQuestion::where('question_id', $id)->get();
+    public function findAllByQuestion($queId) {
+        $ltqu = TestQuestion::where('que_id', $queId)->get();
         $testidarr = Utils::testidArray($ltqu);
         $ltcf = TestConfiguration::whereIn('id', $testidarr)->get();
         
@@ -35,8 +35,8 @@ class TestConfigurationService {
 	    return $ltcf;
 	}
 	
-	public function findApprovedQuestions($tst_id) {
-	    $ltqu = TestQuestion::where('test_id', $tst_id)->with(['refersToQuestion' => function ($query) {
+	public function findApprovedQuestions($tstId) {
+	    $ltqu = TestQuestion::where('tst_id', $tstId)->with(['refersToQuestion' => function ($query) {
 	        $query->where('status', 'APPROVED');
 	    }])->get();
 	    
@@ -75,15 +75,15 @@ class TestConfigurationService {
     	    $tcf->save();
     	    
     	    if ($tcf->id != null) {
-    	        TestQuestion::where("test_id", $tcf->id)->delete();
+    	        TestQuestion::where("tst_id", $tcf->id)->delete();
     	    }
         
-    	    $ques = Question::whereIn('id', $idArr)->get();
+    	    $ques = Question::whereIn('que_id', $idArr)->get();
     	    $tquArr = array();
     	    for ($i = 0; $i < sizeof($idArr); $i++) {
-    	        $que = $ques->where('id', $idArr[$i])->first();
+    	        $que = $ques->where('que_id', $idArr[$i])->first();
     	        if ($que->status == "APPROVED") {
-    	            $tqu = new TestQuestion(['test_id' => $tcf->id, 'question_id' => $idArr[$i], 'que_id' => $que->que_id, 'seq_id' => $i + 1]);
+    	            $tqu = new TestQuestion(['tst_id' => $tcf->id, 'que_id' => $que->que_id, 'seq_id' => $i + 1]);
     	            $tquArr[] = $tqu;
     	        }
     	    }
@@ -98,18 +98,18 @@ class TestConfigurationService {
 	        $tcf = TestConfiguration::findOrFail($id);
 	        $i = $tcf->questions()->count();
 	        $queInTest = $tcf->questions->contains(function($tqu, $key) use ($que) {
-	            return $tqu->question_id == $que->id;
+	            return $tqu->que_id == $que->id;
 	        });
             if (!$queInTest) {
-                $tqu = new TestQuestion(['test_id' => $tcf->id, 'question_id' => $que->id, 'que_id' => $que->que_id, 'seq_id' => $i + 1]);
+                $tqu = new TestQuestion(['tst_id' => $tcf->id, 'que_id' => $que->que_id, 'seq_id' => $i + 1]);
                 $tqu->save();
             }
 	        $this->correctTotalInTestsWithQuestion($que->id, true);
 	    });
 	}
 	    
-	public function correctTotalInTestsWithQuestion($id, $increase) {
-	    $ltcf = $this->findAllByQuestion($id);
+	public function correctTotalInTestsWithQuestion($queId, $increase) {
+	    $ltcf = $this->findAllByQuestion($queId);
 	    foreach ($ltcf as $tcf) {
 	        if ($increase) {
 	            $tcf->tst_count_tqu++;

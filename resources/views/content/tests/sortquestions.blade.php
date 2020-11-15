@@ -28,7 +28,7 @@
     </div>
     <div id="sortable" class="ui-sortable collection">   
     @foreach($ldqchosen as $dq)
-    @php ($dqid = $dq->getId())
+    @php ($dqid = $dq->getQueId())
     @php ($asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents())
     @php ($photoFileName = $dq->getDisplayQuestionAsked()->getQuestionImage()->getGrfFileName())
     <div class="row">

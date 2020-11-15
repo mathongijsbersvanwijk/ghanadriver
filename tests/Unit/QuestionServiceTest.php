@@ -41,11 +41,4 @@ class QuestionServiceTest extends TestCase {
 		$ques = $this->qs->findBySingleCategory(12);
 		$this->assertEquals(28, sizeof($ques));
 	}
-	
-	public function testWhereIn() {
-	    $ques = Question::whereIn('id', [134, 140, 232])->get();
-	    $this->assertEquals(3, sizeof($ques));
-	    $que = $ques->where('id', 140)->first();
-	    $this->assertEquals(3201, $que->que_id);
-	}
 }

@@ -137,7 +137,7 @@ class QuestionUgcController extends Controller
         $qi = QuestionToolkit::createImage($fmd[1]['value'], 'B', $photo->getClientOriginalname()); // $fmd[1]['name'] == 'askedmedid'
         
         $que = $qs->updatePhoto($queId, $qi, Auth::user());
-        $tcfs->correctTotalInTestsWithQuestion($que->id, false);
+        $tcfs->correctTotalInTestsWithQuestion($que->que_id, false);
         $request->session()->put('que', $que);
         
         $is->save($photo, $que->que_id);
@@ -181,7 +181,7 @@ class QuestionUgcController extends Controller
         }
         
         $que = $qs->updateText($queId, $qt, $ldqalt, Auth::user());
-        $tcfs->correctTotalInTestsWithQuestion($que->id, false);
+        $tcfs->correctTotalInTestsWithQuestion($que->que_id, false);
         
         $this->notifyAdmin($que, "updated text", $qt->getTekContents(), null);
         

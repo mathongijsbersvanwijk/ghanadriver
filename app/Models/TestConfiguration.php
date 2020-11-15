@@ -14,6 +14,6 @@ class TestConfiguration extends Model
     }
 
     public function questions() {
-        return $this->hasMany(TestQuestion::class, 'test_id');
+        return $this->hasMany(TestQuestion::class, 'tst_id');
     }
 }

@@ -31,7 +31,7 @@
     </div>
 	@endif
     @foreach($ldq as $dq)
-    @php ($dqid = $dq->getId())
+    @php ($dqid = $dq->getQueId())
     @php ($asked = $dq->getDisplayQuestionAsked()->getQuestionText()->getTekContents())
     @php ($qi = $dq->getDisplayQuestionAsked()->getQuestionImage())
 	<div class="row">

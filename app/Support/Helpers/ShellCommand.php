@@ -12,7 +12,7 @@ $sc->restoreDatabase();
 class ShellCommand
 {
     public function restoreDatabase() {
-        $process = new Process(['./load_gdnew.sh'], '/home/mathon/laravel/ghanadriver7');
+        $process = new Process(['./load_gdpk.sh'], '/home/mathon/laravel/ghanadriver7');
         $process->run();
         
         // executes after the command finishes

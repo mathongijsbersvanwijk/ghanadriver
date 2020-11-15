@@ -22,9 +22,9 @@ class QuestionService {
 	    return Question::findOrFail($id);
 	}
 	
-	public function findByQueId($queId) {
-	    return Question::where('que_id', $queId)->first();
-	}
+// 	public function findByQueId($queId) {
+// 	    return Question::where('que_id', $queId)->first();
+// 	}
 	
 	public function findBySingleCategory($catId) {
 		$cats = new Collection();
@@ -48,7 +48,7 @@ class QuestionService {
 		for ($i = 0; $i < sizeof($ca); $i++) {
 			$lqas = $lqas
 			->join('categorizations as c'.$i, function ($join) use ($ca, $i) {
-				$join->on('c'.$i.'.categorizable_id', '=', 'quagga_question.id')
+				$join->on('c'.$i.'.categorizable_id', '=', 'quagga_question.que_id')
 				->where('c'.$i.'.categorizable_type', '=', 'App\Models\Question')
 				->where('c'.$i.'.category_id', '=', $ca[$i]);
 			});
@@ -95,12 +95,12 @@ class QuestionService {
 
 	public function findQuestionAskedArtifactsByUser($userId) {
 	    $loa = DB::select(DB::raw(
-	        "SELECT q.id, q.status, q.reason, pp.que_id, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
+	        "SELECT q.que_id, q.status, q.reason, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
 	        "FROM quagga_question q " .
 	        "LEFT JOIN quagga_pose_part pp ON q.que_id = pp.que_id " .
 	        "LEFT JOIN quagga_tekst tk ON pp.med_id = tk.med_id " .
 	        "LEFT JOIN quagga_graphic grf ON pp.med_id = grf.med_id " .
-	        ($userId != null ? "WHERE q.user_id = ". $userId : "") . " ORDER BY q.id, seq"
+	        ($userId != null ? "WHERE q.user_id = ". $userId : "") . " ORDER BY q.que_id, seq"
 	    ));
 	    
 	    return $loa;
@@ -108,12 +108,12 @@ class QuestionService {
 	
 	public function findQuestionAskedArtifactsByStatus($status) {
 	    $loa = DB::select(DB::raw(
-	        "SELECT q.id, q.status, q.reason, pp.que_id, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
+	        "SELECT q.que_id, q.status, q.reason, 'P' as type, pp.pop_id as seq, pp.med_id, pp.med_type, null as alt_correct, tk.tek_contents, grf.grf_filename " .
 	        "FROM quagga_question q " .
 	        "LEFT JOIN quagga_pose_part pp ON q.que_id = pp.que_id " .
 	        "LEFT JOIN quagga_tekst tk ON pp.med_id = tk.med_id " .
 	        "LEFT JOIN quagga_graphic grf ON pp.med_id = grf.med_id " .
-	        ($status != null ? "WHERE q.status = '". $status . "'" : "") . " ORDER BY q.id, seq"
+	        ($status != null ? "WHERE q.status = '". $status . "'" : "") . " ORDER BY q.que_id, seq"
 	    ));
 	    
 	    return $loa;
@@ -200,7 +200,7 @@ class QuestionService {
 			// just an optimization to prevent needless deletes and inserts
 			$cgn = $cgns->first();
 			$cgn->category_id = array_values($catids)[0];
-			$cgn->categorizable_id = $que->id;
+			$cgn->categorizable_id = $que->que_id;
 			$cgn->categorizable_type = 'App\Models\Question';
 			$cgn->exists = true;
 			$que->categorizations()->save($cgn);
@@ -209,7 +209,7 @@ class QuestionService {
 			foreach ($catids as $catid) {
 				$cgn = new Categorization;
 				$cgn->category_id = $catid;
-				$cgn->categorizable_id = $que->id;
+				$cgn->categorizable_id = $que->que_id;
 				$cgn->categorizable_type = 'App\Models\Question';
 				$que->categorizations()->save($cgn);
 			}
@@ -219,7 +219,6 @@ class QuestionService {
 	public function update($untypedArr) {
 	    $que = new Question();
 	    $que->exists = true;
-	    $que->id = $untypedArr['id'];
 	    $que->que_id = $untypedArr['que_id'];
 	    $que->status = $untypedArr['status'];
 	    $que->reason = $untypedArr['reason'];
@@ -229,7 +228,7 @@ class QuestionService {
 	}
 	
 	public function updatePhoto($queId, $qi, $user) {
-	    $que = $this->findByQueId($queId);
+	    $que = $this->find($queId);
 	    if ($user != $que->owner) {
 	        throw new NoPermissionException();
 	    }
@@ -249,7 +248,7 @@ class QuestionService {
 	}
 	
 	public function updateText($queId, $qt, $ldqalt, $user) {
-	    $que = $this->findByQueId($queId);
+	    $que = $this->find($queId);
 	    if ($user != $que->owner) {
 	        throw new NoPermissionException();
 	    }

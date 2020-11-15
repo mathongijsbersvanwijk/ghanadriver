@@ -2,11 +2,9 @@
 namespace App\Business;
 
 use App\Models\Question;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Collection;
 
 class DisplayQuestion {
-    private $id;
     private $queId;
     private $que;
 	private $dqask;
@@ -20,14 +18,6 @@ class DisplayQuestion {
 		$this->que = new Question();
 		$this->dqask = new DisplayQuestionAsked();
 		$this->ldqalt = new Collection();
-	}
-	
-	public function getId() {
-	    return $this->id;
-	}
-	
-	public function setId($id) {
-	    $this->id = $id;
 	}
 	
 	public function getQueId() {

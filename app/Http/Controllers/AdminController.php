@@ -44,8 +44,8 @@ class AdminController extends Controller
         return redirect()->route('admin.questions.index');
     }
 
-    private function notifyUser(Question $que, $reason, $asked, $pathToPhoto) {
-        $question = Question::findOrFail($que->id);
+    private function notifyUser(Question $question, $reason, $asked, $pathToPhoto) {
+        //$question = Question::findOrFail($que->id);
         Mail::to($question->owner)->send(new QuestionRejected($question, $reason, $asked, $pathToPhoto));
     }
 }

@@ -21,7 +21,7 @@ class Utils {
 	public static function queidArray($items) {
 	    $a = array();
 	    foreach ($items as $item) {
-	        $a[] = $item->question_id;
+	        $a[] = $item->que_id;
 	    }
 	    return $a;
 	}
@@ -29,7 +29,7 @@ class Utils {
 	public static function testidArray($items) {
 	    $a = array();
 	    foreach ($items as $item) {
-	        $a[] = $item->test_id;
+	        $a[] = $item->tst_id;
 	    }
 	    return $a;
 	}
