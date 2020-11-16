@@ -108,7 +108,6 @@ function doAnswerQuestion(alt) {
 	<br/>
 	<form action="{{ route('admin.questions.updatestatus') }}" method="post">
 		@csrf
-		<input type="hidden" id="id" name="id" value="{!! $que->id !!}" >
 		<input type="hidden" id="que_id" name="que_id" value="{!! $que->que_id !!}" >
 		<div class="form-group row">
 			<label for="status" class="col-sm-2 col-form-label">Status</label>

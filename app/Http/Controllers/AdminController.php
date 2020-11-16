@@ -20,9 +20,9 @@ class AdminController extends Controller
         return view('content.admin.questionsindex', compact('ldq', 'status'));
     }
     
-    public function show(Request $request, $id, QuestionService $qs) {
-        $que = $qs->find($id);
-        $utq = new UserTestQuestion($que->que_id);
+    public function show(Request $request, $queid, QuestionService $qs) {
+        $que = $qs->find($queid);
+        $utq = new UserTestQuestion($queid);
 
         return view('z.questionexact', compact('utq', 'que'));
     }
@@ -45,7 +45,7 @@ class AdminController extends Controller
     }
 
     private function notifyUser(Question $question, $reason, $asked, $pathToPhoto) {
-        //$question = Question::findOrFail($que->id);
+        $question = Question::findOrFail($question->que_id);
         Mail::to($question->owner)->send(new QuestionRejected($question, $reason, $asked, $pathToPhoto));
     }
 }

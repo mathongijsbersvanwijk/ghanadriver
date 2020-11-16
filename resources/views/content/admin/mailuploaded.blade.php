@@ -6,11 +6,11 @@
     </div>
     <div class="row">
     	<div class="col-sm-12">
-    		<h4><a href="{{ route('admin.questions.show', ['id' => $id]) }}">Approve or reject question</a></h4>
+    		<h4><a href="{{ route('admin.questions.show', ['queid' => $queid]) }}">Approve or reject question</a></h4>
     	</div>
 		@if ($asked != null)
 	    	<div class="col-sm-12">
-				<p>{!! $id !!}. {!! $asked !!}<p>  				
+				<p>{!! $queid !!}. {!! $asked !!}<p>  				
 			</div>
 		@endif
 		@if ($pathToPhoto != null)

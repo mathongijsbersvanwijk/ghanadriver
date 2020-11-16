@@ -44,7 +44,7 @@ Route::group(['middleware'=>['auth']], function() { //add 'verified' in array
 Route::group(['middleware'=>['auth', 'admin']], function() {
     Route::get('admin/questions/index/{status}','AdminController@index')->name('admin.questions.index');
     Route::get('admin/questions/index','AdminController@index')->name('admin.questions.index');
-    Route::get('admin/questions/{id}','AdminController@show')->name('admin.questions.show');
+    Route::get('admin/questions/{queid}','AdminController@show')->name('admin.questions.show');
     Route::post('admin/questions/updatestatus','AdminController@updatestatus')->name('admin.questions.updatestatus');
 });
     

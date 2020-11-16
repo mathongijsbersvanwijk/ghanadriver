@@ -31,7 +31,7 @@ class TestConfigurationServiceTest extends TestCase {
 	}
 
 	public function testFindTestsWithQuestion() {
-	    $ltcf = $this->tcfs->findAllByQuestion(172);
+	    $ltcf = $this->tcfs->findAllByQuestion(3308);
 	    $this->assertEquals(2, $ltcf->first()->id);
 	}
 	

@@ -23,11 +23,11 @@
     @php ($qi = $dq->getDisplayQuestionAsked()->getQuestionImage())
     <div class="row">
     	<div class="col-sm-2">
-       	   	<p style="margin-top: 5px">{!! $dq->getId() !!} / {!! $dq->getQueId() !!}</p>
+       	   	<p style="margin-top: 5px">{!! $dq->getQueId() !!}</p>
     	</div>
     	<div class="col-sm-2 gdtip">
         	@if ($qi != null && $qi->getGrfFileName() != null)
-        		<a href="{{ route('admin.questions.show', ['id' => $dq->getId()]) }}">
+        		<a href="{{ route('admin.questions.show', ['queid' => $dq->getQueId()]) }}">
                	   	<img class="img-fluid" src="/storage/thumb/{!! $qi->getGrfFileName() !!}" 
 	               	   	onerror="this.onerror=null;this.src='/storage/thumb/empty.png';"/>
         		</a>
@@ -36,7 +36,7 @@
         	@endif
     	</div>
     	<div class="col-sm-6 gdtip">
-    		<a href="{{ route('admin.questions.show', ['id' => $dq->getId()]) }}" >
+    		<a href="{{ route('admin.questions.show', ['queid' => $dq->getQueId()]) }}" >
 	       	   	<p style="margin-top: 5px">{!! $asked !!}</p>
   			</a>
     	</div>

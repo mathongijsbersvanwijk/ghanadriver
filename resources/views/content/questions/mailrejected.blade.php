@@ -12,7 +12,7 @@
         </div>
 		@if ($asked != null)
 	    	<div class="col-sm-12">
-				<p>{!! $id !!}. {!! $asked !!}<p>  				
+				<p>{!! $queid !!}. {!! $asked !!}<p>  				
 			</div>
 		@endif
 		@if ($pathToPhoto != null)

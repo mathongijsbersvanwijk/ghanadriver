@@ -12,14 +12,15 @@ use App\Models\QuestionTextResource;
 use App\Support\Helpers\Utils;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class QuestionService {
 	public function findAll() {
 		return Question::all();
 	}
 	
-	public function find($id) {
-	    return Question::findOrFail($id);
+	public function find($queid) {
+	    return Question::findOrFail($queid);
 	}
 	
 // 	public function findByQueId($queId) {
@@ -146,7 +147,7 @@ class QuestionService {
 	        $qtr->save();
 	        
 	        $qask = new QuestionAsked();
-	        $qask->que_id = $que->que_id;
+	        $qask->que_id = $maxQueId + 1;
 	        $qask->pop_id = 1;
 	        $qask->med_id = $qtr->med_id;
 	        $qask->med_type = $qtr->med_type;
@@ -156,11 +157,11 @@ class QuestionService {
 	        $maxMedgrfId = DB::table('quagga_graphic')->max('med_id');
 	        $qir->med_id = $maxMedgrfId + 1;
 	        $qir->med_type = $qi->getMedType();
-	        $qir->grf_filename = $que->que_id."_".$qi->getGrfFileName();
+	        $qir->grf_filename = ($maxQueId + 1)."_".$qi->getGrfFileName();
 	        $qir->save();
 	        
 	        $qask = new QuestionAsked();
-	        $qask->que_id = $que->que_id;
+	        $qask->que_id = $maxQueId + 1;
 	        $qask->pop_id = 2;
 	        $qask->med_id = $qir->med_id;
 	        $qask->med_type = $qir->med_type;
@@ -176,7 +177,7 @@ class QuestionService {
 	            $qtr->save();
 	            
 	            $qalt = new QuestionAlternative();
-	            $qalt->que_id = $que->que_id;
+	            $qalt->que_id = $maxQueId + 1;
 	            $qalt->alt_id = $i;
 	            $qalt->med_id = $qtr->med_id; 
 	            $qalt->med_type = $qtr->med_type;

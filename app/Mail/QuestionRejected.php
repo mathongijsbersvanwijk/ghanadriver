@@ -33,7 +33,7 @@ class QuestionRejected extends Mailable
      */
     public function build() {
         return $this->view('content.questions.mailrejected')->with(
-            ['id' => $this->question->que_id, 'asked' => $this->asked, 'reason' => $this->reason, 'pathToPhoto' => $this->pathToPhoto
+            ['queid' => $this->question->que_id, 'asked' => $this->asked, 'reason' => $this->reason, 'pathToPhoto' => $this->pathToPhoto
             ]);
     }
 }

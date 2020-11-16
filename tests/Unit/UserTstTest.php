@@ -85,11 +85,11 @@ class UserTstTest extends TestCase {
 	
 	public function testNavigationDeepUgc() {
 	    $ut = new UserTest(1);
-	    $ut->createTest(101, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
+	    $ut->createTest(102, 1, 1, $this->tcfs, $this->pcs, $this->qs, $this->tqs);
 	    
 	    $tqu = $ut->getNextQuestion(0);
 	    $dq = $tqu->loadQuestion($this->qs);
-	    $this->assertEquals(11002, $dq->getQueId());
+	    $this->assertEquals(11004, $dq->getQueId());
 	    $cattitle = $dq->getCategoryTitle();
 	    $this->assertEquals("user-generated", $cattitle);
 	}
