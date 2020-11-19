@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 
 class AddArticles extends Command {
 	protected $signature = 'add:articles';
-	protected $description = 'This does it';
+	protected $description = 'Save articles to database';
 	
 	private $as;
 	private $cs;

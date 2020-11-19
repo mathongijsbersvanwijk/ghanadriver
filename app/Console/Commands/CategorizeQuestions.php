@@ -4,10 +4,11 @@ namespace App\Console\Commands;
 use App\Services\CategoryService;
 use App\Services\QuestionService;
 use Illuminate\Console\Command;
+use App\Models\Categorization;
 
 class CategorizeQuestions extends Command {
     protected $signature = 'categorize:questions';
-    protected $description = 'This does it';
+    protected $description = 'Convert categorizations from metavalues to articles and save the to database';
 
     private $qs;
     private $cs;
@@ -19,21 +20,23 @@ class CategorizeQuestions extends Command {
     }
     
     public function handle() {
+        //Categorization::where('categorizable_id', '<', 11000)->delete();
     	$ques = $this->qs->findAll();
     	foreach ($ques as $que) {
     		$loa = $this->qs->findQuestionMetaData($que->que_id);
+    		$catids = array();
     		if (sizeof($loa) > 0) {
     		    echo 'Categorizing '.$loa[0]->doc_id.' as '.$loa[0]->value.PHP_EOL;
     		    $que = $this->qs->find($loa[0]->doc_id);
     		    $catName = $this->getCategoryName($loa[0]->value);
     		    $cat = $this->cs->findByName($catName);
-    		    $catids = array();
     		    $catids[0] = $cat->id;
-    		    
-    		    $this->qs->saveCategorizations($que, $catids);
     		} else {
-    		    echo 'No categories for '.$que->que_id.PHP_EOL;
+    		    echo 'Categorizing '.$que->que_id.' as user-generated'.PHP_EOL;
+    		    $que = $this->qs->find($que->que_id);
+    		    $catids[0] = 21;
     		}
+    		$this->qs->saveCategorizations($que, $catids);
     	}
     }
     
