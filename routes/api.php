@@ -1,5 +1,6 @@
 <?php
-
+use App\Http\Resources\TestConfigurationResource;
+use App\Models\TestConfiguration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/tests/all', function () {
+    return TestConfigurationResource::collection(TestConfiguration::all());
+});
+    
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
