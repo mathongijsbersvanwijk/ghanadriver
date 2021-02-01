@@ -47,4 +47,12 @@ class QuestionText {
 	public function setTekContents($tekContents) {
 		$this->tekContents = $tekContents;
 	}
+
+	public function toJson() {
+	    $data = array(
+	        "tekContents" => $this->tekContents
+	    );
+	    
+	    return $data;
+	}
 }

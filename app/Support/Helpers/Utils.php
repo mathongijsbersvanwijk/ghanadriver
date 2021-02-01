@@ -42,6 +42,14 @@ class Utils {
 	    return $a;
 	}
 	
+ 	public static function testquestionsArray($items) {
+	    $a = array();
+	    foreach ($items as $item) {
+	        $a[] = ['id' => $item->getQuestion()->getQueId(), 'cat' => 'a category'];
+	    }
+	    return $a;
+	}
+
 	public static function uriToArray($uri) {
 		$arr = explode('/', $uri);
 		$arrnew = array();

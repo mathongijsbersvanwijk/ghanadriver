@@ -47,4 +47,12 @@ class QuestionImage {
 	public function setGrfFileName($grfFileName) {
 		$this->grfFileName = $grfFileName;
 	}
+
+	public function toJson() {
+	    $data = array(
+	        "grfFileName" => $this->grfFileName
+	    );
+	    
+	    return $data;
+	}
 }

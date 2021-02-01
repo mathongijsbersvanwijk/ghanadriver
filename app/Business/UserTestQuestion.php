@@ -69,7 +69,18 @@ class UserTestQuestion {
 		}
 		return 0;
 	}
-}	
+
+	public function toJson() {
+	    $data = array(
+	        "dq" => $this->dq->toJson(),
+	        "dqaAnswer" => $this->dqaAnswer != null ? $this->dqaAnswer->toJson() : null,
+	        "answerResourceType" => $this->answerResourceType
+	    );
+	    
+	    return $data;
+	}
+}
+
 
 
 

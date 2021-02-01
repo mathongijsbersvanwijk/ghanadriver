@@ -18,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/tests/all', function () {
     return TestConfigurationResource::collection(TestConfiguration::all());
 });
-    
+Route::get('/z/start', 'ZebraController@starttestApi')->name('startapi');
+//Route::post('/z/question', 'ZebraController@answerQuestionAndProceedApi')->name('question');
+Route::get('/z/render/{id}', 'ZebraController@renderApi')->name('render');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
