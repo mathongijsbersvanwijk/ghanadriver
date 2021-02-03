@@ -9,6 +9,15 @@
          </div>
          <div class="row">
             <div class="col-sm-6">
+            	<img class="img-fluid" src="/vendor/landing-page/img/vielly.png" alt=""/>
+            </div>
+            <div class="col-sm-6">
+                <a href="https://bolt.eu/nl/cities/accra/" target="_new"><h2>Vielly</h2></a>
+                <p>Coming soon: ridesharing service to make it easy for young people who hate Trotro but cannot afford Bolt or Uber.</p>
+            </div>
+        </div>
+         <div class="row">
+            <div class="col-sm-6">
             	<img class="img-fluid" src="/vendor/landing-page/img/bolt.jpg" alt=""/>
             </div>
             <div class="col-sm-6">
