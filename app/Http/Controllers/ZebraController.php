@@ -41,16 +41,14 @@ class ZebraController extends Controller
     
     public function starttestApi(Request $request, TestConfigurationService $tcfs, ProfileCategoryService $pcs,
         QuestionService $qs, TestQuestionService $tqs) {
-            $tstId = 3;
-            $op = WebConstants::PROFILED_TEST;
+            $tstId = 1;
+            $op = WebConstants::PREDEFINED_TEST;
             $mode = WebConstants::SELF_PACED_MODE;
             
             $userId = 1234567;
             $ut = new UserTest($userId);
             $ut->createTest($tstId, $op, $mode, $tcfs, $pcs, $qs, $tqs);
-            //$lutq = $ut->getUserTestQuestions();
             
-            //return response()->json(Utils::testquestionsArray($lutq));
             return response()->json($ut->toJson());
     }
     
