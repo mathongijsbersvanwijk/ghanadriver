@@ -13,12 +13,13 @@ use App\Services\TestConfigurationService;
 use App\Services\TestQuestionService;
 use App\Services\UserTestResultService;
 use App\Support\Helpers\QuestionToolkit;
-use App\Support\Helpers\Utils;
 use App\Support\Helpers\WebConstants;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class ZebraController extends Controller
 {
@@ -39,12 +40,8 @@ class ZebraController extends Controller
             return $this->render($request, 0, WebConstants::NEXT_QUESTION);
     }
     
-    public function starttestApi(Request $request, TestConfigurationService $tcfs, ProfileCategoryService $pcs,
+    public function starttestApi(Request $request, $tstId, $op, $mode, TestConfigurationService $tcfs, ProfileCategoryService $pcs,
         QuestionService $qs, TestQuestionService $tqs) {
-            $tstId = 1;
-            $op = WebConstants::PREDEFINED_TEST;
-            $mode = WebConstants::SELF_PACED_MODE;
-            
             $userId = 1234567;
             $ut = new UserTest($userId);
             $ut->createTest($tstId, $op, $mode, $tcfs, $pcs, $qs, $tqs);
@@ -81,6 +78,17 @@ class ZebraController extends Controller
         return $this->render($request, $tquId, $op);
     }
 
+    public function stoptestApi(Request $request, UserTestResultService $utrs) {
+        $obj = $request->all();
+        Log::info($obj['test']);
+        Log::info($obj['lutq']);
+        
+   
+        //$ut->stopTest($utrs);
+        
+        return Response::HTTP_OK;
+    }
+    
     public function redoFaults(Request $request) {
         $ut = $request->session()->get('ut');
 
@@ -151,7 +159,6 @@ class ZebraController extends Controller
             Cache::put($queId, $dq, 7200);
             // todo: check loadQuestion for other attributes
         }
-        //dd($dq);
         return response()->json($dq->toJson());
     }
         
