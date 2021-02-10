@@ -15,6 +15,7 @@ abstract class Test {
 	
 	public function toJson() {
 	    $data = array(
+	        "id" => $this->tcf->id,
 	        "pro_id" => $this->tcf->pro_id,
 	        "tst_type" => $this->tcf->tst_type,
 	        "tst_description" => $this->tcf->tst_description,

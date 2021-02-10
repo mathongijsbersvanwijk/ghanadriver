@@ -6,6 +6,7 @@ use App\Business\UserTestQuestion;
 use App\Exceptions\NoPermissionException;
 use App\Exceptions\RedoFaultsNotPossibleException;
 use App\Models\Question;
+use App\Models\UserTestResult;
 use App\Services\ArticleService;
 use App\Services\ProfileCategoryService;
 use App\Services\QuestionService;
@@ -15,7 +16,6 @@ use App\Services\UserTestResultService;
 use App\Support\Helpers\QuestionToolkit;
 use App\Support\Helpers\WebConstants;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -79,14 +79,22 @@ class ZebraController extends Controller
     }
 
     public function stoptestApi(Request $request, UserTestResultService $utrs) {
-        $obj = $request->all();
-        Log::info($obj['test']);
-        Log::info($obj['lutq']);
+        $data = $request->all();
+        $userId = $data['user_id'];
+        $test = $data['test'];
+        //$lutq = $data['lutq'];
+        $utra = $data['utr'];
         
-   
-        //$ut->stopTest($utrs);
+        $countAnswers = $utra['exa_count_tqu_correct'];
+        if (array_key_exists('exa_id', $utra)) {
+            $utr = new UserTestResult();
+            $utr->exa_id = $utra['exa_id'];
+        } else {
+            $utr = null;
+        }
+        $utr = $utrs->saveUserTestResult($utr, $userId, $test['id'], $test['pro_id'], $countAnswers, 1);
         
-        return Response::HTTP_OK;
+        return response()->json($utr->toArray());
     }
     
     public function redoFaults(Request $request) {

@@ -233,9 +233,8 @@ class UserTest {
 	    $data = array(
 	        "user_id" => $this->userId,
 	        "test" => $this->test->toJson(),
-	        "mode" => $this->mode,
-	        "faultsOnly" => $this->faultsOnly,
-	        "lutq" => $a
+	        "lutq" => $a,
+	        "utr" => $this->utr != null ? $this->utr->toJson() : null,
 	    );
 	    
         return $data;
