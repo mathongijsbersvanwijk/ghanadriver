@@ -82,17 +82,15 @@ class ZebraController extends Controller
         $data = $request->all();
         $userId = $data['user_id'];
         $test = $data['test'];
-        //$lutq = $data['lutq'];
         $utra = $data['utr'];
         
-        $countAnswers = $utra['exa_count_tqu_correct'];
         if (array_key_exists('exa_id', $utra)) {
             $utr = new UserTestResult();
             $utr->exa_id = $utra['exa_id'];
         } else {
             $utr = null;
         }
-        $utr = $utrs->saveUserTestResult($utr, $userId, $test['id'], $test['pro_id'], $countAnswers, 1);
+        $utr = $utrs->saveUserTestResult($utr, $userId, $test['id'], $test['pro_id'], $utra['exa_count_tqu_correct'], 1);
         
         return response()->json($utr->toArray());
     }
