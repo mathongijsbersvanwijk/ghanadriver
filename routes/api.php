@@ -22,6 +22,6 @@ Route::get('/z/start/{tstId}/{op}/{mode}', 'ZebraController@starttestApi')->name
 Route::get('/z/render/{id}', 'ZebraController@renderApi')->name('renderapi');
 Route::post('/z/stop', 'ZebraController@stoptestApi')->name('stopapi');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
