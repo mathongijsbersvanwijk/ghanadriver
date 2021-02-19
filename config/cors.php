@@ -19,6 +19,7 @@ return [
         'api/*',
         '/login',
         '/logout',
+        '/home',
         '/sanctum/csrf-cookie'
     ],
 
