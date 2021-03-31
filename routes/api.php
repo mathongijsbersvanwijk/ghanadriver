@@ -24,27 +24,35 @@ Route::get('/z/start/{tstId}/{op}/{mode}', 'ZebraController@starttestApi')->name
 Route::get('/z/render/{id}', 'ZebraController@renderApi')->name('renderapi');
 Route::post('/z/stop', 'ZebraController@stoptestApi')->name('stopapi');
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/user', function(Request $request) {
+        return auth()->user();
+    });
+    Route::post('/logout', function (Request $request) {
+        auth()->user()->currentAccessToken()->delete();
+        
+        return [
+            'message' => 'token revoked'
+        ];
+    });
 });
 
-Route::post('/login',
-    function (Request $request) {
-        $data = $request->validate(['email' => 'required|email','password' => 'required'
-        ]);
+Route::post('/login', function (Request $request) {
+    $data = $request->validate(['email' => 'required|email','password' => 'required'
+    ]);
 
-        $user = User::where('email', $request->email)->first();
+    $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response(['message' => ['These credentials do not match our records.'
-            ]
-            ], 404);
-        }
+    if (!$user || !Hash::check($request->password, $user->password)) {
+        return response(['message' => ['These credentials do not match our records.'
+        ]
+        ], 404);
+    }
 
-        $token = $user->createToken('my-app-token')->plainTextToken;
+    $token = $user->createToken('my-app-token')->plainTextToken;
 
-        $response = ['user' => $user,'token' => $token
-        ];
+    $response = ['user' => $user,'token' => $token
+    ];
 
-        return response($response, 201);
-    });
+    return response($response, 201);
+});
