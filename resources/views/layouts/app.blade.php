@@ -69,7 +69,7 @@
         </div>
     	<footer class="footer">
     		<div class="span12 text-center">
-		    	&copy; 2021 GhanaDriver.com&nbsp;&nbsp;&nbsp;<a href="/privacypolicy">Privacy Policy</a>
+		    	&copy; 2022 GhanaDriver.com&nbsp;&nbsp;&nbsp;<a href="/privacypolicy">Privacy Policy</a>
 	    	</div>
         </footer>
     </div>
