@@ -48,7 +48,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <div class="py-4">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-12">
@@ -66,7 +66,7 @@
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
     	<footer class="footer">
     		<div class="span12 text-center">
 		    	&copy; 2022 GhanaDriver.com&nbsp;&nbsp;&nbsp;<a href="/privacypolicy">Privacy Policy</a>

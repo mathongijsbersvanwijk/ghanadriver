@@ -6,36 +6,48 @@ use App\Business\UserTestQuestion;
 use App\Exceptions\NoPermissionException;
 use App\Exceptions\RedoFaultsNotPossibleException;
 use App\Models\Question;
+use App\Models\UserTestResult;
 use App\Services\ArticleService;
 use App\Services\ProfileCategoryService;
 use App\Services\QuestionService;
 use App\Services\TestConfigurationService;
 use App\Services\TestQuestionService;
 use App\Services\UserTestResultService;
+use App\Support\Helpers\QuestionToolkit;
 use App\Support\Helpers\WebConstants;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class ZebraController extends Controller
 {
     public function starttest(Request $request, TestConfigurationService $tcfs, ProfileCategoryService $pcs,
         QuestionService $qs, TestQuestionService $tqs) {
-        $tstId = $request->input('tstId');
-        $op = $request->input('op');
-        $mode = $request->input('mode');
-        
-        $userId = Auth::user() == null ? $request->session()->getId() : Auth::user()->id;
-        $ut = new UserTest($userId);
-
-        $ut->createTest($tstId, $op, $mode, $tcfs, $pcs, $qs, $tqs);
-        $request->session()->put('ut', $ut);
-        // Session::
-
-        // jsp redirects to first question
-        return $this->render($request, 0, WebConstants::NEXT_QUESTION);
+            $tstId = $request->input('tstId');
+            $op = $request->input('op');
+            $mode = $request->input('mode');
+            
+            $userId = Auth::user() == null ? $request->session()->getId() : Auth::user()->id;
+            $ut = new UserTest($userId);
+            
+            $ut->createTest($tstId, $op, $mode, $tcfs, $pcs, $qs, $tqs);
+            $request->session()->put('ut', $ut);
+            // Session::
+            
+            // jsp redirects to first question
+            return $this->render($request, 0, WebConstants::NEXT_QUESTION);
     }
-
+    
+    public function starttestApi(Request $request, $tstId, $op, $mode, TestConfigurationService $tcfs, ProfileCategoryService $pcs,
+        QuestionService $qs, TestQuestionService $tqs) {
+            $userId = 1234567;
+            $ut = new UserTest($userId);
+            $ut->createTest($tstId, $op, $mode, $tcfs, $pcs, $qs, $tqs);
+            
+            return response()->json($ut->toJson());
+    }
+    
     public function answerQuestionAndProceed(Request $request, UserTestResultService $utrs) {
         $tquId = $request->input('tquId');
         $altId = $request->input('altId');
@@ -65,6 +77,23 @@ class ZebraController extends Controller
         return $this->render($request, $tquId, $op);
     }
 
+    public function stoptestApi(Request $request, UserTestResultService $utrs) {
+        $data = $request->all();
+        $userId = $data['user_id'];
+        $test = $data['test'];
+        $utra = $data['utr'];
+        
+        if (array_key_exists('exa_id', $utra)) {
+            $utr = new UserTestResult();
+            $utr->exa_id = $utra['exa_id'];
+        } else {
+            $utr = null;
+        }
+        $utr = $utrs->saveUserTestResult($utr, $userId, $test['id'], $test['pro_id'], $utra['exa_count_tqu_correct'], 1);
+        
+        return response()->json($utr->toArray());
+    }
+    
     public function redoFaults(Request $request) {
         $ut = $request->session()->get('ut');
 
@@ -128,6 +157,16 @@ class ZebraController extends Controller
         }
     }
 
+    public function renderApi(Request $request, $queId, QuestionService $qs) {
+        $dq = Cache::get($queId);
+        if ($dq == null) {
+            $dq = QuestionToolkit::getDisplayQuestionById($queId, $qs);
+            Cache::put($queId, $dq, 7200);
+            // todo: check loadQuestion for other attributes
+        }
+        return response()->json($dq->toJson());
+    }
+        
     public function book($title, ArticleService $as) {
         // $arts = $as->findBySingleCategoryTitle($title);
         // $art = $arts->get(0);

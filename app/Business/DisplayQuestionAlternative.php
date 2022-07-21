@@ -37,4 +37,15 @@ class DisplayQuestionAlternative {
 	public function setQuestionImage($questionImage) {
 		$this->qi = $questionImage;
 	}
+
+	public function toJson() {
+	    $data = array(
+	        "alt_id" => $this->altId,
+	        "is_correct" => $this->isCorrect,
+	        "qt" => $this->qt != null ? $this->qt->toJson() : null,
+	        "qi" => $this->qi != null ? $this->qi->toJson() : null
+	    );
+	    
+	    return $data;
+	}
 }	

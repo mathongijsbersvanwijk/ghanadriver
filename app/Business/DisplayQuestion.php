@@ -87,6 +87,20 @@ class DisplayQuestion {
  		return $arts->get(0);
 	} 
  */
+	public function toJson() {
+	    $a = array();
+	    foreach ($this->ldqalt as $dqalt) {
+	        $a[] = $dqalt->toJson();
+	    }
+	    $data = array(
+	        "que_id" => $this->queId,
+	        "dqask" => $this->dqask->toJson(),
+	        "cattitle" => $this->cattitle,
+	        "ldqalt" => $a
+	    );
+	    
+	    return $data;
+	}
 }	
 
 

@@ -224,5 +224,20 @@ class UserTest {
 	public function getCountMinSuccess() {
 	    return $this->test->getTcf()->tst_count_min_success;
 	}
+
+	public function toJson() {
+	    $a = array();
+	    foreach ($this->lutq as $utq) {
+	        $a[] = $utq->toJson();
+	    }
+	    $data = array(
+	        "user_id" => $this->userId,
+	        "test" => $this->test->toJson(),
+	        "lutq" => $a,
+	        "utr" => $this->utr != null ? $this->utr->toJson() : null,
+	    );
+	    
+        return $data;
+	}
 }	
 

@@ -25,4 +25,13 @@ class DisplayQuestionAsked {
 	public function setQuestionImage($questionImage) {
 		$this->qi = $questionImage;
 	}
+
+	public function toJson() {
+	    $data = array(
+	        "qt" => $this->qt != null ? $this->qt->toJson() : null,
+	        "qi" => $this->qi != null ? $this->qi->toJson() : null
+	    );
+	    
+	    return $data;
+	}
 }	
