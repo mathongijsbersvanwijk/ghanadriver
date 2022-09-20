@@ -1,3 +1,5 @@
+![alt text](https://bitbucket.org/mathon/ghanadriver7/src/master/gd_business_model.png?raw=true)
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
